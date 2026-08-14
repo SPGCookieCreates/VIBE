@@ -19,6 +19,7 @@
   --cyan:#35dcff;
   --pink:#ff4fd8;
   --green:#63f5a2;
+  --red:#ff5c7a;
   --bg:#05050a;
   --glass:rgba(255,255,255,.055);
   --glass2:rgba(255,255,255,.085);
@@ -55,6 +56,8 @@ body{
   font-family:Inter,sans-serif;
   overflow:hidden;
 }
+
+/* NEON ATMOSPHERE */
 
 body:before{
   content:"";
@@ -232,6 +235,17 @@ nav{
   letter-spacing:2.5px;
 }
 
+.sectionTitle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 12px 8px;
+  color:#666;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
 .groupCreate{
   width:100%;
   height:44px;
@@ -264,7 +278,7 @@ nav{
 .search{
   width:100%;
   height:43px;
-  margin-bottom:15px;
+  margin-bottom:5px;
   padding:0 14px;
   border-radius:14px;
   border:1px solid rgba(255,255,255,.09);
@@ -288,7 +302,8 @@ nav{
   color:#666;
 }
 
-.userList{
+.userList,
+.groupList{
   display:flex;
   flex-direction:column;
   gap:7px;
@@ -361,9 +376,6 @@ nav{
 .friendName{
   font-size:13px;
   font-weight:700;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
 }
 
 .friendPreview{
@@ -376,7 +388,7 @@ nav{
 }
 
 .noUsers{
-  padding:25px 10px;
+  padding:18px 10px;
   text-align:center;
   color:#666;
   font-size:11px;
@@ -386,6 +398,38 @@ nav{
   margin-left:auto;
   color:#9d8cff;
   font-size:10px;
+}
+
+/* GROUP SIDEBAR */
+
+.groupItem{
+  position:relative;
+}
+
+.groupDelete{
+  flex-shrink:0;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,92,122,.07);
+  border:1px solid rgba(255,92,122,.1);
+  color:#ff7f98;
+  font-size:12px;
+  opacity:.35;
+  transition:.2s;
+}
+
+.groupItem:hover .groupDelete{
+  opacity:1;
+}
+
+.groupDelete:hover{
+  background:rgba(255,92,122,.18);
+  border-color:rgba(255,92,122,.35);
+  transform:scale(1.06);
+  box-shadow:0 0 18px rgba(255,92,122,.15);
 }
 
 /* CHAT */
@@ -416,13 +460,11 @@ nav{
   display:flex;
   align-items:center;
   gap:12px;
-  min-width:0;
 }
 
 .personAvatar{
   width:42px;
   height:42px;
-  flex-shrink:0;
   border-radius:14px;
   display:grid;
   place-items:center;
@@ -448,9 +490,6 @@ nav{
 .personName{
   font-size:14px;
   font-weight:700;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
 }
 
 .personStatus{
@@ -489,7 +528,6 @@ nav{
 
 .messages{
   flex:1;
-  min-height:0;
   overflow-y:auto;
   padding:30px 7%;
   scroll-behavior:smooth;
@@ -506,34 +544,6 @@ nav{
 .selectList::-webkit-scrollbar-thumb{
   background:rgba(255,255,255,.1);
   border-radius:10px;
-}
-
-.emptyChat{
-  height:100%;
-  min-height:300px;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  color:#666;
-}
-
-.emptyChat > div{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.emptyChat strong{
-  display:block;
-  color:#ddd;
-  font-size:14px;
-  margin-top:2px;
-}
-
-.emptyChat span{
-  margin-top:8px;
-  color:#666;
-  font-size:11px;
 }
 
 .welcome{
@@ -606,7 +616,6 @@ nav{
   box-shadow:
     inset 0 1px rgba(255,255,255,.035),
     0 5px 25px rgba(0,0,0,.08);
-  overflow-wrap:anywhere;
 }
 
 .mine .bubble{
@@ -673,16 +682,6 @@ nav{
     0 10px 45px rgba(0,0,0,.45),
     0 0 30px rgba(100,70,255,.08),
     inset 0 1px rgba(255,255,255,.08);
-  transition:.2s;
-}
-
-.composerBox:focus-within{
-  border-color:rgba(132,102,255,.3);
-  box-shadow:
-    0 10px 45px rgba(0,0,0,.45),
-    0 0 30px rgba(100,70,255,.12),
-    0 0 0 3px rgba(132,102,255,.04),
-    inset 0 1px rgba(255,255,255,.08);
 }
 
 .messageInput{
@@ -699,11 +698,6 @@ nav{
 
 .messageInput::placeholder{
   color:#777;
-}
-
-.messageInput:disabled{
-  cursor:not-allowed;
-  opacity:.65;
 }
 
 .emoji{
@@ -743,10 +737,6 @@ nav{
   transform:translateY(-2px) scale(1.03);
   box-shadow:
     0 0 35px rgba(100,100,255,.4);
-}
-
-.send:active{
-  transform:scale(.97);
 }
 
 /* MODAL */
@@ -832,7 +822,6 @@ nav{
   background:rgba(255,255,255,.035);
   border:1px solid transparent;
   transition:.2s;
-  cursor:pointer;
 }
 
 .selectUser:hover{
@@ -1017,16 +1006,6 @@ nav{
   .messageInput{
     font-size:12px;
   }
-
-  .emoji{
-    width:39px;
-    height:39px;
-  }
-
-  .send{
-    width:43px;
-    height:43px;
-  }
 }
 </style>
 </head>
@@ -1043,24 +1022,14 @@ nav{
 <div class="app">
 
 <nav>
-
   <div class="logo">
     VIBE<span>✦</span>
   </div>
 
   <div class="navRight">
+    <div class="online">● ONLINE</div>
 
-    <div class="online">
-      ● ONLINE
-    </div>
-
-    <div
-      class="avatar"
-      id="myAvatar"
-      title="Change profile picture"
-    >
-      ?
-    </div>
+    <div class="avatar" id="myAvatar">?</div>
 
     <input
       type="file"
@@ -1068,18 +1037,14 @@ nav{
       accept="image/png,image/jpeg,image/webp"
       style="display:none"
     >
-
   </div>
-
 </nav>
 
 <div class="main">
 
 <aside class="sidebar">
 
-  <div class="sideTitle">
-    CHATS
-  </div>
+  <div class="sideTitle">CHATS</div>
 
   <button
     class="groupCreate"
@@ -1095,9 +1060,22 @@ nav{
     autocomplete="off"
   >
 
+  <div class="sectionTitle">
+    PEOPLE
+  </div>
+
   <div
     class="userList"
     id="userList"
+  ></div>
+
+  <div class="sectionTitle">
+    GROUPS
+  </div>
+
+  <div
+    class="groupList"
+    id="groupList"
   ></div>
 
 </aside>
@@ -1111,9 +1089,7 @@ nav{
     <div
       class="personAvatar"
       id="headerAvatar"
-    >
-      ✦
-    </div>
+    >✦</div>
 
     <div>
 
@@ -1154,24 +1130,18 @@ nav{
   id="messages"
 >
 
-  <div class="emptyChat">
-
+  <div class="welcome">
     <div>
 
-      <div class="welcomeIcon">
-        ✦
-      </div>
+      <div class="welcomeIcon">✦</div>
 
-      <strong>
-        Welcome to VIBE
-      </strong>
+      <strong>Welcome to VIBE</strong>
 
-      <span>
+      <p>
         Select someone or create a group.
-      </span>
+      </p>
 
     </div>
-
   </div>
 
 </div>
@@ -1183,7 +1153,6 @@ nav{
     <button
       class="emoji"
       onclick="addEmoji()"
-      title="Add emoji"
     >
       😊
     </button>
@@ -1199,7 +1168,6 @@ nav{
     <button
       class="send"
       onclick="sendMessage()"
-      title="Send message"
     >
       ➤
     </button>
@@ -1211,7 +1179,6 @@ nav{
 </main>
 </div>
 </div>
-
 
 <!-- GROUP MODAL -->
 
@@ -1264,7 +1231,6 @@ nav{
 
 </div>
 
-
 <div
   class="toast"
   id="toast"
@@ -1296,7 +1262,9 @@ import {
   getDocs,
   serverTimestamp,
   limit,
-  where
+  where,
+  deleteDoc,
+  writeBatch
 } from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
@@ -1308,8 +1276,6 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
-
-/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -1347,24 +1313,12 @@ const storage =
   getStorage(firebaseApp);
 
 
-/* STATE */
-
 let currentUser = null;
-
 let selectedChat = null;
-
 let unsubscribeMessages = null;
-
-let unsubscribeGroups = null;
-
 let allUsers = [];
-
 let allGroups = [];
 
-let toastTimer = null;
-
-
-/* HELPERS */
 
 const $ = id =>
   document.getElementById(id);
@@ -1378,12 +1332,8 @@ function showToast(text){
 
   el.classList.add("show");
 
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
-
+  setTimeout(() => {
     el.classList.remove("show");
-
   },2200);
 
 }
@@ -1405,7 +1355,6 @@ onAuthStateChanged(
     }
 
     currentUser = user;
-
 
     const name =
       user.displayName ||
@@ -1447,15 +1396,12 @@ onAuthStateChanged(
           online:true
         },
 
-        {
-          merge:true
-        }
+        {merge:true}
 
       );
 
 
       await loadUsers();
-
       await loadGroups();
 
     }
@@ -1503,7 +1449,6 @@ async function loadUsers(){
       const user =
         item.data();
 
-
       if(
         user.uid !==
         currentUser.uid
@@ -1549,68 +1494,52 @@ async function loadGroups(){
 
   try{
 
-    const groupsSnapshot =
-      await getDocs(
-
-        query(
-
-          collection(
-            db,
-            "conversations"
-          ),
-
-          where(
-            "members",
-            "array-contains",
-            currentUser.uid
-          ),
-
-          limit(100)
-
+    const groupsQuery =
+      query(
+        collection(db,"conversations"),
+        where(
+          "members",
+          "array-contains",
+          currentUser.uid
+        ),
+        where(
+          "type",
+          "==",
+          "group"
         )
-
       );
+
+
+    const snapshot =
+      await getDocs(groupsQuery);
 
 
     allGroups = [];
 
 
-    groupsSnapshot.forEach(item => {
+    snapshot.forEach(item => {
 
-      const data =
+      const group =
         item.data();
 
 
-      if(data.type === "group"){
+      allGroups.push({
 
-        allGroups.push({
+        id:item.id,
 
-          id:item.id,
-          ...data
+        ...group
 
-        });
-
-      }
+      });
 
     });
 
 
     allGroups.sort(
-      (a,b) => {
-
-        const aTime =
-          a.updatedAt?.toMillis?.() ||
-          a.createdAt?.toMillis?.() ||
-          0;
-
-        const bTime =
-          b.updatedAt?.toMillis?.() ||
-          b.createdAt?.toMillis?.() ||
-          0;
-
-        return bTime - aTime;
-
-      }
+      (a,b) =>
+        (a.name || "")
+          .localeCompare(
+            b.name || ""
+          )
     );
 
 
@@ -1620,15 +1549,12 @@ async function loadGroups(){
 
   catch(error){
 
-    console.error(
-      "Group loading error:",
-      error
-    );
+    console.error(error);
 
-    /*
-      This can happen if Firestore rules do not
-      allow reading conversations yet.
-    */
+    $("groupList").innerHTML =
+      `<div class="noUsers">
+        Couldn't load groups.
+      </div>`;
 
   }
 
@@ -1639,72 +1565,45 @@ async function loadGroups(){
 
 function renderSidebar(){
 
+  renderUsers();
+  renderGroups();
+
+}
+
+
+/* USERS SIDEBAR */
+
+function renderUsers(){
+
   const list =
     $("userList");
-
-  const search =
-    $("searchInput")
-      .value
-      .trim()
-      .toLowerCase();
-
 
   list.innerHTML = "";
 
 
+  const search =
+    $("searchInput")
+      ?.value
+      .trim()
+      .toLowerCase() || "";
+
+
   const filteredUsers =
-    allUsers.filter(user => {
-
-      const name =
-        (
-          user.displayName ||
-          "VIBE User"
-        ).toLowerCase();
-
-      const email =
-        (
-          user.email ||
-          ""
-        ).toLowerCase();
-
-      return (
-        !search ||
-        name.includes(search) ||
-        email.includes(search)
-      );
-
-    });
+    allUsers.filter(user =>
+      (
+        user.displayName ||
+        "VIBE User"
+      )
+        .toLowerCase()
+        .includes(search)
+    );
 
 
-  const filteredGroups =
-    allGroups.filter(group => {
-
-      const name =
-        (
-          group.name ||
-          "Unnamed Group"
-        ).toLowerCase();
-
-      return (
-        !search ||
-        name.includes(search)
-      );
-
-    });
-
-
-  if(
-    !filteredUsers.length &&
-    !filteredGroups.length
-  ){
+  if(!filteredUsers.length){
 
     list.innerHTML =
       `<div class="noUsers">
-        ${
-          search
-            ? "No chats found."
-            : "No chats yet."
-        }
+        No matching users.
       </div>`;
 
     return;
@@ -1712,24 +1611,91 @@ function renderSidebar(){
   }
 
 
-  /* GROUPS FIRST */
-
-  filteredGroups.forEach(group => {
-
-    const button =
-      createGroupSidebarItem(group);
-
-    list.appendChild(button);
-
-  });
-
-
-  /* USERS */
-
   filteredUsers.forEach(user => {
 
     const button =
-      createUserSidebarItem(user);
+      document.createElement("button");
+
+    button.className =
+      "friend";
+
+
+    if(
+      selectedChat &&
+      selectedChat.type === "dm" &&
+      selectedChat.id === user.uid
+    ){
+
+      button.classList.add("active");
+
+    }
+
+
+    const avatar =
+      document.createElement("div");
+
+    avatar.className =
+      "friendAvatar";
+
+
+    if(user.photoURL){
+
+      avatar.innerHTML =
+        `<img src="${user.photoURL}" alt="">`;
+
+    }
+
+    else{
+
+      avatar.textContent =
+        (
+          user.displayName ||
+          "V"
+        )
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "friendInfo";
+
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "friendName";
+
+    name.textContent =
+      user.displayName ||
+      "VIBE User";
+
+
+    const preview =
+      document.createElement("div");
+
+    preview.className =
+      "friendPreview";
+
+    preview.textContent =
+      "Direct message";
+
+
+    info.appendChild(name);
+    info.appendChild(preview);
+
+    button.appendChild(avatar);
+    button.appendChild(info);
+
+
+    button.onclick =
+      () => selectDM(user);
+
 
     list.appendChild(button);
 
@@ -1738,194 +1704,190 @@ function renderSidebar(){
 }
 
 
-/* USER SIDEBAR ITEM */
+/* GROUP SIDEBAR */
 
-function createUserSidebarItem(user){
+function renderGroups(){
 
-  const button =
-    document.createElement("button");
+  const list =
+    $("groupList");
 
-  button.className =
-    "friend";
-
-
-  if(
-    selectedChat &&
-    selectedChat.type === "dm" &&
-    selectedChat.id === user.uid
-  ){
-
-    button.classList.add("active");
-
-  }
+  list.innerHTML = "";
 
 
-  const avatar =
-    document.createElement("div");
+  const search =
+    $("searchInput")
+      ?.value
+      .trim()
+      .toLowerCase() || "";
 
-  avatar.className =
-    "friendAvatar";
+
+  const filteredGroups =
+    allGroups.filter(group =>
+      (
+        group.name ||
+        "Unnamed Group"
+      )
+        .toLowerCase()
+        .includes(search)
+    );
 
 
-  if(user.photoURL){
+  if(!filteredGroups.length){
 
-    const image =
-      document.createElement("img");
+    list.innerHTML =
+      `<div class="noUsers">
+        ${search ? "No matching groups." : "No groups yet."}
+      </div>`;
 
-    image.src =
-      user.photoURL;
-
-    image.alt = "";
-
-    avatar.appendChild(image);
+    return;
 
   }
 
-  else{
+
+  filteredGroups.forEach(group => {
+
+    const wrapper =
+      document.createElement("div");
+
+    wrapper.className =
+      "groupItem";
+
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "friend";
+
+
+    if(
+      selectedChat &&
+      selectedChat.type === "group" &&
+      selectedChat.id === group.id
+    ){
+
+      button.classList.add("active");
+
+    }
+
+
+    const avatar =
+      document.createElement("div");
+
+    avatar.className =
+      "friendAvatar";
 
     avatar.textContent =
+      "✦";
+
+
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "friendInfo";
+
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "friendName";
+
+    name.textContent =
+      group.name ||
+      "Unnamed Group";
+
+
+    const preview =
+      document.createElement("div");
+
+    preview.className =
+      "friendPreview";
+
+    preview.textContent =
       (
-        user.displayName ||
-        "V"
-      )
-        .charAt(0)
-        .toUpperCase();
-
-  }
+        group.members?.length ||
+        1
+      ) +
+      " members";
 
 
-  const info =
-    document.createElement("div");
+    info.appendChild(name);
+    info.appendChild(preview);
 
-  info.className =
-    "friendInfo";
-
-
-  const name =
-    document.createElement("div");
-
-  name.className =
-    "friendName";
-
-  name.textContent =
-    user.displayName ||
-    "VIBE User";
+    button.appendChild(avatar);
+    button.appendChild(info);
 
 
-  const preview =
-    document.createElement("div");
-
-  preview.className =
-    "friendPreview";
-
-  preview.textContent =
-    "Direct message";
+    button.onclick =
+      () => selectGroup(group);
 
 
-  info.appendChild(name);
-  info.appendChild(preview);
-
-  button.appendChild(avatar);
-  button.appendChild(info);
+    wrapper.appendChild(button);
 
 
-  button.onclick =
-    () => selectDM(user);
+    /*
+      Only the creator sees the delete button.
+    */
+
+    if(
+      group.createdBy ===
+      currentUser.uid
+    ){
+
+      const deleteButton =
+        document.createElement("button");
+
+      deleteButton.className =
+        "groupDelete";
+
+      deleteButton.innerHTML =
+        "🗑";
+
+      deleteButton.title =
+        "Delete group";
 
 
-  return button;
+      deleteButton.onclick =
+        event => {
 
-}
+          event.stopPropagation();
 
+          deleteGroup(group);
 
-/* GROUP SIDEBAR ITEM */
-
-function createGroupSidebarItem(group){
-
-  const button =
-    document.createElement("button");
-
-  button.className =
-    "friend";
+        };
 
 
-  if(
-    selectedChat &&
-    selectedChat.type === "group" &&
-    selectedChat.id === group.id
-  ){
+      wrapper.appendChild(
+        deleteButton
+      );
 
-    button.classList.add("active");
-
-  }
+    }
 
 
-  const avatar =
-    document.createElement("div");
+    /*
+      Put the delete button beside
+      the group instead of inside it.
+    */
 
-  avatar.className =
-    "friendAvatar";
+    wrapper.style.display =
+      "flex";
 
-  avatar.textContent =
-    "✦";
+    wrapper.style.alignItems =
+      "center";
 
-
-  const info =
-    document.createElement("div");
-
-  info.className =
-    "friendInfo";
+    wrapper.style.gap =
+      "4px";
 
 
-  const name =
-    document.createElement("div");
-
-  name.className =
-    "friendName";
-
-  name.textContent =
-    group.name ||
-    "Unnamed Group";
+    button.style.flex =
+      "1";
 
 
-  const preview =
-    document.createElement("div");
+    list.appendChild(wrapper);
 
-  preview.className =
-    "friendPreview";
-
-  preview.textContent =
-    (
-      group.members?.length ||
-      0
-    ) +
-    " members";
-
-
-  info.appendChild(name);
-  info.appendChild(preview);
-
-
-  const badge =
-    document.createElement("span");
-
-  badge.className =
-    "groupBadge";
-
-  badge.textContent =
-    "GROUP";
-
-
-  button.appendChild(avatar);
-  button.appendChild(info);
-  button.appendChild(badge);
-
-
-  button.onclick =
-    () => selectGroup(group);
-
-
-  return button;
+  });
 
 }
 
@@ -1950,29 +1912,21 @@ function selectDM(user){
   selectedChat = {
 
     type:"dm",
-
     id:user.uid,
-
     user:user
 
   };
 
 
   updateChatHeader(
-
-    user.displayName ||
-      "VIBE User",
-
+    user.displayName || "VIBE User",
     user.photoURL,
-
     "● VIBE user"
-
   );
 
 
   $("messageInput").disabled =
     false;
-
 
   $("messageInput").placeholder =
     "Message " +
@@ -1987,11 +1941,17 @@ function selectDM(user){
 
   loadConversation();
 
-  setTimeout(
-    () =>
-      $("messageInput").focus(),
-    50
-  );
+}
+
+
+function dmConversationId(userId){
+
+  return [
+
+    currentUser.uid,
+    userId
+
+  ].sort().join("_");
 
 }
 
@@ -2017,55 +1977,32 @@ function selectGroup(group){
 
 
   updateChatHeader(
-
-    selectedChat.name,
-
+    group.name ||
+    "Unnamed Group",
     null,
-
     (
-      selectedChat.members.length
+      group.members?.length ||
+      1
     ) +
     " members"
-
   );
 
 
   $("messageInput").disabled =
     false;
 
-
   $("messageInput").placeholder =
     "Message " +
-    selectedChat.name +
+    (
+      group.name ||
+      "group"
+    ) +
     "...";
 
 
   renderSidebar();
 
   loadConversation();
-
-  setTimeout(
-    () =>
-      $("messageInput").focus(),
-    50
-  );
-
-}
-
-
-/* DM ID */
-
-function dmConversationId(userId){
-
-  return [
-
-    currentUser.uid,
-
-    userId
-
-  ]
-    .sort()
-    .join("_");
 
 }
 
@@ -2074,7 +2011,14 @@ function dmConversationId(userId){
 
 function loadDMConversation(){
 
-  stopMessageListener();
+  if(unsubscribeMessages){
+
+    unsubscribeMessages();
+
+    unsubscribeMessages =
+      null;
+
+  }
 
 
   const id =
@@ -2095,23 +2039,25 @@ function loadDMConversation(){
   const messagesQuery =
     query(
       messagesRef,
-      orderBy(
-        "createdAt",
-        "asc"
-      )
+      orderBy("createdAt","asc")
     );
 
 
-  subscribeMessages(
-    messagesQuery
-  );
+  subscribeMessages(messagesQuery);
 
 }
 
 
 function loadGroupConversation(){
 
-  stopMessageListener();
+  if(unsubscribeMessages){
+
+    unsubscribeMessages();
+
+    unsubscribeMessages =
+      null;
+
+  }
 
 
   const messagesRef =
@@ -2126,30 +2072,18 @@ function loadGroupConversation(){
   const messagesQuery =
     query(
       messagesRef,
-      orderBy(
-        "createdAt",
-        "asc"
-      )
+      orderBy("createdAt","asc"
     );
 
 
-  subscribeMessages(
-    messagesQuery
-  );
+  subscribeMessages(messagesQuery);
 
 }
 
 
 function loadConversation(){
 
-  if(!selectedChat)
-    return;
-
-
-  if(
-    selectedChat.type ===
-    "group"
-  ){
+  if(selectedChat.type === "group"){
 
     loadGroupConversation();
 
@@ -2164,31 +2098,11 @@ function loadConversation(){
 }
 
 
-/* STOP MESSAGE LISTENER */
-
-function stopMessageListener(){
-
-  if(unsubscribeMessages){
-
-    unsubscribeMessages();
-
-    unsubscribeMessages =
-      null;
-
-  }
-
-}
-
-
 /* MESSAGES */
 
 function subscribeMessages(messagesQuery){
 
-  $("messages").innerHTML =
-    `<div class="welcome">
-      <div class="welcomeIcon">✦</div>
-      <strong>Loading conversation...</strong>
-    </div>`;
+  $("messages").innerHTML = "";
 
 
   unsubscribeMessages =
@@ -2198,8 +2112,7 @@ function subscribeMessages(messagesQuery){
 
       snapshot => {
 
-        $("messages").innerHTML =
-          "";
+        $("messages").innerHTML = "";
 
 
         if(snapshot.empty){
@@ -2234,51 +2147,19 @@ function subscribeMessages(messagesQuery){
           const data =
             item.data();
 
-
           addMessage(
-
             data,
-
             data.senderId ===
               currentUser.uid
-
           );
 
         });
-
-
-        scrollMessages();
 
       },
 
       error => {
 
-        console.error(
-          "Message listener:",
-          error
-        );
-
-
-        $("messages").innerHTML = `
-
-          <div class="welcome">
-
-            <div class="welcomeIcon">
-              !
-            </div>
-
-            <strong>
-              Couldn't load this chat.
-            </strong>
-
-            <p>
-              Check your Firestore rules.
-            </p>
-
-          </div>
-
-        `;
-
+        console.error(error);
 
         showToast(
           "Couldn't load messages."
@@ -2312,7 +2193,6 @@ async function sendMessage(){
   const input =
     $("messageInput");
 
-
   const text =
     input.value.trim();
 
@@ -2324,14 +2204,10 @@ async function sendMessage(){
   try{
 
     let conversationId;
-
     let members;
 
 
-    if(
-      selectedChat.type ===
-      "group"
-    ){
+    if(selectedChat.type === "group"){
 
       conversationId =
         selectedChat.id;
@@ -2349,11 +2225,8 @@ async function sendMessage(){
         );
 
       members = [
-
         currentUser.uid,
-
         selectedChat.user.uid
-
       ];
 
     }
@@ -2379,9 +2252,7 @@ async function sendMessage(){
 
       },
 
-      {
-        merge:true
-      }
+      {merge:true}
 
     );
 
@@ -2423,28 +2294,11 @@ async function sendMessage(){
 
     input.focus();
 
-
-    /*
-      Refresh group ordering.
-    */
-
-    if(
-      selectedChat.type ===
-      "group"
-    ){
-
-      loadGroups();
-
-    }
-
   }
 
   catch(error){
 
-    console.error(
-      "Send message error:",
-      error
-    );
+    console.error(error);
 
     showToast(
       "Message couldn't send."
@@ -2457,10 +2311,7 @@ async function sendMessage(){
 
 /* MESSAGE UI */
 
-function addMessage(
-  data,
-  mine
-){
+function addMessage(data,mine){
 
   const container =
     $("messages");
@@ -2471,11 +2322,7 @@ function addMessage(
 
   row.className =
     "messageRow" +
-    (
-      mine
-        ? " mine"
-        : ""
-    );
+    (mine ? " mine" : "");
 
 
   const bubble =
@@ -2487,8 +2334,7 @@ function addMessage(
 
   if(
     selectedChat &&
-    selectedChat.type ===
-      "group" &&
+    selectedChat.type === "group" &&
     !mine
   ){
 
@@ -2502,10 +2348,7 @@ function addMessage(
       data.senderName ||
       "VIBE User";
 
-
-    bubble.appendChild(
-      sender
-    );
+    bubble.appendChild(sender);
 
   }
 
@@ -2531,7 +2374,7 @@ function addMessage(
   if(
     timestamp &&
     typeof timestamp.toDate ===
-      "function"
+    "function"
   ){
 
     timestamp =
@@ -2539,14 +2382,10 @@ function addMessage(
 
   }
 
-  else if(
-    data.clientTime
-  ){
+  else if(data.clientTime){
 
     timestamp =
-      new Date(
-        data.clientTime
-      );
+      new Date(data.clientTime);
 
   }
 
@@ -2559,36 +2398,19 @@ function addMessage(
 
 
   time.textContent =
-    formatTime(
-      timestamp
-    );
+    formatTime(timestamp);
 
 
   bubble.appendChild(text);
-
   bubble.appendChild(time);
 
   row.appendChild(bubble);
 
   container.appendChild(row);
 
-}
 
-
-/* SCROLL */
-
-function scrollMessages(){
-
-  const container =
-    $("messages");
-
-
-  requestAnimationFrame(() => {
-
-    container.scrollTop =
-      container.scrollHeight;
-
-  });
+  container.scrollTop =
+    container.scrollHeight;
 
 }
 
@@ -2603,7 +2425,6 @@ function updateChatHeader(
 
   $("headerName").textContent =
     name;
-
 
   $("personStatus").textContent =
     status;
@@ -2632,34 +2453,13 @@ function updateChatHeader(
 
 function openGroupModal(){
 
-  if(!currentUser){
-
-    showToast(
-      "Please wait for VIBE to load."
-    );
-
-    return;
-
-  }
-
-
-  $("groupNameInput").value =
-    "";
-
+  $("groupNameInput").value = "";
 
   renderGroupUsers();
-
 
   $("groupModal")
     .classList
     .add("show");
-
-
-  setTimeout(
-    () =>
-      $("groupNameInput").focus(),
-    50
-  );
 
 }
 
@@ -2673,36 +2473,12 @@ function closeGroupModal(){
 }
 
 
-/* CLOSE MODAL BY BACKDROP */
-
-$("groupModal")
-  .addEventListener(
-    "click",
-    event => {
-
-      if(
-        event.target ===
-        $("groupModal")
-      ){
-
-        closeGroupModal();
-
-      }
-
-    }
-  );
-
-
-/* GROUP USERS */
-
 function renderGroupUsers(){
 
   const list =
     $("groupUserList");
 
-
-  list.innerHTML =
-    "";
+  list.innerHTML = "";
 
 
   if(!allUsers.length){
@@ -2745,15 +2521,8 @@ function renderGroupUsers(){
 
     if(user.photoURL){
 
-      const image =
-        document.createElement("img");
-
-      image.src =
-        user.photoURL;
-
-      image.alt = "";
-
-      avatar.appendChild(image);
+      avatar.innerHTML =
+        `<img src="${user.photoURL}" alt="">`;
 
     }
 
@@ -2778,22 +2547,12 @@ function renderGroupUsers(){
       "VIBE User";
 
 
-    label.appendChild(
-      checkbox
-    );
-
-    label.appendChild(
-      avatar
-    );
-
-    label.appendChild(
-      name
-    );
+    label.appendChild(checkbox);
+    label.appendChild(avatar);
+    label.appendChild(name);
 
 
-    list.appendChild(
-      label
-    );
+    list.appendChild(label);
 
   });
 
@@ -2823,9 +2582,10 @@ async function createGroup(){
 
   const checked =
     [
-      ...document.querySelectorAll(
-        "#groupUserList input:checked"
-      )
+      ...document
+        .querySelectorAll(
+          "#groupUserList input:checked"
+        )
     ];
 
 
@@ -2852,16 +2612,16 @@ async function createGroup(){
   );
 
 
+  const groupRef =
+    doc(
+      collection(
+        db,
+        "conversations"
+      )
+    );
+
+
   try{
-
-    const groupRef =
-      doc(
-        collection(
-          db,
-          "conversations"
-        )
-      );
-
 
     await setDoc(
 
@@ -2905,8 +2665,17 @@ async function createGroup(){
     };
 
 
-    allGroups.unshift(
+    allGroups.push(
       newGroup
+    );
+
+
+    allGroups.sort(
+      (a,b) =>
+        (a.name || "")
+          .localeCompare(
+            b.name || ""
+          )
     );
 
 
@@ -2924,25 +2693,18 @@ async function createGroup(){
 
 
     updateChatHeader(
-
       name,
-
       null,
-
       selectedMembers.length +
       " members"
-
     );
 
 
     $("messageInput").disabled =
       false;
 
-
     $("messageInput").placeholder =
-      "Message " +
-      name +
-      "...";
+      "Message " + name + "...";
 
 
     closeGroupModal();
@@ -2955,25 +2717,249 @@ async function createGroup(){
       "Group created ✦"
     );
 
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Couldn't create group."
+    );
+
+  }
+
+}
+
+
+/* DELETE GROUP */
+
+async function deleteGroup(group){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  /*
+    Only the group creator can delete it.
+  */
+
+  if(
+    group.createdBy !==
+    currentUser.uid
+  ){
+
+    showToast(
+      "Only the group creator can delete this."
+    );
+
+    return;
+
+  }
+
+
+  const groupName =
+    group.name ||
+    "this group";
+
+
+  const confirmed =
+    window.confirm(
+      `Delete "${groupName}"?\n\nThis will remove the group and its messages for everyone.`
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  try{
+
+    showToast(
+      "Deleting group..."
+    );
+
 
     /*
-      Refresh the group list from
-      Firestore as well.
+      Stop listening to the group's messages
+      if it is currently open.
     */
 
-    loadGroups();
+    if(
+      selectedChat &&
+      selectedChat.type === "group" &&
+      selectedChat.id === group.id
+    ){
+
+      if(unsubscribeMessages){
+
+        unsubscribeMessages();
+
+        unsubscribeMessages =
+          null;
+
+      }
+
+      selectedChat =
+        null;
+
+
+      $("messageInput").disabled =
+        true;
+
+      $("messageInput").value =
+        "";
+
+      $("messageInput").placeholder =
+        "Select someone first...";
+
+
+      $("headerName").textContent =
+        "Select someone";
+
+      $("personStatus").textContent =
+        "● VIBE";
+
+      $("headerAvatar").textContent =
+        "✦";
+
+
+      $("messages").innerHTML = `
+
+        <div class="welcome">
+
+          <div class="welcomeIcon">
+            ✦
+          </div>
+
+          <strong>
+            Welcome to VIBE
+          </strong>
+
+          <p>
+            Select someone or create a group.
+          </p>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /*
+      Delete all messages inside the group first.
+      Firestore subcollections are not automatically
+      removed when their parent document is deleted.
+    */
+
+    const messagesSnapshot =
+      await getDocs(
+
+        collection(
+          db,
+          "conversations",
+          group.id,
+          "messages"
+        )
+
+      );
+
+
+    /*
+      Firestore batches can contain up to 500 writes.
+      Delete in chunks so larger groups work too.
+    */
+
+    let batch =
+      writeBatch(db);
+
+    let operationCount =
+      0;
+
+
+    for(
+      const messageDoc
+      of messagesSnapshot.docs
+    ){
+
+      batch.delete(
+        messageDoc.ref
+      );
+
+      operationCount++;
+
+
+      if(operationCount >= 450){
+
+        await batch.commit();
+
+        batch =
+          writeBatch(db);
+
+        operationCount =
+          0;
+
+      }
+
+    }
+
+
+    if(operationCount > 0){
+
+      await batch.commit();
+
+    }
+
+
+    /*
+      Finally delete the group itself.
+    */
+
+    await deleteDoc(
+
+      doc(
+        db,
+        "conversations",
+        group.id
+      )
+
+    );
+
+
+    /*
+      Remove it locally so the sidebar
+      updates immediately.
+    */
+
+    allGroups =
+      allGroups.filter(
+        item =>
+          item.id !== group.id
+      );
+
+
+    renderSidebar();
+
+
+    showToast(
+      "Group deleted ✦"
+    );
 
   }
 
   catch(error){
 
-    console.error(
-      "Create group error:",
-      error
-    );
+    console.error(error);
 
     showToast(
-      "Couldn't create group."
+      "Couldn't delete the group."
     );
 
   }
@@ -3012,7 +2998,6 @@ function addEmoji(){
   input.value +=
     " 😊";
 
-
   input.focus();
 
 }
@@ -3044,17 +3029,6 @@ $("messageInput")
 
 function startVideo(){
 
-  if(!selectedChat){
-
-    showToast(
-      "Select a chat first."
-    );
-
-    return;
-
-  }
-
-
   window.location.href =
     "video.html";
 
@@ -3063,174 +3037,128 @@ function startVideo(){
 
 /* PROFILE PICTURE */
 
-$("myAvatar")
-  .addEventListener(
-    "click",
-    () => {
+$("myAvatar").addEventListener(
+  "click",
+  () => {
 
-      if(currentUser){
+    $("pfpInput").click();
 
-        $("pfpInput").click();
-
-      }
-
-    }
-  );
+  }
+);
 
 
-$("pfpInput")
-  .addEventListener(
-    "change",
-    async event => {
+$("pfpInput").addEventListener(
+  "change",
+  async event => {
 
-      const file =
-        event.target.files[0];
-
-
-      if(
-        !file ||
-        !currentUser
-      )
-        return;
+    const file =
+      event.target.files[0];
 
 
-      if(
-        file.size >
-        5 * 1024 * 1024
-      ){
-
-        showToast(
-          "PFP must be under 5 MB."
-        );
-
-        event.target.value =
-          "";
-
-        return;
-
-      }
+    if(
+      !file ||
+      !currentUser
+    )
+      return;
 
 
-      if(
-        ![
-          "image/jpeg",
-          "image/png",
-          "image/webp"
-        ].includes(
-          file.type
-        )
-      ){
-
-        showToast(
-          "Please choose JPG, PNG, or WebP."
-        );
-
-        event.target.value =
-          "";
-
-        return;
-
-      }
-
+    if(
+      file.size >
+      5 * 1024 * 1024
+    ){
 
       showToast(
-        "Uploading PFP..."
+        "PFP must be under 5 MB."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      ![
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ].includes(file.type)
+    ){
+
+      showToast(
+        "Please choose JPG, PNG, or WebP."
+      );
+
+      return;
+
+    }
+
+
+    showToast(
+      "Uploading PFP..."
+    );
+
+
+    try{
+
+      const storageRef =
+        ref(
+          storage,
+          "profilePictures/" +
+          currentUser.uid
+        );
+
+
+      await uploadBytes(
+        storageRef,
+        file
       );
 
 
-      try{
-
-        const storageRef =
-          ref(
-            storage,
-            "profilePictures/" +
-            currentUser.uid
-          );
-
-
-        await uploadBytes(
-          storageRef,
-          file
+      const photoURL =
+        await getDownloadURL(
+          storageRef
         );
 
 
-        const photoURL =
-          await getDownloadURL(
-            storageRef
-          );
+      await setDoc(
+
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        ),
+
+        {
+          photoURL:photoURL
+        },
+
+        {merge:true}
+
+      );
 
 
-        await setDoc(
-
-          doc(
-            db,
-            "users",
-            currentUser.uid
-          ),
-
-          {
-            photoURL:
-              photoURL
-          },
-
-          {
-            merge:true
-          }
-
-        );
+      $("myAvatar").innerHTML =
+        `<img src="${photoURL}" alt="Profile">`;
 
 
-        currentUser.photoURL =
-          photoURL;
-
-
-        $("myAvatar").innerHTML =
-          `<img src="${photoURL}" alt="Profile">`;
-
-
-        showToast(
-          "Profile picture updated ✦"
-        );
-
-
-        await loadUsers();
-
-      }
-
-      catch(error){
-
-        console.error(
-          "PFP upload error:",
-          error
-        );
-
-        showToast(
-          "Couldn't upload PFP."
-        );
-
-      }
-
-
-      event.target.value =
-        "";
+      showToast(
+        "Profile picture updated ✦"
+      );
 
     }
-  );
 
+    catch(error){
 
-/* CLEANUP */
+      console.error(error);
 
-window.addEventListener(
-  "beforeunload",
-  () => {
-
-    stopMessageListener();
-
-    if(unsubscribeGroups){
-
-      unsubscribeGroups();
+      showToast(
+        "Couldn't upload PFP."
+      );
 
     }
+
+
+    event.target.value = "";
 
   }
 );
@@ -3255,6 +3183,9 @@ window.closeGroupModal =
 
 window.createGroup =
   createGroup;
+
+window.deleteGroup =
+  deleteGroup;
 
 </script>
 
