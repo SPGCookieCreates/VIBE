@@ -1724,7 +1724,143 @@ function startVideo(){
 
 }
 
+/* ==========================================
+   PROFILE PICTURE
+========================================== */
 
+$("myAvatar").addEventListener(
+  "click",
+  () => {
+
+    $("pfpInput").click();
+
+  }
+);
+
+
+$("pfpInput").addEventListener(
+  "change",
+  async event => {
+
+    const file =
+      event.target.files[0];
+
+    if(!file || !currentUser)
+      return;
+
+
+    // Basic safety/size limit
+    if(file.size > 5 * 1024 * 1024){
+
+      showToast(
+        "PFP must be under 5 MB."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      ![
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+      ].includes(file.type)
+    ){
+
+      showToast(
+        "Please choose a JPG, PNG, or WebP."
+      );
+
+      return;
+
+    }
+
+
+    showToast(
+      "Uploading PFP..."
+    );
+
+
+    try{
+
+      const storageRef =
+        ref(
+          storage,
+          "profilePictures/" +
+          currentUser.uid
+        );
+
+
+      await uploadBytes(
+        storageRef,
+        file
+      );
+
+
+      const photoURL =
+        await getDownloadURL(
+          storageRef
+        );
+
+
+      await setDoc(
+
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        ),
+
+        {
+          photoURL:photoURL
+        },
+
+        {
+          merge:true
+        }
+
+      );
+
+
+      // Update your avatar immediately
+      $("myAvatar").innerHTML = `
+        <img
+          src="${photoURL}"
+          alt="Profile"
+          style="
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            border-radius:13px;
+          "
+        >
+      `;
+
+
+      showToast(
+        "Profile picture updated ✦"
+      );
+
+    }
+
+    catch(error){
+
+      console.error(error);
+
+      showToast(
+        "Couldn't upload PFP."
+      );
+
+    }
+
+
+    event.target.value = "";
+
+  }
+);
+  
 /* Make functions available to HTML */
 
 window.sendMessage =
