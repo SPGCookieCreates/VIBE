@@ -2,40 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>VIBE ✦</title>
 
-<script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 * {
   box-sizing: border-box;
-}
-
-:root {
-  --purple: #8366ff;
-  --cyan: #31dfff;
-  --pink: #ff4fd8;
-  --bg: #07070c;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 10% 15%, #6540ff35, transparent 30%),
-    radial-gradient(circle at 90% 85%, #00ddff25, transparent 30%),
-    radial-gradient(circle at 50% 50%, #ff2fd10b, transparent 40%),
-    var(--bg);
-  color: white;
-  font-family: Inter, sans-serif;
+  display: grid;
+  place-items: center;
   overflow: hidden;
-}
+  font-family: Arial, sans-serif;
+  color: white;
 
-/* ---------- BACKGROUND ---------- */
+  background:
+    radial-gradient(circle at 15% 20%, #704cff35, transparent 30%),
+    radial-gradient(circle at 85% 80%, #00d9ff25, transparent 30%),
+    #07070c;
+}
 
 body::before {
   content: "";
@@ -44,1362 +33,906 @@ body::before {
   pointer-events: none;
 
   background-image:
-    linear-gradient(#ffffff05 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff05 1px, transparent 1px);
+    linear-gradient(#ffffff08 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff08 1px, transparent 1px);
 
   background-size: 45px 45px;
-
-  mask-image: linear-gradient(
-    to bottom,
-    black,
-    transparent
-  );
-
-  animation: gridMove 15s linear infinite;
-}
-
-@keyframes gridMove {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(45px);
-  }
-}
-
-/* floating glow */
-
-.glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: .15;
-  pointer-events: none;
-  animation: float 10s ease-in-out infinite;
-}
-
-.glow.one {
-  background: var(--purple);
-  top: -100px;
-  left: -100px;
-}
-
-.glow.two {
-  background: var(--cyan);
-  right: -100px;
-  bottom: -100px;
-  animation-delay: -4s;
-}
-
-@keyframes float {
-  50% {
-    transform: translate(60px, -40px);
-  }
-}
-
-/* ---------- NAV ---------- */
-
-nav {
-  height: 76px;
-  padding: 0 30px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  position: relative;
-  z-index: 10;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.logo span {
-  color: var(--purple);
-  text-shadow: 0 0 20px var(--purple);
-}
-
-.status {
-  padding: 8px 14px;
-
-  border-radius: 999px;
-  border: 1px solid #ffffff12;
-
-  background: #ffffff08;
-  backdrop-filter: blur(20px);
-
-  font-size: 11px;
-  color: #999;
-}
-
-/* ---------- JOIN ---------- */
-
-#joinScreen {
-  min-height: calc(100vh - 76px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px;
-}
-
-.hero {
-  width: min(500px, 100%);
-  text-align: center;
-
-  animation: heroIn .8s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes heroIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.orb {
-  width: 105px;
-  height: 105px;
-
-  margin: 0 auto 30px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 32px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
-
-  box-shadow:
-    0 0 100px #7257ff50,
-    inset 0 0 35px #ffffff35;
-
-  font-size: 44px;
-
-  transform: rotate(-6deg);
-
-  animation: orbFloat 4s ease-in-out infinite;
-}
-
-@keyframes orbFloat {
-  50% {
-    transform: rotate(3deg) translateY(-8px);
-  }
-}
-
-h1 {
-  margin: 0;
-
-  font-size: clamp(45px, 9vw, 76px);
-
-  line-height: .9;
-
-  letter-spacing: -6px;
-}
-
-.gradient {
-  background:
-    linear-gradient(
-      90deg,
-      white,
-      #a48dff,
-      #4de4ff
-    );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
-}
-
-.subtitle {
-  max-width: 400px;
-
-  margin: 25px auto 35px;
-
-  color: #858591;
-
-  line-height: 1.6;
+  mask-image: linear-gradient(#000, transparent);
 }
 
 .card {
-  padding: 24px;
-
-  border-radius: 25px;
+  width: min(430px, 92vw);
+  padding: 38px;
+  border: 1px solid #ffffff14;
+  border-radius: 28px;
 
   background: #ffffff08;
-
-  border: 1px solid #ffffff12;
-
   backdrop-filter: blur(30px);
 
-  box-shadow:
-    0 30px 100px #0009,
-    inset 0 1px #ffffff0b;
+  box-shadow: 0 30px 100px #0009;
+  text-align: center;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.logo span {
+  color: #8668ff;
+  text-shadow: 0 0 30px #8668ff;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 30px;
+}
+
+.google {
+  width: 100%;
+  height: 52px;
+
+  border: 1px solid #ffffff16;
+  border-radius: 15px;
+
+  background: white;
+  color: #111;
+
+  font-weight: 700;
+  font-size: 13px;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.google:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px #0005;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 22px 0;
+
+  color: #555;
+  font-size: 10px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #ffffff12;
 }
 
 input {
   width: 100%;
-  height: 58px;
+  height: 50px;
 
-  border: 1px solid #ffffff15;
-  border-radius: 16px;
-
-  background: #00000035;
-
-  color: white;
-
-  text-align: center;
-
-  font-size: 18px;
-  font-weight: 800;
-
-  letter-spacing: 5px;
+  margin-bottom: 10px;
+  padding: 0 15px;
 
   outline: none;
 
-  transition: .2s;
-}
+  border: 1px solid #ffffff12;
+  border-radius: 14px;
 
-input::placeholder {
-  color: #555;
+  background: #ffffff08;
+  color: white;
+
+  font-size: 13px;
 }
 
 input:focus {
   border-color: #8065ff;
-
-  box-shadow:
-    0 0 0 4px #8065ff15,
-    0 0 30px #8065ff15;
+  box-shadow: 0 0 0 3px #8065ff15;
 }
 
-button {
-  border: none;
-  font-family: inherit;
+input::placeholder {
+  color: #666;
+}
+
+.emailBtn,
+.enter {
+  width: 100%;
+  height: 50px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #8061ff,
+    #32dfff
+  );
+
   color: white;
+
+  font-weight: 800;
   cursor: pointer;
 }
 
-.primary {
-  width: 100%;
-  height: 58px;
-
-  margin-top: 12px;
-
-  border-radius: 16px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #795cff,
-      #24d5ff
-    );
-
-  font-weight: 800;
-
-  box-shadow:
-    0 10px 35px #674cff35;
-
-  transition: .2s;
-}
-
-.primary:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 15px 50px #674cff55;
-}
-
-.create {
+.switch {
   margin-top: 18px;
-
-  background: none;
-
-  color: #a696ff;
-
-  font-size: 13px;
-
-  font-weight: 600;
-}
-
-#error {
-  margin-top: 14px;
-
-  color: #ff668c;
-
-  font-size: 13px;
-}
-
-/* ---------- CALL ---------- */
-
-#callScreen {
-  display: none;
-
-  height: calc(100vh - 76px);
-
-  padding: 12px 24px 24px;
-
-  position: relative;
-  z-index: 2;
-}
-
-.roombar {
-  height: 45px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.roomName {
   color: #777;
-  font-size: 12px;
-}
-
-.roomName strong {
-  color: white;
-  letter-spacing: 4px;
-}
-
-.connected {
-  color: #62f5a0;
   font-size: 11px;
 }
 
-.videos {
-  height: calc(100% - 125px);
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 15px;
+.switch button {
+  border: 0;
+  background: none;
+  color: #9b87ff;
+  cursor: pointer;
 }
 
-.videoCard {
-  position: relative;
-
-  overflow: hidden;
-
-  border-radius: 27px;
-
-  background: #111117;
-
-  border: 1px solid #ffffff12;
-
-  box-shadow:
-    0 30px 100px #000b;
-
-  transition: .3s;
-}
-
-.videoCard:hover {
-  border-color: #ffffff25;
-}
-
-video {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  background:
-    radial-gradient(
-      circle,
-      #171727,
-      #08080d
-    );
-}
-
-.videoCard:first-child video {
-  transform: scaleX(-1);
-}
-
-.videoLabel {
-  position: absolute;
-
-  left: 16px;
-  bottom: 16px;
-
-  padding: 9px 13px;
-
-  border-radius: 12px;
-
-  background: #0008;
-
-  backdrop-filter: blur(20px);
-
+.error {
+  min-height: 18px;
+  margin-top: 15px;
+  color: #ff6d8e;
   font-size: 11px;
 }
 
-.waiting {
-  position: absolute;
-  inset: 0;
+#app {
+  display: none;
+  text-align: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 18px;
 
   display: grid;
   place-items: center;
 
-  pointer-events: none;
+  border-radius: 25px;
 
+  background: linear-gradient(
+    135deg,
+    #8061ff,
+    #32dfff
+  );
+
+  font-size: 30px;
+  font-weight: 900;
+}
+
+#app h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+#app p {
   color: #777;
-}
-
-.waitingBox {
-  text-align: center;
-
-  padding: 22px;
-
-  border-radius: 20px;
-
-  background: #0007;
-
-  backdrop-filter: blur(20px);
-}
-
-.spinner {
-  width: 35px;
-  height: 35px;
-
-  margin: 0 auto 15px;
-
-  border-radius: 50%;
-
-  border: 2px solid #ffffff15;
-  border-top-color: var(--purple);
-
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ---------- CONTROLS ---------- */
-
-.controls {
-  height: 70px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-}
-
-.control {
-  width: 52px;
-  height: 52px;
-
-  border-radius: 50%;
-
-  background: #ffffff0c;
-
-  border: 1px solid #ffffff15;
-
-  backdrop-filter: blur(20px);
-
-  font-size: 18px;
-
-  transition: .2s;
-}
-
-.control:hover {
-  transform: translateY(-3px);
-  background: #ffffff18;
-}
-
-.control.off {
-  background: #ff386022;
-  border-color: #ff386055;
-}
-
-.hangup {
-  background: #ff31552b;
-  border-color: #ff315555;
-}
-
-.hangup:hover {
-  background: #ff315555;
-}
-
-/* ---------- TOAST ---------- */
-
-.toast {
-  position: fixed;
-
-  left: 50%;
-  bottom: 30px;
-
-  transform:
-    translate(-50%, 20px);
-
-  padding: 12px 18px;
-
-  border-radius: 999px;
-
-  background: #111119e8;
-
-  border: 1px solid #ffffff18;
-
-  backdrop-filter: blur(20px);
-
-  color: #ccc;
-
   font-size: 12px;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition: .3s;
-
-  z-index: 100;
 }
 
-.toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
+.logout {
+  margin-top: 12px;
+
+  border: 0;
+  background: none;
+
+  color: #666;
+  cursor: pointer;
 }
 
-/* ---------- MOBILE ---------- */
-
-@media(max-width: 700px) {
-
-  body {
-    overflow: auto;
-  }
-
-  nav {
-    padding: 0 18px;
-  }
-
-  #callScreen {
-    height: auto;
-    min-height: calc(100vh - 76px);
-
-    padding: 8px 10px 15px;
-  }
-
-  .videos {
-    height: auto;
-
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-  }
-
-  .videoCard {
-    height: 40vh;
-  }
-
-  .videoCard:first-child {
-    height: 27vh;
-  }
-
-  .controls {
-    margin-top: 8px;
-  }
-
-  h1 {
-    letter-spacing: -4px;
-  }
+button:active {
+  transform: scale(0.98);
 }
 </style>
 </head>
 
 <body>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
+<div class="card">
 
-<nav>
-  <div class="logo">
-    VIBE<span>✦</span>
-  </div>
+  <!-- LOGIN SCREEN -->
 
-  <div class="status" id="navStatus">
-    PRIVATE • 2 PEOPLE
-  </div>
-</nav>
+  <section id="login">
 
-
-<!-- ================= JOIN ================= -->
-
-<section id="joinScreen">
-
-  <div class="hero">
-
-    <div class="orb">
-      ✦
+    <div class="logo">
+      VIBE<span>✦</span>
     </div>
-
-    <h1>
-      <span class="gradient">Talk.</span><br>
-      Your way.
-    </h1>
 
     <div class="subtitle">
-      A private little corner of the internet
-      for you and your favorite person.
+      Your people. Your space.
     </div>
 
-    <div class="card">
+    <button
+      class="google"
+      id="googleBtn"
+    >
+      Continue with Google
+    </button>
 
-      <input
-        id="roomInput"
-        maxlength="6"
-        placeholder="ROOM CODE"
-        autocomplete="off"
-        spellcheck="false"
-      >
-
-      <button
-        class="primary"
-        onclick="joinRoom()"
-      >
-        JOIN ROOM →
-      </button>
-
-      <button
-        class="create"
-        onclick="createRoom()"
-      >
-        + Create a new room
-      </button>
-
-      <div id="error"></div>
-
+    <div class="divider">
+      OR
     </div>
 
-  </div>
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+      autocomplete="email"
+    >
 
-</section>
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
+    <button
+      class="emailBtn"
+      id="emailBtn"
+    >
+      Create account
+    </button>
 
-<!-- ================= CALL ================= -->
+    <div class="switch">
 
-<section id="callScreen">
+      <span id="switchText">
+        Already have an account?
+      </span>
 
-  <div class="roombar">
+      <button id="modeBtn">
+        Log in
+      </button>
 
-    <div class="roomName">
-      ROOM
-      <strong id="roomDisplay">
-        ------
-      </strong>
     </div>
 
     <div
-      class="connected"
-      id="connectionStatus"
+      class="error"
+      id="error"
+    ></div>
+
+  </section>
+
+
+  <!-- LOGGED-IN SCREEN -->
+
+  <section id="app">
+
+    <div
+      class="avatar"
+      id="avatar"
     >
-      ● Connecting
+      V
     </div>
 
-  </div>
+    <h1 id="welcome">
+      Welcome to VIBE.
+    </h1>
 
-
-  <div class="videos">
-
-    <!-- LOCAL -->
-
-    <div class="videoCard">
-
-      <video
-        id="localVideo"
-        autoplay
-        muted
-        playsinline
-      ></video>
-
-      <div class="videoLabel">
-        You
-      </div>
-
-    </div>
-
-
-    <!-- REMOTE -->
-
-    <div class="videoCard">
-
-      <video
-        id="remoteVideo"
-        autoplay
-        playsinline
-      ></video>
-
-      <div
-        class="waiting"
-        id="waiting"
-      >
-
-        <div class="waitingBox">
-
-          <div class="spinner"></div>
-
-          <div>
-            Waiting for your friend...
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="videoLabel">
-        Friend
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="controls">
+    <p id="account"></p>
 
     <button
-      class="control"
-      id="micBtn"
-      onclick="toggleMic()"
+      class="enter"
+      id="enterBtn"
     >
-      🎤
+      Enter VIBE ✦
     </button>
+
+    <br>
 
     <button
-      class="control"
-      id="camBtn"
-      onclick="toggleCamera()"
+      class="logout"
+      id="logoutBtn"
     >
-      📹
+      Sign out
     </button>
 
-    <button
-      class="control hangup"
-      onclick="leaveCall()"
-    >
-      ☎
-    </button>
+  </section>
 
-  </div>
-
-</section>
+</div>
 
 
-<div
-  class="toast"
-  id="toast"
-></div>
+<script type="module">
+
+/*
+====================================================
+FIREBASE IMPORTS
+====================================================
+*/
+
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 
-<script>
-let peer = null;
-let localStream = null;
-let currentCall = null;
-
-let roomCode = "";
-let isHost = false;
-
-const $ = id => document.getElementById(id);
-
-
-// ==========================================
-// ROOM HELPERS
-// ==========================================
-
-function randomRoom() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let result = "";
-
-  for (let i = 0; i < 6; i++) {
-    result += chars[Math.floor(Math.random() * chars.length)];
-  }
-
-  return result;
-}
-
-function hostPeerId(code) {
-  return "vibe-" + code.toLowerCase();
-}
-
-function showError(message) {
-  $("error").textContent = message;
-}
-
-function toast(message) {
-  const el = $("toast");
-
-  el.textContent = message;
-  el.classList.add("show");
-
-  setTimeout(() => {
-    el.classList.remove("show");
-  }, 2500);
-}
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
-// ==========================================
-// CREATE ROOM
-// ==========================================
-
-async function createRoom() {
-
-  const code = randomRoom();
-
-  $("roomInput").value = code;
-
-  await startRoom(code, true);
-}
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
-// ==========================================
-// JOIN ROOM
-// ==========================================
+/*
+====================================================
+VIBE FIREBASE CONFIG
+====================================================
+*/
 
-async function joinRoom() {
+const firebaseConfig = {
 
-  const code =
-    $("roomInput")
-      .value
-      .trim()
-      .toUpperCase();
+  apiKey:
+    "AIzaSyC0oSoz5Xn2-vqCz7tZL-tXITcClTmE1Mk",
 
-  if (code.length !== 6) {
-    showError("Enter a 6-character room code.");
-    return;
-  }
+  authDomain:
+    "vibe-8ef48.firebaseapp.com",
 
-  await startRoom(code, false);
-}
+  projectId:
+    "vibe-8ef48",
 
+  storageBucket:
+    "vibe-8ef48.firebasestorage.app",
 
-// ==========================================
-// START ROOM
-// ==========================================
+  messagingSenderId:
+    "508522238856",
 
-async function startRoom(code, host) {
+  appId:
+    "1:508522238856:web:d79330d3e1d6078d83a03d"
 
-  roomCode = code;
-  isHost = host;
-
-  showError("");
-
-  try {
-
-    // Camera + microphone permission
-    localStream =
-      await navigator.mediaDevices.getUserMedia({
-        video: {
-          width: { ideal: 1280 },
-          height: { ideal: 720 }
-        },
-        audio: true
-      });
+};
 
 
-    $("localVideo").srcObject = localStream;
+/*
+====================================================
+INITIALIZE FIREBASE
+====================================================
+*/
 
-    $("joinScreen").style.display = "none";
-    $("callScreen").style.display = "block";
-
-    $("roomDisplay").textContent = roomCode;
-
-    $("connectionStatus").textContent =
-      isHost
-        ? "● Waiting for friend"
-        : "● Connecting";
+const app =
+  initializeApp(firebaseConfig);
 
 
-    // --------------------------------------
-    // HOST
-    // --------------------------------------
+const auth =
+  getAuth(app);
 
-    if (isHost) {
 
-      /*
-       * The room code becomes the host's
-       * PeerJS ID.
-       *
-       * Example:
-       *
-       * Room: X7K92P
-       * Peer ID: vibe-x7k92p
-       */
+const db =
+  getFirestore(app);
 
-      peer = new Peer(
-        hostPeerId(roomCode)
+
+const googleProvider =
+  new GoogleAuthProvider();
+
+
+/*
+====================================================
+ELEMENTS
+====================================================
+*/
+
+const loginScreen =
+  document.getElementById("login");
+
+const appScreen =
+  document.getElementById("app");
+
+const googleBtn =
+  document.getElementById("googleBtn");
+
+const emailBtn =
+  document.getElementById("emailBtn");
+
+const modeBtn =
+  document.getElementById("modeBtn");
+
+const emailInput =
+  document.getElementById("email");
+
+const passwordInput =
+  document.getElementById("password");
+
+const errorBox =
+  document.getElementById("error");
+
+const welcome =
+  document.getElementById("welcome");
+
+const account =
+  document.getElementById("account");
+
+const avatar =
+  document.getElementById("avatar");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const enterBtn =
+  document.getElementById("enterBtn");
+
+
+/*
+====================================================
+LOGIN MODE
+====================================================
+*/
+
+let loginMode = false;
+
+
+/*
+====================================================
+GOOGLE LOGIN
+====================================================
+*/
+
+googleBtn.addEventListener(
+  "click",
+  async () => {
+
+    errorBox.textContent = "";
+
+    try {
+
+      await signInWithPopup(
+        auth,
+        googleProvider
       );
 
     }
 
-    // --------------------------------------
-    // GUEST
-    // --------------------------------------
+    catch (error) {
 
-    else {
+      console.error(error);
 
-      /*
-       * Guest gets a random PeerJS ID.
-       */
+      errorBox.textContent =
+        friendlyError(error);
 
-      peer = new Peer();
+    }
+
+  }
+);
+
+
+/*
+====================================================
+EMAIL LOGIN / SIGNUP
+====================================================
+*/
+
+emailBtn.addEventListener(
+  "click",
+  async () => {
+
+    errorBox.textContent = "";
+
+    const email =
+      emailInput.value.trim();
+
+    const password =
+      passwordInput.value;
+
+
+    if (!email || !password) {
+
+      errorBox.textContent =
+        "Enter your email and password.";
+
+      return;
 
     }
 
 
-    peer.on("open", peerId => {
+    if (password.length < 6) {
 
-      console.log("Peer ID:", peerId);
+      errorBox.textContent =
+        "Password must be at least 6 characters.";
 
-      if (isHost) {
+      return;
 
-        $("connectionStatus").textContent =
-          "● Waiting for friend";
+    }
 
-        toast(
-          "Room " + roomCode + " is ready"
-        );
 
-        /*
-         * Give the host a shareable URL.
-         */
+    try {
 
-        updateURL();
+      let result;
+
+
+      if (loginMode) {
+
+        result =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
 
       }
 
       else {
 
-        $("connectionStatus").textContent =
-          "● Calling room";
-
-        callHost();
-
-      }
-
-    });
+        result =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
 
 
-    // --------------------------------------
-    // INCOMING CALL
-    // --------------------------------------
-
-    peer.on("call", call => {
-
-      console.log("Incoming call");
-
-      currentCall = call;
-
-      call.answer(localStream);
-
-      call.on("stream", remoteStream => {
-
-        showRemote(remoteStream);
-
-      });
-
-      call.on("close", () => {
-
-        $("connectionStatus").textContent =
-          "● Call ended";
-
-      });
-
-    });
-
-
-    peer.on("error", error => {
-
-      console.error("PeerJS error:", error);
-
-      if (
-        error.type === "unavailable-id"
-      ) {
-
-        showError(
-          "That room already exists. Try another room."
+        await createProfile(
+          result.user
         );
 
-        cleanup();
-
-        $("joinScreen").style.display = "flex";
-        $("callScreen").style.display = "none";
-
-        return;
       }
 
-      if (
-        error.type === "peer-unavailable"
-      ) {
-
-        $("connectionStatus").textContent =
-          "● Room not found";
-
-        toast(
-          "Your friend hasn't created that room yet."
-        );
-
-        return;
-      }
-
-      $("connectionStatus").textContent =
-        "● Connection error";
-
-    });
-
-
-    peer.on("disconnected", () => {
-
-      $("connectionStatus").textContent =
-        "● Disconnected";
-
-    });
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    showError(
-      getCameraError(error)
-    );
-
-  }
-}
-
-
-// ==========================================
-// CALL HOST
-// ==========================================
-
-function callHost() {
-
-  if (!peer || !localStream) {
-    return;
-  }
-
-  const hostId =
-    hostPeerId(roomCode);
-
-  console.log(
-    "Calling:",
-    hostId
-  );
-
-  currentCall =
-    peer.call(
-      hostId,
-      localStream
-    );
-
-
-  if (!currentCall) {
-
-    toast(
-      "Couldn't connect to the room."
-    );
-
-    return;
-  }
-
-
-  currentCall.on(
-    "stream",
-    remoteStream => {
-
-      showRemote(remoteStream);
-
     }
-  );
 
-
-  currentCall.on(
-    "close",
-    () => {
-
-      $("connectionStatus").textContent =
-        "● Call ended";
-
-    }
-  );
-
-
-  currentCall.on(
-    "error",
-    error => {
+    catch (error) {
 
       console.error(error);
 
-      $("connectionStatus").textContent =
-        "● Connection failed";
+      errorBox.textContent =
+        friendlyError(error);
 
     }
+
+  }
+);
+
+
+/*
+====================================================
+SWITCH LOGIN / CREATE ACCOUNT
+====================================================
+*/
+
+modeBtn.addEventListener(
+  "click",
+  () => {
+
+    loginMode =
+      !loginMode;
+
+
+    if (loginMode) {
+
+      emailBtn.textContent =
+        "Log in";
+
+      modeBtn.textContent =
+        "Create one";
+
+      document.getElementById(
+        "switchText"
+      ).textContent =
+        "Don't have an account?";
+
+    }
+
+    else {
+
+      emailBtn.textContent =
+        "Create account";
+
+      modeBtn.textContent =
+        "Log in";
+
+      document.getElementById(
+        "switchText"
+      ).textContent =
+        "Already have an account?";
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+CREATE USER PROFILE
+====================================================
+*/
+
+async function createProfile(user) {
+
+  const displayName =
+    user.displayName ||
+    (
+      user.email
+        ? user.email.split("@")[0]
+        : "VIBE User"
+    );
+
+
+  await setDoc(
+    doc(
+      db,
+      "users",
+      user.uid
+    ),
+
+    {
+
+      uid:
+        user.uid,
+
+      displayName:
+        displayName,
+
+      email:
+        user.email || "",
+
+      photoURL:
+        user.photoURL || "",
+
+      createdAt:
+        serverTimestamp(),
+
+      online:
+        true
+
+    },
+
+    {
+      merge: true
+    }
+
   );
 
 }
 
 
-// ==========================================
-// REMOTE VIDEO
-// ==========================================
+/*
+====================================================
+AUTH STATE
+====================================================
+*/
 
-function showRemote(stream) {
+onAuthStateChanged(
+  auth,
+  async (user) => {
 
-  $("remoteVideo").srcObject =
-    stream;
+    if (user) {
 
-  $("waiting").style.display =
-    "none";
+      try {
 
-  $("connectionStatus").textContent =
-    "● Connected";
-
-  $("navStatus").textContent =
-    "LIVE • 2 PEOPLE";
-
-  toast("You're connected ✦");
-
-}
-
-
-// ==========================================
-// SHAREABLE URL
-// ==========================================
-
-function updateURL() {
-
-  const url =
-    window.location.origin +
-    window.location.pathname +
-    "?room=" +
-    roomCode;
-
-  window.history.replaceState(
-    {},
-    "",
-    url
-  );
-
-  /*
-   * Put the room link in the clipboard
-   * automatically when possible.
-   */
-
-  if (navigator.clipboard) {
-
-    navigator.clipboard.writeText(url)
-      .then(() => {
-
-        toast(
-          "Invite link copied ✦"
+        await createProfile(
+          user
         );
 
-      })
-      .catch(() => {});
+      }
+
+      catch (error) {
+
+        console.error(
+          "Profile error:",
+          error
+        );
+
+      }
+
+
+      loginScreen.style.display =
+        "none";
+
+      appScreen.style.display =
+        "block";
+
+
+      const name =
+        user.displayName ||
+        (
+          user.email
+            ? user.email.split("@")[0]
+            : "VIBE User"
+        );
+
+
+      welcome.textContent =
+        "Welcome, " +
+        name +
+        ".";
+
+
+      account.textContent =
+        user.email || "";
+
+
+      avatar.textContent =
+        name
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+    else {
+
+      loginScreen.style.display =
+        "block";
+
+      appScreen.style.display =
+        "none";
+
+    }
 
   }
-}
-
-
-// ==========================================
-// AUTOMATIC ROOM FROM URL
-// ==========================================
-
-function checkURLRoom() {
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const room =
-    params.get("room");
-
-  if (room && room.length === 6) {
-
-    $("roomInput").value =
-      room.toUpperCase();
-
-    /*
-     * We intentionally DON'T automatically
-     * open the camera.
-     *
-     * The friend clicks JOIN ROOM first,
-     * which causes the browser permission
-     * prompt.
-     */
-
-    toast(
-      "Invite received ✦"
-    );
-  }
-}
-
-
-// ==========================================
-// MICROPHONE
-// ==========================================
-
-function toggleMic() {
-
-  if (!localStream) return;
-
-  const track =
-    localStream.getAudioTracks()[0];
-
-  if (!track) return;
-
-  track.enabled =
-    !track.enabled;
-
-  $("micBtn").textContent =
-    track.enabled
-      ? "🎤"
-      : "🔇";
-
-  $("micBtn").classList.toggle(
-    "off",
-    !track.enabled
-  );
-}
-
-
-// ==========================================
-// CAMERA
-// ==========================================
-
-function toggleCamera() {
-
-  if (!localStream) return;
-
-  const track =
-    localStream.getVideoTracks()[0];
-
-  if (!track) return;
-
-  track.enabled =
-    !track.enabled;
-
-  $("camBtn").textContent =
-    track.enabled
-      ? "📹"
-      : "🚫";
-
-  $("camBtn").classList.toggle(
-    "off",
-    !track.enabled
-  );
-}
-
-
-// ==========================================
-// LEAVE
-// ==========================================
-
-function leaveCall() {
-
-  cleanup();
-
-  location.href =
-    window.location.pathname;
-}
-
-
-function cleanup() {
-
-  if (currentCall) {
-
-    try {
-      currentCall.close();
-    } catch (e) {}
-
-    currentCall = null;
-  }
-
-
-  if (peer) {
-
-    try {
-      peer.destroy();
-    } catch (e) {}
-
-    peer = null;
-  }
-
-
-  if (localStream) {
-
-    localStream
-      .getTracks()
-      .forEach(track => {
-        track.stop();
-      });
-
-    localStream = null;
-  }
-}
-
-
-// ==========================================
-// CAMERA ERRORS
-// ==========================================
-
-function getCameraError(error) {
-
-  switch (error.name) {
-
-    case "NotAllowedError":
-      return "Camera or microphone permission was blocked. Click the 🔒 icon and allow both.";
-
-    case "NotFoundError":
-      return "No camera or microphone was found.";
-
-    case "NotReadableError":
-      return "Your camera or microphone is already being used by another app.";
-
-    case "SecurityError":
-      return "Your browser blocked camera access.";
-
-    case "TypeError":
-      return "Camera access requires HTTPS. Make sure you're using your GitHub Pages URL.";
-
-    default:
-      return (
-        "Couldn't access your camera/microphone: " +
-        error.message
-      );
-  }
-}
-
-
-// ==========================================
-// STARTUP
-// ==========================================
-
-window.addEventListener(
-  "load",
-  checkURLRoom
 );
+
+
+/*
+====================================================
+ENTER VIBE
+====================================================
+*/
+
+enterBtn.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "messenger.html";
+
+  }
+);
+
+
+/*
+====================================================
+LOG OUT
+====================================================
+*/
+
+logoutBtn.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      await signOut(
+        auth
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+FRIENDLY ERROR MESSAGES
+====================================================
+*/
+
+function friendlyError(error) {
+
+  const code =
+    error.code || "";
+
+
+  if (
+    code.includes(
+      "auth/email-already-in-use"
+    )
+  ) {
+
+    return (
+      "That email already has an account."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/invalid-credential"
+    )
+  ) {
+
+    return (
+      "Email or password is incorrect."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/invalid-email"
+    )
+  ) {
+
+    return (
+      "Please enter a valid email."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/popup-closed-by-user"
+    )
+  ) {
+
+    return (
+      "Google sign-in was cancelled."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/unauthorized-domain"
+    )
+  ) {
+
+    return (
+      "This website isn't authorized in Firebase yet."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/operation-not-allowed"
+    )
+  ) {
+
+    return (
+      "That sign-in method isn't enabled in Firebase."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/weak-password"
+    )
+  ) {
+
+    return (
+      "Choose a stronger password."
+    );
+
+  }
+
+
+  return (
+    error.message ||
+    "Something went wrong."
+  );
+
+}
+
 </script>
 
 </body>
