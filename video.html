@@ -4,625 +4,405 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VIBE ✦</title>
+<title>VIBE ✦ Video</title>
 
 <script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
 }
 
-:root {
-  --purple: #8366ff;
-  --cyan: #31dfff;
-  --pink: #ff4fd8;
-  --bg: #07070c;
+:root{
+  --purple:#8366ff;
+  --cyan:#31dfff;
+  --pink:#ff4fd8;
+  --bg:#07070c;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
+body{
+  margin:0;
+  min-height:100vh;
   background:
-    radial-gradient(circle at 10% 15%, #6540ff35, transparent 30%),
-    radial-gradient(circle at 90% 85%, #00ddff25, transparent 30%),
-    radial-gradient(circle at 50% 50%, #ff2fd10b, transparent 40%),
+    radial-gradient(circle at 10% 15%,#6540ff35,transparent 30%),
+    radial-gradient(circle at 90% 85%,#00ddff25,transparent 30%),
     var(--bg);
-  color: white;
-  font-family: Inter, sans-serif;
-  overflow: hidden;
+  color:white;
+  font-family:Inter,sans-serif;
+  overflow:hidden;
 }
 
-/* ---------- BACKGROUND ---------- */
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
   background-image:
-    linear-gradient(#ffffff05 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff05 1px, transparent 1px);
+    linear-gradient(#ffffff05 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff05 1px,transparent 1px);
+  background-size:45px 45px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
 
-  background-size: 45px 45px;
+button,input{
+  font-family:inherit;
+}
 
-  mask-image: linear-gradient(
-    to bottom,
-    black,
-    transparent
+button{
+  border:0;
+  color:white;
+  cursor:pointer;
+}
+
+/* ================= NAV ================= */
+
+nav{
+  height:70px;
+  padding:0 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #ffffff0d;
+  background:#07070ccc;
+  backdrop-filter:blur(25px);
+  position:relative;
+  z-index:10;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+
+.logo span{
+  color:var(--purple);
+  text-shadow:0 0 25px var(--purple);
+}
+
+.status{
+  padding:8px 13px;
+  border-radius:999px;
+  background:#ffffff08;
+  border:1px solid #ffffff12;
+  color:#888;
+  font-size:10px;
+}
+
+/* ================= JOIN ================= */
+
+#joinScreen{
+  height:calc(100vh - 70px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.hero{
+  width:min(500px,100%);
+  text-align:center;
+}
+
+.orb{
+  width:100px;
+  height:100px;
+  margin:0 auto 25px;
+  display:grid;
+  place-items:center;
+  border-radius:30px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  box-shadow:0 0 100px #7257ff50;
+  font-size:42px;
+  transform:rotate(-5deg);
+}
+
+h1{
+  margin:0;
+  font-size:clamp(45px,9vw,75px);
+  line-height:.9;
+  letter-spacing:-6px;
+}
+
+.gradient{
+  background:linear-gradient(
+    90deg,
+    white,
+    #a48dff,
+    #4de4ff
   );
-
-  animation: gridMove 15s linear infinite;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
-@keyframes gridMove {
-  from {
-    transform: translateY(0);
+.subtitle{
+  max-width:410px;
+  margin:25px auto 30px;
+  color:#858591;
+  line-height:1.6;
+  font-size:13px;
+}
+
+.card{
+  padding:24px;
+  border-radius:25px;
+  background:#ffffff08;
+  border:1px solid #ffffff12;
+  backdrop-filter:blur(30px);
+  box-shadow:0 30px 100px #0009;
+}
+
+#roomInput{
+  width:100%;
+  height:58px;
+  border:1px solid #ffffff15;
+  border-radius:16px;
+  background:#00000035;
+  color:white;
+  text-align:center;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:5px;
+  outline:none;
+}
+
+#roomInput:focus{
+  border-color:#8065ff;
+  box-shadow:0 0 0 4px #8065ff15;
+}
+
+#roomInput::placeholder{
+  color:#555;
+}
+
+.primary{
+  width:100%;
+  height:58px;
+  margin-top:12px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#795cff,#24d5ff);
+  font-weight:800;
+  box-shadow:0 10px 35px #674cff35;
+}
+
+.primary:hover{
+  transform:translateY(-2px);
+}
+
+.create{
+  margin-top:18px;
+  background:none;
+  color:#a696ff;
+  font-size:13px;
+  font-weight:600;
+}
+
+#error{
+  margin-top:14px;
+  color:#ff668c;
+  font-size:13px;
+}
+
+/* ================= CALL ================= */
+
+#callScreen{
+  display:none;
+  height:calc(100vh - 70px);
+  padding:12px 20px 20px;
+}
+
+.roombar{
+  height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.roomName{
+  color:#777;
+  font-size:11px;
+}
+
+.roomName strong{
+  color:white;
+  letter-spacing:4px;
+}
+
+.connected{
+  color:#62f5a0;
+  font-size:11px;
+}
+
+/* ================= VIDEO GRID ================= */
+
+.videos{
+  height:calc(100% - 115px);
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-rows:minmax(0,1fr);
+  gap:12px;
+}
+
+.videoCard{
+  position:relative;
+  min-height:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:#111117;
+  border:1px solid #ffffff12;
+  box-shadow:0 25px 80px #000b;
+}
+
+.videoCard video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  background:#09090f;
+}
+
+.videoCard.local video{
+  transform:scaleX(-1);
+}
+
+.videoLabel{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  padding:8px 11px;
+  border-radius:11px;
+  background:#0009;
+  backdrop-filter:blur(15px);
+  font-size:10px;
+}
+
+.removeButton{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:#0008;
+  font-size:13px;
+  display:none;
+}
+
+.emptyVideo{
+  height:100%;
+  display:grid;
+  place-items:center;
+  color:#555;
+  text-align:center;
+}
+
+.emptyVideo strong{
+  display:block;
+  color:#aaa;
+  margin-bottom:6px;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+
+.control{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#ffffff0c;
+  border:1px solid #ffffff15;
+  backdrop-filter:blur(20px);
+  font-size:18px;
+  transition:.2s;
+}
+
+.control:hover{
+  transform:translateY(-3px);
+  background:#ffffff18;
+}
+
+.control.off{
+  background:#ff386022;
+  border-color:#ff386055;
+}
+
+.hangup{
+  background:#ff31552b;
+  border-color:#ff315555;
+}
+
+.hangup:hover{
+  background:#ff315555;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  padding:12px 18px;
+  border-radius:999px;
+  background:#111119e8;
+  border:1px solid #ffffff18;
+  backdrop-filter:blur(20px);
+  color:#ccc;
+  font-size:11px;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:100;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+  body{
+    overflow:auto;
   }
 
-  to {
-    transform: translateY(45px);
-  }
-}
-
-/* floating glow */
-
-.glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: .15;
-  pointer-events: none;
-  animation: float 10s ease-in-out infinite;
-}
-
-.glow.one {
-  background: var(--purple);
-  top: -100px;
-  left: -100px;
-}
-
-.glow.two {
-  background: var(--cyan);
-  right: -100px;
-  bottom: -100px;
-  animation-delay: -4s;
-}
-
-@keyframes float {
-  50% {
-    transform: translate(60px, -40px);
-  }
-}
-
-/* ---------- NAV ---------- */
-
-nav {
-  height: 76px;
-  padding: 0 30px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  position: relative;
-  z-index: 10;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -1px;
-}
-
-.logo span {
-  color: var(--purple);
-  text-shadow: 0 0 20px var(--purple);
-}
-
-.status {
-  padding: 8px 14px;
-
-  border-radius: 999px;
-  border: 1px solid #ffffff12;
-
-  background: #ffffff08;
-  backdrop-filter: blur(20px);
-
-  font-size: 11px;
-  color: #999;
-}
-
-/* ---------- JOIN ---------- */
-
-#joinScreen {
-  min-height: calc(100vh - 76px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px;
-}
-
-.hero {
-  width: min(500px, 100%);
-  text-align: center;
-
-  animation: heroIn .8s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes heroIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(.97);
+  nav{
+    padding:0 15px;
   }
 
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.orb {
-  width: 105px;
-  height: 105px;
-
-  margin: 0 auto 30px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 32px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
-
-  box-shadow:
-    0 0 100px #7257ff50,
-    inset 0 0 35px #ffffff35;
-
-  font-size: 44px;
-
-  transform: rotate(-6deg);
-
-  animation: orbFloat 4s ease-in-out infinite;
-}
-
-@keyframes orbFloat {
-  50% {
-    transform: rotate(3deg) translateY(-8px);
-  }
-}
-
-h1 {
-  margin: 0;
-
-  font-size: clamp(45px, 9vw, 76px);
-
-  line-height: .9;
-
-  letter-spacing: -6px;
-}
-
-.gradient {
-  background:
-    linear-gradient(
-      90deg,
-      white,
-      #a48dff,
-      #4de4ff
-    );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
-}
-
-.subtitle {
-  max-width: 400px;
-
-  margin: 25px auto 35px;
-
-  color: #858591;
-
-  line-height: 1.6;
-}
-
-.card {
-  padding: 24px;
-
-  border-radius: 25px;
-
-  background: #ffffff08;
-
-  border: 1px solid #ffffff12;
-
-  backdrop-filter: blur(30px);
-
-  box-shadow:
-    0 30px 100px #0009,
-    inset 0 1px #ffffff0b;
-}
-
-input {
-  width: 100%;
-  height: 58px;
-
-  border: 1px solid #ffffff15;
-  border-radius: 16px;
-
-  background: #00000035;
-
-  color: white;
-
-  text-align: center;
-
-  font-size: 18px;
-  font-weight: 800;
-
-  letter-spacing: 5px;
-
-  outline: none;
-
-  transition: .2s;
-}
-
-input::placeholder {
-  color: #555;
-}
-
-input:focus {
-  border-color: #8065ff;
-
-  box-shadow:
-    0 0 0 4px #8065ff15,
-    0 0 30px #8065ff15;
-}
-
-button {
-  border: none;
-  font-family: inherit;
-  color: white;
-  cursor: pointer;
-}
-
-.primary {
-  width: 100%;
-  height: 58px;
-
-  margin-top: 12px;
-
-  border-radius: 16px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #795cff,
-      #24d5ff
-    );
-
-  font-weight: 800;
-
-  box-shadow:
-    0 10px 35px #674cff35;
-
-  transition: .2s;
-}
-
-.primary:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 15px 50px #674cff55;
-}
-
-.create {
-  margin-top: 18px;
-
-  background: none;
-
-  color: #a696ff;
-
-  font-size: 13px;
-
-  font-weight: 600;
-}
-
-#error {
-  margin-top: 14px;
-
-  color: #ff668c;
-
-  font-size: 13px;
-}
-
-/* ---------- CALL ---------- */
-
-#callScreen {
-  display: none;
-
-  height: calc(100vh - 76px);
-
-  padding: 12px 24px 24px;
-
-  position: relative;
-  z-index: 2;
-}
-
-.roombar {
-  height: 45px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.roomName {
-  color: #777;
-  font-size: 12px;
-}
-
-.roomName strong {
-  color: white;
-  letter-spacing: 4px;
-}
-
-.connected {
-  color: #62f5a0;
-  font-size: 11px;
-}
-
-.videos {
-  height: calc(100% - 125px);
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 15px;
-}
-
-.videoCard {
-  position: relative;
-
-  overflow: hidden;
-
-  border-radius: 27px;
-
-  background: #111117;
-
-  border: 1px solid #ffffff12;
-
-  box-shadow:
-    0 30px 100px #000b;
-
-  transition: .3s;
-}
-
-.videoCard:hover {
-  border-color: #ffffff25;
-}
-
-video {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  background:
-    radial-gradient(
-      circle,
-      #171727,
-      #08080d
-    );
-}
-
-.videoCard:first-child video {
-  transform: scaleX(-1);
-}
-
-.videoLabel {
-  position: absolute;
-
-  left: 16px;
-  bottom: 16px;
-
-  padding: 9px 13px;
-
-  border-radius: 12px;
-
-  background: #0008;
-
-  backdrop-filter: blur(20px);
-
-  font-size: 11px;
-}
-
-.waiting {
-  position: absolute;
-  inset: 0;
-
-  display: grid;
-  place-items: center;
-
-  pointer-events: none;
-
-  color: #777;
-}
-
-.waitingBox {
-  text-align: center;
-
-  padding: 22px;
-
-  border-radius: 20px;
-
-  background: #0007;
-
-  backdrop-filter: blur(20px);
-}
-
-.spinner {
-  width: 35px;
-  height: 35px;
-
-  margin: 0 auto 15px;
-
-  border-radius: 50%;
-
-  border: 2px solid #ffffff15;
-  border-top-color: var(--purple);
-
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ---------- CONTROLS ---------- */
-
-.controls {
-  height: 70px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-}
-
-.control {
-  width: 52px;
-  height: 52px;
-
-  border-radius: 50%;
-
-  background: #ffffff0c;
-
-  border: 1px solid #ffffff15;
-
-  backdrop-filter: blur(20px);
-
-  font-size: 18px;
-
-  transition: .2s;
-}
-
-.control:hover {
-  transform: translateY(-3px);
-  background: #ffffff18;
-}
-
-.control.off {
-  background: #ff386022;
-  border-color: #ff386055;
-}
-
-.hangup {
-  background: #ff31552b;
-  border-color: #ff315555;
-}
-
-.hangup:hover {
-  background: #ff315555;
-}
-
-/* ---------- TOAST ---------- */
-
-.toast {
-  position: fixed;
-
-  left: 50%;
-  bottom: 30px;
-
-  transform:
-    translate(-50%, 20px);
-
-  padding: 12px 18px;
-
-  border-radius: 999px;
-
-  background: #111119e8;
-
-  border: 1px solid #ffffff18;
-
-  backdrop-filter: blur(20px);
-
-  color: #ccc;
-
-  font-size: 12px;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition: .3s;
-
-  z-index: 100;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width: 700px) {
-
-  body {
-    overflow: auto;
+  #callScreen{
+    height:auto;
+    min-height:calc(100vh - 70px);
+    padding:8px 10px 15px;
   }
 
-  nav {
-    padding: 0 18px;
+  .videos{
+    height:auto;
+    grid-template-columns:1fr;
   }
 
-  #callScreen {
-    height: auto;
-    min-height: calc(100vh - 76px);
-
-    padding: 8px 10px 15px;
+  .videoCard{
+    height:32vh;
   }
 
-  .videos {
-    height: auto;
-
-    grid-template-columns: 1fr;
-
-    gap: 10px;
+  .controls{
+    margin-top:8px;
   }
 
-  .videoCard {
-    height: 40vh;
-  }
-
-  .videoCard:first-child {
-    height: 27vh;
-  }
-
-  .controls {
-    margin-top: 8px;
-  }
-
-  h1 {
-    letter-spacing: -4px;
+  h1{
+    letter-spacing:-4px;
   }
 }
 </style>
@@ -630,21 +410,23 @@ video {
 
 <body>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
-
 <nav>
+
   <div class="logo">
     VIBE<span>✦</span>
   </div>
 
-  <div class="status" id="navStatus">
-    PRIVATE • 2 PEOPLE
+  <div
+    class="status"
+    id="navStatus"
+  >
+    PRIVATE • 0 PEOPLE
   </div>
+
 </nav>
 
 
-<!-- ================= JOIN ================= -->
+<!-- ================= JOIN SCREEN ================= -->
 
 <section id="joinScreen">
 
@@ -656,12 +438,12 @@ video {
 
     <h1>
       <span class="gradient">Talk.</span><br>
-      Your way.
+      Together.
     </h1>
 
     <div class="subtitle">
-      A private little corner of the internet
-      for you and your favorite person.
+      Create a private VIBE room and bring
+      your friends into the same video call.
     </div>
 
     <div class="card">
@@ -697,7 +479,7 @@ video {
 </section>
 
 
-<!-- ================= CALL ================= -->
+<!-- ================= CALL SCREEN ================= -->
 
 <section id="callScreen">
 
@@ -720,11 +502,12 @@ video {
   </div>
 
 
-  <div class="videos">
+  <div
+    class="videos"
+    id="videos"
+  >
 
-    <!-- LOCAL -->
-
-    <div class="videoCard">
+    <div class="videoCard local">
 
       <video
         id="localVideo"
@@ -739,40 +522,6 @@ video {
 
     </div>
 
-
-    <!-- REMOTE -->
-
-    <div class="videoCard">
-
-      <video
-        id="remoteVideo"
-        autoplay
-        playsinline
-      ></video>
-
-      <div
-        class="waiting"
-        id="waiting"
-      >
-
-        <div class="waitingBox">
-
-          <div class="spinner"></div>
-
-          <div>
-            Waiting for your friend...
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="videoLabel">
-        Friend
-      </div>
-
-    </div>
-
   </div>
 
 
@@ -782,6 +531,7 @@ video {
       class="control"
       id="micBtn"
       onclick="toggleMic()"
+      title="Microphone"
     >
       🎤
     </button>
@@ -790,6 +540,7 @@ video {
       class="control"
       id="camBtn"
       onclick="toggleCamera()"
+      title="Camera"
     >
       📹
     </button>
@@ -797,6 +548,7 @@ video {
     <button
       class="control hangup"
       onclick="leaveCall()"
+      title="Leave"
     >
       ☎
     </button>
@@ -812,71 +564,239 @@ video {
 ></div>
 
 
-<script>
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  deleteDoc,
+  onSnapshot,
+  serverTimestamp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC0oSoz5Xn2-vqCz7tZL-tXITcClTmE1Mk",
+
+  authDomain:
+    "vibe-8ef48.firebaseapp.com",
+
+  projectId:
+    "vibe-8ef48",
+
+  storageBucket:
+    "vibe-8ef48.firebasestorage.app",
+
+  messagingSenderId:
+    "508522238856",
+
+  appId:
+    "1:508522238856:web:d79330d3e1d6078d83a03d"
+
+};
+
+
+const firebaseApp =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(firebaseApp);
+
+const db =
+  getFirestore(firebaseApp);
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser = null;
+
 let peer = null;
+
 let localStream = null;
-let currentCall = null;
 
 let roomCode = "";
-let isHost = false;
 
-const $ = id => document.getElementById(id);
+let participantUnsubscribe = null;
+
+let roomParticipantId = null;
+
+const calls = new Map();
+
+const participants = new Map();
+
+const $ =
+  id => document.getElementById(id);
 
 
-// ==========================================
-// ROOM HELPERS
-// ==========================================
+/* =========================================================
+   AUTH
+========================================================= */
 
-function randomRoom() {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(!user){
+
+      showError(
+        "You need to log into VIBE first."
+      );
+
+      return;
+
+    }
+
+    currentUser = user;
+
+    checkURLRoom();
+
+  }
+);
+
+
+/* =========================================================
+   ROOM HELPERS
+========================================================= */
+
+function randomRoom(){
+
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
   let result = "";
 
-  for (let i = 0; i < 6; i++) {
-    result += chars[Math.floor(Math.random() * chars.length)];
+  for(let i = 0; i < 6; i++){
+
+    result +=
+      chars[
+        Math.floor(
+          Math.random() *
+          chars.length
+        )
+      ];
+
   }
 
   return result;
+
 }
 
-function hostPeerId(code) {
-  return "vibe-" + code.toLowerCase();
+
+function randomParticipantId(){
+
+  return (
+    "p-" +
+    Math.random()
+      .toString(36)
+      .slice(2) +
+    Date.now()
+  );
+
 }
 
-function showError(message) {
-  $("error").textContent = message;
+
+function hostPeerId(code){
+
+  return (
+    "vibe-" +
+    code.toLowerCase()
+  );
+
 }
 
-function toast(message) {
-  const el = $("toast");
 
-  el.textContent = message;
+/* =========================================================
+   UI
+========================================================= */
+
+function showError(message){
+
+  $("error").textContent =
+    message;
+
+}
+
+
+function toast(message){
+
+  const el =
+    $("toast");
+
+  el.textContent =
+    message;
+
   el.classList.add("show");
 
-  setTimeout(() => {
-    el.classList.remove("show");
-  }, 2500);
+  setTimeout(
+    () => {
+      el.classList.remove("show");
+    },
+    2500
+  );
+
 }
 
 
-// ==========================================
-// CREATE ROOM
-// ==========================================
+function updatePeopleCount(){
 
-async function createRoom() {
+  const count =
+    participants.size + 1;
 
-  const code = randomRoom();
+  $("navStatus").textContent =
+    "LIVE • " +
+    count +
+    " PEOPLE";
 
-  $("roomInput").value = code;
-
-  await startRoom(code, true);
 }
 
 
-// ==========================================
-// JOIN ROOM
-// ==========================================
+/* =========================================================
+   CREATE ROOM
+========================================================= */
 
-async function joinRoom() {
+async function createRoom(){
+
+  const code =
+    randomRoom();
+
+  $("roomInput").value =
+    code;
+
+  await startRoom(
+    code,
+    true
+  );
+
+}
+
+
+/* =========================================================
+   JOIN ROOM
+========================================================= */
+
+async function joinRoom(){
 
   const code =
     $("roomInput")
@@ -884,199 +804,256 @@ async function joinRoom() {
       .trim()
       .toUpperCase();
 
-  if (code.length !== 6) {
-    showError("Enter a 6-character room code.");
+  if(code.length !== 6){
+
+    showError(
+      "Enter a 6-character room code."
+    );
+
     return;
+
   }
 
-  await startRoom(code, false);
+  await startRoom(
+    code,
+    false
+  );
+
 }
 
 
-// ==========================================
-// START ROOM
-// ==========================================
+/* =========================================================
+   START ROOM
+========================================================= */
 
-async function startRoom(code, host) {
+async function startRoom(
+  code,
+  host
+){
 
-  roomCode = code;
-  isHost = host;
+  if(!currentUser){
+
+    showError(
+      "Still connecting to VIBE..."
+    );
+
+    return;
+
+  }
+
+  roomCode =
+    code;
 
   showError("");
 
-  try {
 
-    // Camera + microphone permission
+  try{
+
+    /* CAMERA */
+
     localStream =
-      await navigator.mediaDevices.getUserMedia({
-        video: {
-          width: { ideal: 1280 },
-          height: { ideal: 720 }
-        },
-        audio: true
-      });
+      await navigator.mediaDevices
+        .getUserMedia({
+
+          video:{
+            width:{
+              ideal:1280
+            },
+            height:{
+              ideal:720
+            }
+          },
+
+          audio:true
+
+        });
 
 
-    $("localVideo").srcObject = localStream;
-
-    $("joinScreen").style.display = "none";
-    $("callScreen").style.display = "block";
-
-    $("roomDisplay").textContent = roomCode;
-
-    $("connectionStatus").textContent =
-      isHost
-        ? "● Waiting for friend"
-        : "● Connecting";
+    $("localVideo")
+      .srcObject =
+      localStream;
 
 
-    // --------------------------------------
-    // HOST
-    // --------------------------------------
+    $("joinScreen")
+      .style.display =
+      "none";
 
-    if (isHost) {
-
-      /*
-       * The room code becomes the host's
-       * PeerJS ID.
-       *
-       * Example:
-       *
-       * Room: X7K92P
-       * Peer ID: vibe-x7k92p
-       */
-
-      peer = new Peer(
-        hostPeerId(roomCode)
-      );
-
-    }
-
-    // --------------------------------------
-    // GUEST
-    // --------------------------------------
-
-    else {
-
-      /*
-       * Guest gets a random PeerJS ID.
-       */
-
-      peer = new Peer();
-
-    }
+    $("callScreen")
+      .style.display =
+      "block";
 
 
-    peer.on("open", peerId => {
+    $("roomDisplay")
+      .textContent =
+      roomCode;
 
-      console.log("Peer ID:", peerId);
 
-      if (isHost) {
+    $("connectionStatus")
+      .textContent =
+      "● Connecting";
 
-        $("connectionStatus").textContent =
-          "● Waiting for friend";
 
-        toast(
-          "Room " + roomCode + " is ready"
+    /*
+     * Every participant gets
+     * their own PeerJS ID.
+     */
+
+    peer =
+      new Peer();
+
+
+    peer.on(
+      "open",
+      async peerId => {
+
+        console.log(
+          "Peer ID:",
+          peerId
         );
+
+
+        roomParticipantId =
+          randomParticipantId();
+
 
         /*
-         * Give the host a shareable URL.
+         * Register ourselves
+         * inside Firestore.
          */
 
-        updateURL();
+        await setDoc(
 
-      }
+          doc(
+            db,
+            "videoRooms",
+            roomCode,
+            "participants",
+            roomParticipantId
+          ),
 
-      else {
+          {
 
-        $("connectionStatus").textContent =
-          "● Calling room";
+            uid:
+              currentUser.uid,
 
-        callHost();
+            peerId:
+              peerId,
 
-      }
+            displayName:
+              currentUser.displayName ||
+              currentUser.email
+                ?.split("@")[0] ||
+              "VIBE User",
 
-    });
+            createdAt:
+              serverTimestamp()
 
+          }
 
-    // --------------------------------------
-    // INCOMING CALL
-    // --------------------------------------
-
-    peer.on("call", call => {
-
-      console.log("Incoming call");
-
-      currentCall = call;
-
-      call.answer(localStream);
-
-      call.on("stream", remoteStream => {
-
-        showRemote(remoteStream);
-
-      });
-
-      call.on("close", () => {
-
-        $("connectionStatus").textContent =
-          "● Call ended";
-
-      });
-
-    });
-
-
-    peer.on("error", error => {
-
-      console.error("PeerJS error:", error);
-
-      if (
-        error.type === "unavailable-id"
-      ) {
-
-        showError(
-          "That room already exists. Try another room."
         );
 
-        cleanup();
 
-        $("joinScreen").style.display = "flex";
-        $("callScreen").style.display = "none";
+        $("connectionStatus")
+          .textContent =
+          "● Waiting for people";
 
-        return;
+
+        updatePeopleCount();
+
+
+        /*
+         * Listen for everybody
+         * joining/leaving.
+         */
+
+        listenForParticipants();
+
+
+        /*
+         * Host gets a shareable URL.
+         */
+
+        if(host){
+
+          updateURL();
+
+          toast(
+            "Room created ✦"
+          );
+
+        }
+
+        else{
+
+          toast(
+            "Joined VIBE room ✦"
+          );
+
+        }
+
       }
+    );
 
-      if (
-        error.type === "peer-unavailable"
-      ) {
 
-        $("connectionStatus").textContent =
-          "● Room not found";
+    /* INCOMING CALL */
+
+    peer.on(
+      "call",
+      call => {
+
+        console.log(
+          "Incoming call",
+          call.peer
+        );
+
+        call.answer(
+          localStream
+        );
+
+        setupCall(
+          call
+        );
+
+      }
+    );
+
+
+    peer.on(
+      "error",
+      error => {
+
+        console.error(
+          "PeerJS error:",
+          error
+        );
+
+        $("connectionStatus")
+          .textContent =
+          "● Connection error";
 
         toast(
-          "Your friend hasn't created that room yet."
+          "Video connection error."
         );
 
-        return;
       }
-
-      $("connectionStatus").textContent =
-        "● Connection error";
-
-    });
+    );
 
 
-    peer.on("disconnected", () => {
+    peer.on(
+      "disconnected",
+      () => {
 
-      $("connectionStatus").textContent =
-        "● Disconnected";
+        $("connectionStatus")
+          .textContent =
+          "● Disconnected";
 
-    });
+      }
+    );
 
 
-  } catch (error) {
+  }
+
+  catch(error){
 
     console.error(error);
 
@@ -1085,73 +1062,302 @@ async function startRoom(code, host) {
     );
 
   }
+
 }
 
 
-// ==========================================
-// CALL HOST
-// ==========================================
+/* =========================================================
+   FIRESTORE PARTICIPANTS
+========================================================= */
 
-function callHost() {
+function listenForParticipants(){
 
-  if (!peer || !localStream) {
-    return;
+  if(participantUnsubscribe){
+
+    participantUnsubscribe();
+
+    participantUnsubscribe =
+      null;
+
   }
 
-  const hostId =
-    hostPeerId(roomCode);
+
+  const ref =
+    collection(
+      db,
+      "videoRooms",
+      roomCode,
+      "participants"
+    );
+
+
+  participantUnsubscribe =
+    onSnapshot(
+      ref,
+      snapshot => {
+
+        const currentIds =
+          new Set();
+
+
+        snapshot.forEach(
+          item => {
+
+            const data =
+              item.data();
+
+            currentIds.add(
+              item.id
+            );
+
+
+            /*
+             * Ignore ourselves.
+             */
+
+            if(
+              item.id ===
+              roomParticipantId
+            ){
+
+              return;
+
+            }
+
+
+            participants.set(
+              item.id,
+              data
+            );
+
+
+            /*
+             * If we don't already
+             * have a call with them,
+             * call them.
+             */
+
+            if(
+              !calls.has(
+                data.peerId
+              )
+            ){
+
+              callParticipant(
+                data
+              );
+
+            }
+
+          }
+        );
+
+
+        /*
+         * Remove people who left.
+         */
+
+        for(
+          const [
+            id,
+            data
+          ] of participants
+        ){
+
+          if(
+            !currentIds.has(id)
+          ){
+
+            participants.delete(id);
+
+            removeVideo(
+              data.peerId
+            );
+
+            const call =
+              calls.get(
+                data.peerId
+              );
+
+            if(call){
+
+              try{
+                call.close();
+              }
+              catch(e){}
+
+              calls.delete(
+                data.peerId
+              );
+
+            }
+
+          }
+
+        }
+
+
+        updatePeopleCount();
+
+      },
+      error => {
+
+        console.error(
+          error
+        );
+
+        toast(
+          "Couldn't load video room."
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   CALL PARTICIPANT
+========================================================= */
+
+function callParticipant(
+  participant
+){
+
+  if(
+    !peer ||
+    !localStream ||
+    !participant.peerId
+  ){
+
+    return;
+
+  }
+
+
+  /*
+   * Prevent duplicate calls.
+   */
+
+  if(
+    calls.has(
+      participant.peerId
+    )
+  ){
+
+    return;
+
+  }
+
 
   console.log(
-    "Calling:",
-    hostId
+    "Calling",
+    participant.peerId
   );
 
-  currentCall =
+
+  const call =
     peer.call(
-      hostId,
-      localStream
+      participant.peerId,
+      localStream,
+      {
+        metadata:{
+          name:
+            currentUser.displayName ||
+            "VIBE User"
+        }
+      }
     );
 
 
-  if (!currentCall) {
-
-    toast(
-      "Couldn't connect to the room."
-    );
+  if(!call){
 
     return;
+
   }
 
 
-  currentCall.on(
+  setupCall(
+    call,
+    participant
+  );
+
+}
+
+
+/* =========================================================
+   SETUP CALL
+========================================================= */
+
+function setupCall(
+  call,
+  participant = null
+){
+
+  calls.set(
+    call.peer,
+    call
+  );
+
+
+  call.on(
     "stream",
     remoteStream => {
 
-      showRemote(remoteStream);
+      const name =
+        participant?.displayName ||
+        "VIBE User";
+
+
+      addVideo(
+        call.peer,
+        remoteStream,
+        name
+      );
+
+
+      $("connectionStatus")
+        .textContent =
+        "● Connected";
 
     }
   );
 
 
-  currentCall.on(
+  call.on(
     "close",
     () => {
 
-      $("connectionStatus").textContent =
-        "● Call ended";
+      calls.delete(
+        call.peer
+      );
+
+      removeVideo(
+        call.peer
+      );
+
+      updatePeopleCount();
 
     }
   );
 
 
-  currentCall.on(
+  call.on(
     "error",
     error => {
 
-      console.error(error);
+      console.error(
+        "Call error:",
+        error
+      );
 
-      $("connectionStatus").textContent =
-        "● Connection failed";
+      calls.delete(
+        call.peer
+      );
+
+      removeVideo(
+        call.peer
+      );
 
     }
   );
@@ -1159,34 +1365,216 @@ function callHost() {
 }
 
 
-// ==========================================
-// REMOTE VIDEO
-// ==========================================
+/* =========================================================
+   VIDEO UI
+========================================================= */
 
-function showRemote(stream) {
+function addVideo(
+  peerId,
+  stream,
+  name
+){
 
-  $("remoteVideo").srcObject =
+  let card =
+    document.querySelector(
+      `[data-peer="${peerId}"]`
+    );
+
+
+  /*
+   * Already exists.
+   */
+
+  if(card){
+
+    const video =
+      card.querySelector(
+        "video"
+      );
+
+    video.srcObject =
+      stream;
+
+    return;
+
+  }
+
+
+  card =
+    document.createElement(
+      "div"
+    );
+
+  card.className =
+    "videoCard";
+
+
+  card.dataset.peer =
+    peerId;
+
+
+  const video =
+    document.createElement(
+      "video"
+    );
+
+  video.autoplay =
+    true;
+
+  video.playsInline =
+    true;
+
+  video.srcObject =
     stream;
 
-  $("waiting").style.display =
-    "none";
 
-  $("connectionStatus").textContent =
-    "● Connected";
+  const label =
+    document.createElement(
+      "div"
+    );
 
-  $("navStatus").textContent =
-    "LIVE • 2 PEOPLE";
+  label.className =
+    "videoLabel";
 
-  toast("You're connected ✦");
+  label.textContent =
+    name;
+
+
+  card.appendChild(
+    video
+  );
+
+  card.appendChild(
+    label
+  );
+
+
+  $("videos")
+    .appendChild(
+      card
+    );
 
 }
 
 
-// ==========================================
-// SHAREABLE URL
-// ==========================================
+/* =========================================================
+   REMOVE VIDEO
+========================================================= */
 
-function updateURL() {
+function removeVideo(
+  peerId
+){
+
+  const card =
+    document.querySelector(
+      `[data-peer="${peerId}"]`
+    );
+
+
+  if(card){
+
+    const video =
+      card.querySelector(
+        "video"
+      );
+
+    if(video){
+
+      video.srcObject =
+        null;
+
+    }
+
+    card.remove();
+
+  }
+
+}
+
+
+/* =========================================================
+   MICROPHONE
+========================================================= */
+
+function toggleMic(){
+
+  if(!localStream)
+    return;
+
+
+  const track =
+    localStream
+      .getAudioTracks()[0];
+
+
+  if(!track)
+    return;
+
+
+  track.enabled =
+    !track.enabled;
+
+
+  $("micBtn")
+    .textContent =
+    track.enabled
+      ? "🎤"
+      : "🔇";
+
+
+  $("micBtn")
+    .classList.toggle(
+      "off",
+      !track.enabled
+    );
+
+}
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+function toggleCamera(){
+
+  if(!localStream)
+    return;
+
+
+  const track =
+    localStream
+      .getVideoTracks()[0];
+
+
+  if(!track)
+    return;
+
+
+  track.enabled =
+    !track.enabled;
+
+
+  $("camBtn")
+    .textContent =
+    track.enabled
+      ? "📹"
+      : "🚫";
+
+
+  $("camBtn")
+    .classList.toggle(
+      "off",
+      !track.enabled
+    );
+
+}
+
+
+/* =========================================================
+   SHARE URL
+========================================================= */
+
+function updateURL(){
 
   const url =
     window.location.origin +
@@ -1194,212 +1582,262 @@ function updateURL() {
     "?room=" +
     roomCode;
 
+
   window.history.replaceState(
     {},
     "",
     url
   );
 
-  /*
-   * Put the room link in the clipboard
-   * automatically when possible.
-   */
 
-  if (navigator.clipboard) {
+  if(
+    navigator.clipboard
+  ){
 
-    navigator.clipboard.writeText(url)
-      .then(() => {
+    navigator.clipboard
+      .writeText(url)
+      .then(
+        () => {
 
-        toast(
-          "Invite link copied ✦"
-        );
+          toast(
+            "Invite link copied ✦"
+          );
 
-      })
-      .catch(() => {});
+        }
+      )
+      .catch(
+        () => {}
+      );
 
   }
+
 }
 
 
-// ==========================================
-// AUTOMATIC ROOM FROM URL
-// ==========================================
+/* =========================================================
+   URL ROOM
+========================================================= */
 
-function checkURLRoom() {
+function checkURLRoom(){
 
   const params =
     new URLSearchParams(
       window.location.search
     );
 
+
   const room =
     params.get("room");
 
-  if (room && room.length === 6) {
 
-    $("roomInput").value =
+  if(
+    room &&
+    room.length === 6
+  ){
+
+    $("roomInput")
+      .value =
       room.toUpperCase();
 
-    /*
-     * We intentionally DON'T automatically
-     * open the camera.
-     *
-     * The friend clicks JOIN ROOM first,
-     * which causes the browser permission
-     * prompt.
-     */
 
     toast(
       "Invite received ✦"
     );
+
   }
+
 }
 
 
-// ==========================================
-// MICROPHONE
-// ==========================================
+/* =========================================================
+   LEAVE
+========================================================= */
 
-function toggleMic() {
+async function leaveCall(){
 
-  if (!localStream) return;
+  try{
 
-  const track =
-    localStream.getAudioTracks()[0];
+    if(
+      roomParticipantId &&
+      roomCode
+    ){
 
-  if (!track) return;
+      await deleteDoc(
 
-  track.enabled =
-    !track.enabled;
+        doc(
+          db,
+          "videoRooms",
+          roomCode,
+          "participants",
+          roomParticipantId
+        )
 
-  $("micBtn").textContent =
-    track.enabled
-      ? "🎤"
-      : "🔇";
+      );
 
-  $("micBtn").classList.toggle(
-    "off",
-    !track.enabled
-  );
-}
+    }
 
+  }
+  catch(error){
 
-// ==========================================
-// CAMERA
-// ==========================================
+    console.error(
+      error
+    );
 
-function toggleCamera() {
+  }
 
-  if (!localStream) return;
-
-  const track =
-    localStream.getVideoTracks()[0];
-
-  if (!track) return;
-
-  track.enabled =
-    !track.enabled;
-
-  $("camBtn").textContent =
-    track.enabled
-      ? "📹"
-      : "🚫";
-
-  $("camBtn").classList.toggle(
-    "off",
-    !track.enabled
-  );
-}
-
-
-// ==========================================
-// LEAVE
-// ==========================================
-
-function leaveCall() {
 
   cleanup();
 
-  location.href =
+
+  window.location.href =
     window.location.pathname;
+
 }
 
 
-function cleanup() {
+/* =========================================================
+   CLEANUP
+========================================================= */
 
-  if (currentCall) {
+function cleanup(){
 
-    try {
-      currentCall.close();
-    } catch (e) {}
+  if(
+    participantUnsubscribe
+  ){
 
-    currentCall = null;
+    participantUnsubscribe();
+
+    participantUnsubscribe =
+      null;
+
   }
 
 
-  if (peer) {
+  for(
+    const call
+    of calls.values()
+  ){
 
-    try {
+    try{
+      call.close();
+    }
+    catch(e){}
+
+  }
+
+
+  calls.clear();
+
+
+  if(peer){
+
+    try{
       peer.destroy();
-    } catch (e) {}
+    }
+    catch(e){}
 
     peer = null;
+
   }
 
 
-  if (localStream) {
+  if(localStream){
 
     localStream
       .getTracks()
-      .forEach(track => {
-        track.stop();
-      });
+      .forEach(
+        track => {
+          track.stop();
+        }
+      );
 
-    localStream = null;
+    localStream =
+      null;
+
   }
+
 }
 
 
-// ==========================================
-// CAMERA ERRORS
-// ==========================================
+/* =========================================================
+   CAMERA ERRORS
+========================================================= */
 
-function getCameraError(error) {
+function getCameraError(
+  error
+){
 
-  switch (error.name) {
+  switch(
+    error.name
+  ){
 
     case "NotAllowedError":
-      return "Camera or microphone permission was blocked. Click the 🔒 icon and allow both.";
+
+      return (
+        "Camera or microphone permission was blocked. " +
+        "Click the 🔒 icon and allow both."
+      );
+
 
     case "NotFoundError":
-      return "No camera or microphone was found.";
+
+      return (
+        "No camera or microphone was found."
+      );
+
 
     case "NotReadableError":
-      return "Your camera or microphone is already being used by another app.";
+
+      return (
+        "Your camera or microphone is already being used."
+      );
+
 
     case "SecurityError":
-      return "Your browser blocked camera access.";
+
+      return (
+        "Your browser blocked camera access."
+      );
+
 
     case "TypeError":
-      return "Camera access requires HTTPS. Make sure you're using your GitHub Pages URL.";
+
+      return (
+        "Camera access requires HTTPS."
+      );
+
 
     default:
+
       return (
         "Couldn't access your camera/microphone: " +
         error.message
       );
+
   }
+
 }
 
 
-// ==========================================
-// STARTUP
-// ==========================================
+/* =========================================================
+   EXPOSE BUTTON FUNCTIONS
+========================================================= */
 
-window.addEventListener(
-  "load",
-  checkURLRoom
-);
+window.createRoom =
+  createRoom;
+
+window.joinRoom =
+  joinRoom;
+
+window.toggleMic =
+  toggleMic;
+
+window.toggleCamera =
+  toggleCamera;
+
+window.leaveCall =
+  leaveCall;
+
 </script>
 
 </body>
