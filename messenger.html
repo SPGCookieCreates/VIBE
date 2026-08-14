@@ -1188,19 +1188,8 @@ function clearMessages(){
 // VIDEO BUTTON
 // ======================================
 
-function startVideo(){
-
-  const url =
-    location.origin +
-    location.pathname +
-    "?video=" +
-    roomCode;
-
-  window.open(
-    url,
-    "_blank"
-  );
-
+function startVideo() {
+  window.location.href = "video.html";
 }
 
 
