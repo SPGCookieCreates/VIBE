@@ -1341,18 +1341,159 @@ function showToast(text){
 
 /* AUTH */
 
+function hideLoading(){
+  const loading = $("loading");
+
+  if(loading){
+    loading.style.display = "none";
+  }
+}
+
+function showAppError(message){
+  hideLoading();
+  showToast(message);
+  console.error(message);
+}
+
 onAuthStateChanged(
   auth,
   async user => {
 
+    // Show the actual app immediately.
+    hideLoading();
+
     if(!user){
 
-      window.location.href =
-        "index.html";
+      showToast("Please sign in to VIBE.");
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 800);
 
       return;
+    }
+
+    currentUser = user;
+
+    const name =
+      user.displayName ||
+      user.email?.split("@")[0] ||
+      "VIBE User";
+
+
+    /* PROFILE */
+
+    if(user.photoURL){
+
+      $("myAvatar").innerHTML =
+        `<img src="${user.photoURL}" alt="Profile">`;
+
+    } else {
+
+      $("myAvatar").textContent =
+        name.charAt(0).toUpperCase();
 
     }
+
+
+    /* SAVE USER */
+
+    try{
+
+      await setDoc(
+
+        doc(
+          db,
+          "users",
+          user.uid
+        ),
+
+        {
+          uid:user.uid,
+          displayName:name,
+          email:user.email || "",
+          photoURL:user.photoURL || "",
+          lastSeen:serverTimestamp(),
+          online:true
+        },
+
+        {merge:true}
+
+      );
+
+    } catch(error){
+
+      console.error(
+        "Could not update user:",
+        error
+      );
+
+      showToast(
+        "Profile connected, but user sync failed."
+      );
+
+    }
+
+
+    /* LOAD USERS */
+
+    try{
+
+      await loadUsers();
+
+    } catch(error){
+
+      console.error(
+        "Could not load users:",
+        error
+      );
+
+      showToast(
+        "Couldn't load users."
+      );
+
+    }
+
+  },
+  error => {
+
+    console.error(
+      "Firebase authentication error:",
+      error
+    );
+
+    hideLoading();
+
+    showToast(
+      "Firebase authentication failed."
+    );
+
+  }
+);
+
+
+/* SAFETY NET
+   Never allow the loading screen to trap the app. */
+
+setTimeout(() => {
+
+  const loading =
+    $("loading");
+
+  if(
+    loading &&
+    loading.style.display !== "none"
+  ){
+
+    hideLoading();
+
+    showToast(
+      "VIBE loaded."
+    );
+
+  }
+
+},5000);
 
     currentUser = user;
 
