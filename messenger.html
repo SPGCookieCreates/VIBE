@@ -9,40 +9,107 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 :root{
-  --purple:#8466ff;
+  --purple:#8b6cff;
+  --purple2:#b39cff;
   --cyan:#35dcff;
   --pink:#ff4fd8;
-  --bg:#07070c;
+  --green:#63f5a2;
+  --bg:#05050a;
+  --glass:rgba(255,255,255,.055);
+  --glass2:rgba(255,255,255,.085);
+  --border:rgba(255,255,255,.11);
+}
+
+html,
+body{
+  margin:0;
+  width:100%;
+  height:100%;
 }
 
 body{
-  margin:0;
   min-height:100vh;
   background:
-    radial-gradient(circle at 10% 10%,#6947ff2c,transparent 30%),
-    radial-gradient(circle at 90% 90%,#00dfff20,transparent 32%),
-    var(--bg);
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(112,74,255,.28),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(255,79,216,.12),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 90%,
+      rgba(0,220,255,.18),
+      transparent 32%
+    ),
+    #05050a;
   color:#fff;
   font-family:Inter,sans-serif;
   overflow:hidden;
 }
+
+/* NEON ATMOSPHERE */
 
 body:before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
+  opacity:.18;
   background-image:
-    linear-gradient(#fff5 1px,transparent 1px),
-    linear-gradient(90deg,#fff5 1px,transparent 1px);
-  background-size:45px 45px;
-  mask-image:linear-gradient(to bottom,#000,transparent);
+    linear-gradient(
+      rgba(255,255,255,.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.07) 1px,
+      transparent 1px
+    );
+  background-size:48px 48px;
+  mask-image:
+    linear-gradient(
+      to bottom,
+      #000,
+      transparent 90%
+    );
 }
 
-button,input{font-family:inherit}
+body:after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  left:-180px;
+  bottom:-220px;
+  border-radius:50%;
+  background:#6d4aff22;
+  filter:blur(100px);
+  pointer-events:none;
+  animation:ambient 9s ease-in-out infinite alternate;
+}
+
+@keyframes ambient{
+  from{
+    transform:translate(0,0) scale(1);
+  }
+  to{
+    transform:translate(100px,-60px) scale(1.2);
+  }
+}
+
+button,
+input{
+  font-family:inherit;
+}
 
 button{
   cursor:pointer;
@@ -50,36 +117,46 @@ button{
   border:0;
 }
 
+/* APP */
+
 .app{
   height:100vh;
   display:flex;
   flex-direction:column;
+  position:relative;
+  z-index:1;
 }
 
 /* NAV */
 
 nav{
-  height:70px;
+  height:72px;
   flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 25px;
-  border-bottom:1px solid #ffffff0d;
-  background:#07070ccc;
-  backdrop-filter:blur(25px);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  background:rgba(5,5,10,.62);
+  backdrop-filter:blur(28px) saturate(150%);
+  -webkit-backdrop-filter:blur(28px) saturate(150%);
   z-index:5;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);
 }
 
 .logo{
-  font-size:22px;
+  font-size:23px;
   font-weight:800;
-  letter-spacing:-1px;
+  letter-spacing:-1.2px;
+  text-shadow:0 0 25px rgba(255,255,255,.08);
 }
 
 .logo span{
   color:var(--purple);
-  text-shadow:0 0 25px var(--purple);
+  text-shadow:
+    0 0 10px var(--purple),
+    0 0 30px var(--purple),
+    0 0 55px rgba(132,102,255,.6);
 }
 
 .navRight{
@@ -89,19 +166,44 @@ nav{
 }
 
 .online{
-  color:#66f6a3;
-  font-size:11px;
+  color:var(--green);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.7px;
+  text-shadow:0 0 12px rgba(99,245,162,.5);
 }
 
 .avatar{
-  width:38px;
-  height:38px;
-  border-radius:13px;
+  width:40px;
+  height:40px;
+  border-radius:14px;
   display:grid;
   place-items:center;
   font-weight:800;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--cyan)
+    );
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.14),
+    0 0 25px rgba(132,102,255,.3);
   overflow:hidden;
+  transition:.25s;
+}
+
+.avatar:hover{
+  transform:translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.2),
+    0 0 35px rgba(132,102,255,.55);
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 /* MAIN */
@@ -110,57 +212,78 @@ nav{
   flex:1;
   min-height:0;
   display:grid;
-  grid-template-columns:280px 1fr;
+  grid-template-columns:290px 1fr;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-  border-right:1px solid #ffffff0d;
-  padding:18px 15px;
-  background:#ffffff03;
+  border-right:1px solid rgba(255,255,255,.08);
+  padding:20px 15px;
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
   overflow:auto;
 }
 
 .sideTitle{
   padding:0 12px 12px;
   color:#777;
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
-  letter-spacing:2px;
+  letter-spacing:2.5px;
 }
 
 .groupCreate{
   width:100%;
-  height:42px;
+  height:44px;
   margin-bottom:12px;
-  border-radius:13px;
-  background:linear-gradient(135deg,#8466ff30,#35dcff20);
-  border:1px solid #8466ff35;
-  color:#b9adff;
+  border-radius:14px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(132,102,255,.20),
+      rgba(53,220,255,.10)
+    );
+  border:1px solid rgba(132,102,255,.3);
+  color:#c5bcff;
   font-size:12px;
   font-weight:700;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.07),
+    0 5px 25px rgba(80,50,200,.08);
+  transition:.25s;
 }
 
 .groupCreate:hover{
-  background:linear-gradient(135deg,#8466ff45,#35dcff30);
+  transform:translateY(-2px);
+  border-color:rgba(132,102,255,.55);
+  box-shadow:
+    0 0 25px rgba(132,102,255,.18),
+    inset 0 1px rgba(255,255,255,.1);
 }
 
 .search{
   width:100%;
-  height:42px;
+  height:43px;
   margin-bottom:15px;
-  padding:0 13px;
-  border-radius:13px;
-  border:1px solid #ffffff10;
+  padding:0 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.09);
   outline:none;
-  background:#ffffff08;
+  background:rgba(255,255,255,.045);
   color:white;
   font-size:12px;
+  backdrop-filter:blur(15px);
+  transition:.2s;
 }
 
 .search:focus{
-  border-color:#8466ff80;
+  border-color:rgba(132,102,255,.55);
+  background:rgba(132,102,255,.07);
+  box-shadow:
+    0 0 0 3px rgba(132,102,255,.08),
+    0 0 25px rgba(132,102,255,.08);
 }
 
 .search::placeholder{
@@ -179,34 +302,51 @@ nav{
   align-items:center;
   gap:12px;
   padding:11px;
-  border-radius:15px;
+  border-radius:16px;
   background:transparent;
   border:1px solid transparent;
   text-align:left;
-  transition:.2s;
+  transition:.22s;
 }
 
 .friend:hover{
-  background:#ffffff0b;
-  border-color:#ffffff10;
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.08);
+  transform:translateX(2px);
 }
 
 .friend.active{
-  background:#8466ff16;
-  border-color:#8466ff35;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(132,102,255,.16),
+      rgba(53,220,255,.045)
+    );
+  border-color:rgba(132,102,255,.28);
+  box-shadow:
+    inset 0 0 25px rgba(132,102,255,.035),
+    0 0 25px rgba(100,70,255,.06);
 }
 
 .friendAvatar{
-  width:42px;
-  height:42px;
+  width:43px;
+  height:43px;
   flex-shrink:0;
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#7659ff,#2fdfff);
+  background:
+    linear-gradient(
+      135deg,
+      #7659ff,
+      #2fdfff
+    );
   font-weight:800;
   position:relative;
   overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.1),
+    0 5px 20px rgba(50,100,255,.15);
 }
 
 .friendAvatar img{
@@ -226,7 +366,7 @@ nav{
 
 .friendPreview{
   margin-top:4px;
-  color:#777;
+  color:#707078;
   font-size:10px;
   white-space:nowrap;
   overflow:hidden;
@@ -240,8 +380,6 @@ nav{
   font-size:11px;
 }
 
-/* GROUP BADGE */
-
 .groupBadge{
   margin-left:auto;
   color:#9d8cff;
@@ -254,19 +392,20 @@ nav{
   min-width:0;
   display:flex;
   flex-direction:column;
-  background:#ffffff02;
+  background:rgba(255,255,255,.012);
 }
 
 .chatHeader{
-  height:70px;
+  height:72px;
   flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 25px;
-  border-bottom:1px solid #ffffff0d;
-  background:#ffffff03;
-  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
 }
 
 .person{
@@ -276,14 +415,22 @@ nav{
 }
 
 .personAvatar{
-  width:40px;
-  height:40px;
-  border-radius:13px;
+  width:42px;
+  height:42px;
+  border-radius:14px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--cyan)
+    );
   font-weight:800;
   overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.12),
+    0 0 25px rgba(100,80,255,.22);
 }
 
 .personAvatar img{
@@ -299,8 +446,9 @@ nav{
 
 .personStatus{
   margin-top:3px;
-  color:#62f4a0;
-  font-size:10px;
+  color:var(--green);
+  font-size:9px;
+  text-shadow:0 0 12px rgba(99,245,162,.4);
 }
 
 .headerButtons{
@@ -311,15 +459,21 @@ nav{
 .headerBtn{
   width:42px;
   height:42px;
-  border-radius:13px;
-  background:#ffffff0b;
-  border:1px solid #ffffff12;
+  border-radius:14px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.1);
   font-size:17px;
+  transition:.22s;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.04);
 }
 
 .headerBtn:hover{
-  background:#ffffff18;
+  background:rgba(132,102,255,.13);
+  border-color:rgba(132,102,255,.3);
   transform:translateY(-2px);
+  box-shadow:
+    0 0 25px rgba(132,102,255,.15);
 }
 
 /* MESSAGES */
@@ -331,6 +485,19 @@ nav{
   scroll-behavior:smooth;
 }
 
+.messages::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar,
+.selectList::-webkit-scrollbar{
+  width:5px;
+}
+
+.messages::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb,
+.selectList::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.1);
+  border-radius:10px;
+}
+
 .welcome{
   text-align:center;
   margin:30px auto 45px;
@@ -338,14 +505,21 @@ nav{
 }
 
 .welcomeIcon{
-  width:65px;
-  height:65px;
+  width:68px;
+  height:68px;
   margin:0 auto 15px;
   display:grid;
   place-items:center;
-  border-radius:21px;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
-  box-shadow:0 0 50px #765aff35;
+  border-radius:22px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(132,102,255,.85),
+      rgba(53,220,255,.75)
+    );
+  box-shadow:
+    0 0 25px rgba(132,102,255,.25),
+    0 0 70px rgba(53,220,255,.1);
   font-size:27px;
 }
 
@@ -361,7 +535,19 @@ nav{
 
 .messageRow{
   display:flex;
-  margin:8px 0;
+  margin:9px 0;
+  animation:messageIn .22s ease;
+}
+
+@keyframes messageIn{
+  from{
+    opacity:0;
+    transform:translateY(7px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
 
 .messageRow.mine{
@@ -371,26 +557,39 @@ nav{
 .bubble{
   max-width:min(600px,75%);
   padding:12px 15px;
-  border-radius:18px;
-  background:#ffffff0b;
-  border:1px solid #ffffff0d;
+  border-radius:19px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.09);
   color:#ddd;
   font-size:13px;
   line-height:1.5;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.035),
+    0 5px 25px rgba(0,0,0,.08);
 }
 
 .mine .bubble{
-  background:linear-gradient(135deg,#7154eccc,#387de0cc);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(113,84,236,.82),
+      rgba(56,125,224,.78)
+    );
+  border-color:rgba(255,255,255,.13);
   color:#fff;
-  border-bottom-right-radius:5px;
+  border-bottom-right-radius:6px;
+  box-shadow:
+    0 5px 25px rgba(90,70,220,.16);
 }
 
 .messageRow:not(.mine) .bubble{
-  border-bottom-left-radius:5px;
+  border-bottom-left-radius:6px;
 }
 
 .senderName{
-  color:#a99cff;
+  color:#aa9eff;
   font-size:10px;
   font-weight:700;
   margin-bottom:4px;
@@ -399,11 +598,11 @@ nav{
 .time{
   display:block;
   margin-top:5px;
-  color:#ffffff66;
+  color:rgba(255,255,255,.42);
   font-size:9px;
 }
 
-/* INPUT */
+/* COMPOSER */
 
 .composer{
   padding:15px 7% 20px;
@@ -414,10 +613,14 @@ nav{
   align-items:center;
   gap:8px;
   padding:7px;
-  border-radius:19px;
-  background:#ffffff08;
-  border:1px solid #ffffff12;
-  backdrop-filter:blur(25px);
+  border-radius:20px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.11);
+  backdrop-filter:blur(30px) saturate(140%);
+  -webkit-backdrop-filter:blur(30px) saturate(140%);
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.3),
+    inset 0 1px rgba(255,255,255,.05);
 }
 
 .messageInput{
@@ -439,17 +642,38 @@ nav{
 .emoji{
   width:42px;
   height:42px;
-  border-radius:13px;
-  background:#ffffff08;
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
   font-size:18px;
+  transition:.2s;
+}
+
+.emoji:hover{
+  background:rgba(255,255,255,.1);
+  transform:scale(1.04);
 }
 
 .send{
-  width:45px;
-  height:45px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  width:46px;
+  height:46px;
+  border-radius:15px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--cyan)
+    );
   font-size:17px;
+  box-shadow:
+    0 0 25px rgba(100,100,255,.25);
+  transition:.2s;
+}
+
+.send:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 35px rgba(100,100,255,.4);
 }
 
 /* MODAL */
@@ -459,8 +683,9 @@ nav{
   inset:0;
   display:none;
   place-items:center;
-  background:#0009;
-  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
   z-index:150;
   padding:20px;
 }
@@ -473,11 +698,19 @@ nav{
   width:min(480px,100%);
   max-height:85vh;
   overflow:auto;
-  padding:25px;
-  border-radius:25px;
-  background:#111119f5;
-  border:1px solid #ffffff15;
-  box-shadow:0 30px 100px #000;
+  padding:26px;
+  border-radius:26px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25,24,40,.93),
+      rgba(10,10,17,.94)
+    );
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.75),
+    0 0 80px rgba(100,70,255,.12);
+  backdrop-filter:blur(35px);
 }
 
 .modalTitle{
@@ -496,12 +729,17 @@ nav{
   width:100%;
   height:48px;
   padding:0 14px;
-  border-radius:13px;
-  border:1px solid #ffffff12;
-  background:#ffffff08;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
   color:white;
   outline:none;
   margin-bottom:15px;
+}
+
+.groupNameInput:focus{
+  border-color:rgba(132,102,255,.5);
+  box-shadow:0 0 20px rgba(132,102,255,.1);
 }
 
 .selectList{
@@ -517,13 +755,15 @@ nav{
   align-items:center;
   gap:10px;
   padding:10px;
-  border-radius:13px;
-  background:#ffffff05;
+  border-radius:14px;
+  background:rgba(255,255,255,.035);
   border:1px solid transparent;
+  transition:.2s;
 }
 
 .selectUser:hover{
-  background:#ffffff0b;
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.08);
 }
 
 .selectUser input{
@@ -536,7 +776,12 @@ nav{
   border-radius:11px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--cyan)
+    );
   font-size:12px;
   font-weight:800;
   overflow:hidden;
@@ -557,14 +802,26 @@ nav{
 .modalBtn{
   flex:1;
   height:45px;
-  border-radius:13px;
-  background:#ffffff0b;
-  border:1px solid #ffffff12;
+  border-radius:14px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.1);
+  transition:.2s;
+}
+
+.modalBtn:hover{
+  background:rgba(255,255,255,.1);
 }
 
 .modalBtn.primary{
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--cyan)
+    );
   font-weight:800;
+  border:0;
+  box-shadow:0 0 25px rgba(100,90,255,.2);
 }
 
 /* TOAST */
@@ -576,11 +833,15 @@ nav{
   transform:translate(-50%,20px);
   opacity:0;
   pointer-events:none;
-  padding:12px 18px;
+  padding:12px 19px;
   border-radius:999px;
-  background:#12121bef;
-  border:1px solid #ffffff15;
-  backdrop-filter:blur(20px);
+  background:rgba(15,15,24,.84);
+  border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.35),
+    0 0 25px rgba(100,70,255,.08);
   font-size:11px;
   transition:.25s;
   z-index:200;
@@ -598,7 +859,8 @@ nav{
   inset:0;
   display:grid;
   place-items:center;
-  background:#07070cf5;
+  background:#05050af7;
+  backdrop-filter:blur(15px);
   z-index:300;
   font-size:14px;
   font-weight:700;
@@ -608,31 +870,79 @@ nav{
   width:35px;
   height:35px;
   margin:auto auto 15px;
-  border:3px solid #ffffff15;
+  border:3px solid rgba(255,255,255,.1);
   border-top-color:var(--purple);
+  border-right-color:var(--cyan);
   border-radius:50%;
   animation:spin .7s linear infinite;
+  box-shadow:0 0 25px rgba(132,102,255,.2);
 }
 
 @keyframes spin{
-  to{transform:rotate(360deg)}
+  to{
+    transform:rotate(360deg);
+  }
 }
+
+/* MOBILE */
 
 @media(max-width:700px){
 
-  nav{padding:0 15px}
+  nav{
+    height:64px;
+    padding:0 14px;
+  }
 
-  .main{grid-template-columns:1fr}
+  .logo{
+    font-size:20px;
+  }
 
-  .sidebar{display:none}
+  .online{
+    display:none;
+  }
 
-  .messages{padding:25px 15px}
+  .main{
+    grid-template-columns:1fr;
+  }
 
-  .composer{padding:10px 10px 15px}
+  .sidebar{
+    display:none;
+  }
 
-  .chatHeader{padding:0 15px}
+  .messages{
+    padding:22px 12px;
+  }
 
-  .bubble{max-width:85%}
+  .composer{
+    padding:9px 9px 14px;
+  }
+
+  .chatHeader{
+    height:64px;
+    padding:0 13px;
+  }
+
+  .personAvatar{
+    width:39px;
+    height:39px;
+  }
+
+  .headerBtn{
+    width:39px;
+    height:39px;
+  }
+
+  .bubble{
+    max-width:88%;
+  }
+
+  .composerBox{
+    border-radius:18px;
+  }
+
+  .messageInput{
+    font-size:12px;
+  }
 }
 </style>
 </head>
@@ -667,7 +977,6 @@ nav{
   </div>
 </nav>
 
-
 <div class="main">
 
 <aside class="sidebar">
@@ -694,7 +1003,6 @@ nav{
   ></div>
 
 </aside>
-
 
 <main class="chat">
 
@@ -727,7 +1035,6 @@ nav{
 
   </div>
 
-
   <div class="headerButtons">
 
     <button
@@ -742,17 +1049,15 @@ nav{
 
 </header>
 
-
 <div
   class="messages"
   id="messages"
 >
 
   <div class="emptyChat">
-
     <div>
 
-      <div class="emptyChatIcon">✦</div>
+      <div class="welcomeIcon">✦</div>
 
       <strong>Welcome to VIBE</strong>
 
@@ -761,11 +1066,9 @@ nav{
       </span>
 
     </div>
-
   </div>
 
 </div>
-
 
 <div class="composer">
 
@@ -800,7 +1103,6 @@ nav{
 </main>
 </div>
 </div>
-
 
 <!-- GROUP MODAL -->
 
@@ -853,7 +1155,6 @@ nav{
 
 </div>
 
-
 <div
   class="toast"
   id="toast"
@@ -861,10 +1162,6 @@ nav{
 
 
 <script type="module">
-
-/* ==========================================
-   FIREBASE
-========================================== */
 
 import {
   initializeApp
@@ -937,19 +1234,11 @@ const storage =
   getStorage(firebaseApp);
 
 
-/* ==========================================
-   STATE
-========================================== */
-
 let currentUser = null;
 let selectedChat = null;
 let unsubscribeMessages = null;
 let allUsers = [];
 
-
-/* ==========================================
-   HELPERS
-========================================== */
 
 const $ = id =>
   document.getElementById(id);
@@ -970,9 +1259,7 @@ function showToast(text){
 }
 
 
-/* ==========================================
-   AUTH
-========================================== */
+/* AUTH */
 
 onAuthStateChanged(
   auth,
@@ -995,8 +1282,19 @@ onAuthStateChanged(
       "VIBE User";
 
 
-    $("myAvatar").textContent =
-      name.charAt(0).toUpperCase();
+    if(user.photoURL){
+
+      $("myAvatar").innerHTML =
+        `<img src="${user.photoURL}" alt="Profile">`;
+
+    }
+
+    else{
+
+      $("myAvatar").textContent =
+        name.charAt(0).toUpperCase();
+
+    }
 
 
     try{
@@ -1045,9 +1343,7 @@ onAuthStateChanged(
 );
 
 
-/* ==========================================
-   LOAD USERS
-========================================== */
+/* USERS */
 
 async function loadUsers(){
 
@@ -1111,9 +1407,7 @@ async function loadUsers(){
 }
 
 
-/* ==========================================
-   SIDEBAR
-========================================== */
+/* SIDEBAR */
 
 function renderSidebar(){
 
@@ -1146,8 +1440,8 @@ function renderSidebar(){
 
     if(
       selectedChat &&
-      selectedChat.id ===
-      user.uid
+      selectedChat.type === "dm" &&
+      selectedChat.id === user.uid
     ){
 
       button.classList.add("active");
@@ -1228,18 +1522,14 @@ function renderSidebar(){
 }
 
 
-/* ==========================================
-   SELECT DM
-========================================== */
+/* DM */
 
 function selectDM(user){
 
   selectedChat = {
 
     type:"dm",
-
     id:user.uid,
-
     user:user
 
   };
@@ -1271,10 +1561,6 @@ function selectDM(user){
 }
 
 
-/* ==========================================
-   CONVERSATION ID
-========================================== */
-
 function dmConversationId(userId){
 
   return [
@@ -1287,9 +1573,7 @@ function dmConversationId(userId){
 }
 
 
-/* ==========================================
-   LOAD DM
-========================================== */
+/* LOAD CONVERSATION */
 
 function loadDMConversation(){
 
@@ -1330,10 +1614,6 @@ function loadDMConversation(){
 }
 
 
-/* ==========================================
-   LOAD GROUP
-========================================== */
-
 function loadGroupConversation(){
 
   if(unsubscribeMessages){
@@ -1367,9 +1647,24 @@ function loadGroupConversation(){
 }
 
 
-/* ==========================================
-   MESSAGE SUBSCRIPTION
-========================================== */
+function loadConversation(){
+
+  if(selectedChat.type === "group"){
+
+    loadGroupConversation();
+
+  }
+
+  else{
+
+    loadDMConversation();
+
+  }
+
+}
+
+
+/* MESSAGES */
 
 function subscribeMessages(messagesQuery){
 
@@ -1415,9 +1710,12 @@ function subscribeMessages(messagesQuery){
 
         snapshot.forEach(item => {
 
+          const data =
+            item.data();
+
           addMessage(
-            item.data(),
-            item.data().senderId ===
+            data,
+            data.senderId ===
               currentUser.uid
           );
 
@@ -1440,30 +1738,7 @@ function subscribeMessages(messagesQuery){
 }
 
 
-/* ==========================================
-   LOAD CONVERSATION
-========================================== */
-
-function loadConversation(){
-
-  if(selectedChat.type === "group"){
-
-    loadGroupConversation();
-
-  }
-
-  else{
-
-    loadDMConversation();
-
-  }
-
-}
-
-
-/* ==========================================
-   SEND MESSAGE
-========================================== */
+/* SEND */
 
 async function sendMessage(){
 
@@ -1516,10 +1791,8 @@ async function sendMessage(){
         );
 
       members = [
-
         currentUser.uid,
         selectedChat.user.uid
-
       ];
 
     }
@@ -1602,9 +1875,7 @@ async function sendMessage(){
 }
 
 
-/* ==========================================
-   MESSAGE UI
-========================================== */
+/* MESSAGE UI */
 
 function addMessage(data,mine){
 
@@ -1710,9 +1981,7 @@ function addMessage(data,mine){
 }
 
 
-/* ==========================================
-   HEADER
-========================================== */
+/* HEADER */
 
 function updateChatHeader(
   name,
@@ -1722,7 +1991,6 @@ function updateChatHeader(
 
   $("headerName").textContent =
     name;
-
 
   $("personStatus").textContent =
     status;
@@ -1747,9 +2015,7 @@ function updateChatHeader(
 }
 
 
-/* ==========================================
-   GROUP MODAL
-========================================== */
+/* GROUP MODAL */
 
 function openGroupModal(){
 
@@ -1772,10 +2038,6 @@ function closeGroupModal(){
 
 }
 
-
-/* ==========================================
-   GROUP USERS
-========================================== */
 
 function renderGroupUsers(){
 
@@ -1863,9 +2125,7 @@ function renderGroupUsers(){
 }
 
 
-/* ==========================================
-   CREATE GROUP
-========================================== */
+/* CREATE GROUP */
 
 async function createGroup(){
 
@@ -2008,9 +2268,7 @@ async function createGroup(){
 }
 
 
-/* ==========================================
-   FORMAT TIME
-========================================== */
+/* TIME */
 
 function formatTime(time){
 
@@ -2026,9 +2284,7 @@ function formatTime(time){
 }
 
 
-/* ==========================================
-   EMOJI
-========================================== */
+/* EMOJI */
 
 function addEmoji(){
 
@@ -2048,9 +2304,7 @@ function addEmoji(){
 }
 
 
-/* ==========================================
-   ENTER
-========================================== */
+/* ENTER */
 
 $("messageInput")
   .addEventListener(
@@ -2072,24 +2326,9 @@ $("messageInput")
   );
 
 
-/* ==========================================
-   VIDEO
-========================================== */
+/* VIDEO */
 
 function startVideo(){
-
-  if(
-    selectedChat &&
-    selectedChat.type === "group"
-  ){
-
-    window.location.href =
-      "video.html";
-
-    return;
-
-  }
-
 
   window.location.href =
     "video.html";
@@ -2097,9 +2336,7 @@ function startVideo(){
 }
 
 
-/* ==========================================
-   PROFILE PICTURE
-========================================== */
+/* PROFILE PICTURE */
 
 $("myAvatar").addEventListener(
   "click",
@@ -2228,9 +2465,7 @@ $("pfpInput").addEventListener(
 );
 
 
-/* ==========================================
-   EXPOSE BUTTON FUNCTIONS
-========================================== */
+/* EXPOSE */
 
 window.sendMessage =
   sendMessage;
