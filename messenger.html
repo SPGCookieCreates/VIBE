@@ -892,7 +892,53 @@ function showToast(text){
   },2200);
 
 }
+async function sendFriendRequest(user){
 
+  if(!currentUser || !user){
+    return;
+  }
+
+  if(friendIds.has(user.uid)){
+    showToast("Already friends ✦");
+    return;
+  }
+
+  if(pendingSent.has(user.uid)){
+    showToast("Request already sent.");
+    return;
+  }
+
+  try{
+
+    await setDoc(
+      doc(
+        db,
+        "friendRequests",
+        currentUser.uid + "_" + user.uid
+      ),
+      {
+        from: currentUser.uid,
+        to: user.uid,
+        status: "pending",
+        createdAt: serverTimestamp()
+      }
+    );
+
+    pendingSent.add(user.uid);
+
+    showToast("Friend request sent ✦");
+
+    await loadUsers();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast("Couldn't send friend request.");
+
+  }
+
+}
 
 /* ==========================================
    AUTH
