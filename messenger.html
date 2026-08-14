@@ -6,12 +6,12 @@
 
 <title>VIBE ✦</title>
 
-<script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 :root{
   --purple:#8466ff;
@@ -120,17 +120,45 @@ nav{
 
 .sidebar{
   border-right:1px solid #ffffff0d;
-  padding:22px 15px;
+  padding:18px 15px;
   background:#ffffff03;
   overflow:auto;
 }
 
 .sideTitle{
-  padding:0 12px 15px;
+  padding:0 12px 12px;
   color:#777;
   font-size:10px;
   font-weight:800;
   letter-spacing:2px;
+}
+
+.search{
+  width:100%;
+  height:42px;
+  margin-bottom:15px;
+  padding:0 13px;
+  border-radius:13px;
+  border:1px solid #ffffff10;
+  outline:none;
+  background:#ffffff08;
+  color:white;
+  font-size:12px;
+}
+
+.search:focus{
+  border-color:#8466ff80;
+  box-shadow:0 0 0 3px #8466ff12;
+}
+
+.search::placeholder{
+  color:#666;
+}
+
+.userList{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
 .friend{
@@ -138,20 +166,28 @@ nav{
   display:flex;
   align-items:center;
   gap:12px;
-  padding:12px;
+  padding:11px;
   border-radius:15px;
-  background:#ffffff0b;
-  border:1px solid #ffffff10;
+  background:transparent;
+  border:1px solid transparent;
   text-align:left;
+  transition:.2s;
 }
 
 .friend:hover{
-  background:#ffffff12;
+  background:#ffffff0b;
+  border-color:#ffffff10;
+}
+
+.friend.active{
+  background:#8466ff16;
+  border-color:#8466ff35;
 }
 
 .friendAvatar{
   width:42px;
   height:42px;
+  flex-shrink:0;
   border-radius:14px;
   display:grid;
   place-items:center;
@@ -167,7 +203,7 @@ nav{
   right:-2px;
   bottom:-2px;
   border-radius:50%;
-  background:#5bf49a;
+  background:#555;
   border:2px solid #111;
 }
 
@@ -183,10 +219,17 @@ nav{
 .friendPreview{
   margin-top:4px;
   color:#777;
-  font-size:11px;
+  font-size:10px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+}
+
+.noUsers{
+  padding:25px 10px;
+  text-align:center;
+  color:#666;
+  font-size:11px;
 }
 
 /* CHAT */
@@ -400,54 +443,23 @@ nav{
   transform:translateY(-2px);
 }
 
-/* EMPTY CONNECTION */
-
-.connectOverlay{
-  position:fixed;
-  inset:0;
-  display:none;
+.emptyChat{
+  height:100%;
+  display:grid;
   place-items:center;
-  background:#07070ce8;
-  backdrop-filter:blur(15px);
-  z-index:50;
-}
-
-.connectCard{
-  width:min(420px,90%);
-  padding:30px;
-  border-radius:25px;
-  background:#ffffff0b;
-  border:1px solid #ffffff15;
   text-align:center;
-  box-shadow:0 30px 100px #000;
+  color:#666;
 }
 
-.connectCard h2{
-  margin:0 0 10px;
+.emptyChatIcon{
+  font-size:45px;
+  margin-bottom:15px;
 }
 
-.connectCard p{
-  color:#888;
-  font-size:12px;
-  line-height:1.6;
-}
-
-.roomCode{
-  margin:20px 0;
-  padding:15px;
-  border-radius:15px;
-  background:#0005;
-  color:#9d8cff;
-  font-weight:800;
-  letter-spacing:5px;
-}
-
-.copy{
-  width:100%;
-  height:50px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
-  font-weight:800;
+.emptyChat strong{
+  color:#ddd;
+  display:block;
+  margin-bottom:7px;
 }
 
 /* TOAST */
@@ -461,7 +473,7 @@ nav{
   pointer-events:none;
   padding:12px 18px;
   border-radius:999px;
-  background:#12121beF;
+  background:#12121bef;
   border:1px solid #ffffff15;
   backdrop-filter:blur(20px);
   font-size:11px;
@@ -472,6 +484,33 @@ nav{
 .toast.show{
   opacity:1;
   transform:translate(-50%,0);
+}
+
+/* LOADING */
+
+.loading{
+  position:fixed;
+  inset:0;
+  display:grid;
+  place-items:center;
+  background:#07070cf5;
+  z-index:200;
+  font-size:14px;
+  font-weight:700;
+}
+
+.spinner{
+  width:35px;
+  height:35px;
+  margin:auto auto 15px;
+  border:3px solid #ffffff15;
+  border-top-color:var(--purple);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
 /* MOBILE */
@@ -516,6 +555,14 @@ nav{
 
 <body>
 
+<div class="loading" id="loading">
+  <div>
+    <div class="spinner"></div>
+    Loading VIBE...
+  </div>
+</div>
+
+
 <div class="app">
 
 <nav>
@@ -546,29 +593,20 @@ nav{
   <aside class="sidebar">
 
     <div class="sideTitle">
-      MESSAGES
+      PEOPLE
     </div>
 
-    <button class="friend">
+    <input
+      class="search"
+      id="searchInput"
+      placeholder="Search VIBE..."
+      autocomplete="off"
+    >
 
-      <div class="friendAvatar" id="friendAvatar">
-        F
-        <div class="dot"></div>
-      </div>
-
-      <div class="friendInfo">
-
-        <div class="friendName" id="friendName">
-          Friend
-        </div>
-
-        <div class="friendPreview" id="preview">
-          Start a conversation...
-        </div>
-
-      </div>
-
-    </button>
+    <div
+      class="userList"
+      id="userList"
+    ></div>
 
   </aside>
 
@@ -581,18 +619,27 @@ nav{
 
       <div class="person">
 
-        <div class="personAvatar" id="headerAvatar">
-          F
+        <div
+          class="personAvatar"
+          id="headerAvatar"
+        >
+          ✦
         </div>
 
         <div>
 
-          <div class="personName" id="headerName">
-            Friend
+          <div
+            class="personName"
+            id="headerName"
+          >
+            Select someone
           </div>
 
-          <div class="personStatus" id="personStatus">
-            ● Connecting
+          <div
+            class="personStatus"
+            id="personStatus"
+          >
+            ● VIBE
           </div>
 
         </div>
@@ -623,21 +670,28 @@ nav{
     </header>
 
 
-    <div class="messages" id="messages">
+    <div
+      class="messages"
+      id="messages"
+    >
 
-      <div class="welcome">
+      <div class="emptyChat">
 
-        <div class="welcomeIcon">
-          ✦
+        <div>
+
+          <div class="emptyChatIcon">
+            ✦
+          </div>
+
+          <strong>
+            Welcome to VIBE
+          </strong>
+
+          <span>
+            Search for someone to start a DM.
+          </span>
+
         </div>
-
-        <strong>
-          Welcome to VIBE
-        </strong>
-
-        <p>
-          Messages are sent directly between you two.
-        </p>
 
       </div>
 
@@ -658,8 +712,9 @@ nav{
         <input
           class="messageInput"
           id="messageInput"
-          placeholder="Type a message..."
+          placeholder="Select someone first..."
           autocomplete="off"
+          disabled
         >
 
         <button
@@ -680,55 +735,93 @@ nav{
 </div>
 
 
-<div class="toast" id="toast"></div>
+<div
+  class="toast"
+  id="toast"
+></div>
 
 
-<script>
+<script type="module">
 
-let peer = null;
-let connection = null;
+/* ==========================================
+   FIREBASE
+========================================== */
 
-let roomCode = "";
-let isHost = false;
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  getDocs,
+  serverTimestamp,
+  limit
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
-// ======================================
-// HELPERS
-// ======================================
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC0oSoz5Xn2-vqCz7tZL-tXITcClTmE1Mk",
+
+  authDomain:
+    "vibe-8ef48.firebaseapp.com",
+
+  projectId:
+    "vibe-8ef48",
+
+  storageBucket:
+    "vibe-8ef48.firebasestorage.app",
+
+  messagingSenderId:
+    "508522238856",
+
+  appId:
+    "1:508522238856:web:d79330d3e1d6078d83a03d"
+
+};
+
+
+const firebaseApp =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(firebaseApp);
+
+const db =
+  getFirestore(firebaseApp);
+
+
+/* ==========================================
+   STATE
+========================================== */
+
+let currentUser = null;
+let selectedUser = null;
+let unsubscribeMessages = null;
 
 const $ = id =>
   document.getElementById(id);
 
 
-function randomRoom(){
-
-  const chars =
-    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-  let result = "";
-
-  for(let i=0;i<6;i++){
-
-    result +=
-      chars[
-        Math.floor(
-          Math.random()*chars.length
-        )
-      ];
-
-  }
-
-  return result;
-}
-
-
-function hostId(room){
-
-  return "vibe-msg-" +
-    room.toLowerCase();
-
-}
-
+/* ==========================================
+   TOAST
+========================================== */
 
 function showToast(text){
 
@@ -738,222 +831,536 @@ function showToast(text){
 
   el.classList.add("show");
 
-  setTimeout(()=>{
+  setTimeout(() => {
+
     el.classList.remove("show");
+
   },2200);
 
 }
 
 
-// ======================================
-// USER NAME
-// ======================================
+/* ==========================================
+   AUTH
+========================================== */
 
-let myName =
-  localStorage.getItem("vibe_name");
+onAuthStateChanged(
+  auth,
+  async user => {
 
-if(!myName){
+    if(!user){
 
-  myName =
-    prompt("What's your VIBE name?") ||
-    "You";
+      window.location.href =
+        "index.html";
 
-  localStorage.setItem(
-    "vibe_name",
-    myName
-  );
+      return;
+
+    }
+
+    currentUser = user;
+
+    const name =
+      user.displayName ||
+      user.email?.split("@")[0] ||
+      "VIBE User";
+
+    $("myAvatar").textContent =
+      name.charAt(0).toUpperCase();
+
+
+    try{
+
+      await setDoc(
+
+        doc(
+          db,
+          "users",
+          user.uid
+        ),
+
+        {
+
+          uid:user.uid,
+
+          displayName:name,
+
+          email:user.email || "",
+
+          photoURL:user.photoURL || "",
+
+          lastSeen:serverTimestamp(),
+
+          online:true
+
+        },
+
+        {
+          merge:true
+        }
+
+      );
+
+      await loadUsers();
+
+    }
+
+    catch(error){
+
+      console.error(error);
+
+      showToast(
+        "Couldn't load VIBE users."
+      );
+
+    }
+
+
+    $("loading").style.display =
+      "none";
+
+  }
+);
+
+
+/* ==========================================
+   LOAD USERS
+========================================== */
+
+async function loadUsers(){
+
+  const userList =
+    $("userList");
+
+  userList.innerHTML =
+    `<div class="noUsers">Loading people...</div>`;
+
+
+  try{
+
+    const snapshot =
+      await getDocs(
+
+        query(
+          collection(db,"users"),
+          limit(50)
+        )
+
+      );
+
+
+    const users = [];
+
+
+    snapshot.forEach(
+      item => {
+
+        const user =
+          item.data();
+
+
+        if(
+          user.uid !==
+          currentUser.uid
+        ){
+
+          users.push(user);
+
+        }
+
+      }
+    );
+
+
+    users.sort(
+      (a,b) =>
+        (a.displayName || "")
+          .localeCompare(
+            b.displayName || ""
+          )
+    );
+
+
+    renderUsers(users);
+
+
+    $("searchInput")
+      .addEventListener(
+        "input",
+        () => {
+
+          const term =
+            $("searchInput")
+              .value
+              .trim()
+              .toLowerCase();
+
+
+          const filtered =
+            users.filter(
+              user =>
+                (user.displayName || "")
+                  .toLowerCase()
+                  .includes(term)
+            );
+
+
+          renderUsers(filtered);
+
+        }
+      );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    userList.innerHTML =
+      `<div class="noUsers">
+        Couldn't load users.
+      </div>`;
+
+  }
 
 }
 
 
-$("myAvatar").textContent =
-  myName[0].toUpperCase();
+/* ==========================================
+   RENDER USERS
+========================================== */
+
+function renderUsers(users){
+
+  const list =
+    $("userList");
+
+  list.innerHTML = "";
 
 
-// ======================================
-// ROOM
-// ======================================
+  if(!users.length){
 
-const params =
-  new URLSearchParams(
-    location.search
-  );
+    list.innerHTML =
+      `<div class="noUsers">
+        No VIBE users found.
+      </div>`;
 
-roomCode =
-  params.get("room") ||
-  randomRoom();
-
-roomCode =
-  roomCode
-    .toUpperCase()
-    .slice(0,6);
-
-
-// ======================================
-// CREATE PEER
-// ======================================
-
-function startMessaging(){
-
-  isHost =
-    !params.get("room");
-
-
-  if(isHost){
-
-    peer =
-      new Peer(
-        hostId(roomCode)
-      );
-
-  }else{
-
-    peer =
-      new Peer();
+    return;
 
   }
 
 
-  peer.on("open", id => {
+  users.forEach(
+    user => {
 
-    console.log(
-      "VIBE ID:",
-      id
-    );
+      const button =
+        document.createElement("button");
+
+      button.className =
+        "friend";
 
 
-    if(isHost){
+      if(
+        selectedUser &&
+        selectedUser.uid === user.uid
+      ){
 
-      updateInvite();
+        button.classList.add(
+          "active"
+        );
 
-      $("personStatus").textContent =
-        "● Waiting for friend";
+      }
 
-      showToast(
-        "Your VIBE room is ready ✦"
-      );
 
-    }else{
+      const avatar =
+        document.createElement("div");
 
-      connectToHost();
+      avatar.className =
+        "friendAvatar";
+
+
+      avatar.textContent =
+        (
+          user.displayName ||
+          "V"
+        )
+          .charAt(0)
+          .toUpperCase();
+
+
+      const dot =
+        document.createElement("div");
+
+      dot.className =
+        "dot";
+
+      avatar.appendChild(dot);
+
+
+      const info =
+        document.createElement("div");
+
+      info.className =
+        "friendInfo";
+
+
+      const name =
+        document.createElement("div");
+
+      name.className =
+        "friendName";
+
+      name.textContent =
+        user.displayName ||
+        "VIBE User";
+
+
+      const preview =
+        document.createElement("div");
+
+      preview.className =
+        "friendPreview";
+
+      preview.textContent =
+        "Start a conversation...";
+
+
+      info.appendChild(name);
+      info.appendChild(preview);
+
+      button.appendChild(avatar);
+      button.appendChild(info);
+
+
+      button.onclick =
+        () => selectUser(user);
+
+
+      list.appendChild(button);
 
     }
-
-  });
-
-
-  peer.on("connection", conn => {
-
-    acceptConnection(conn);
-
-  });
-
-
-  peer.on("error", error => {
-
-    console.error(error);
-
-    if(
-      error.type ===
-      "peer-unavailable"
-    ){
-
-      $("personStatus").textContent =
-        "● Friend not online";
-
-      showToast(
-        "Room isn't online yet."
-      );
-
-    }
-
-  });
+  );
 
 }
 
 
-// ======================================
-// CONNECT
-// ======================================
+/* ==========================================
+   SELECT USER
+========================================== */
 
-function connectToHost(){
+function selectUser(user){
+
+  selectedUser =
+    user;
+
+
+  $("headerName").textContent =
+    user.displayName ||
+    "VIBE User";
+
+
+  $("headerAvatar").textContent =
+    (
+      user.displayName ||
+      "V"
+    )
+      .charAt(0)
+      .toUpperCase();
+
+
+  $("personStatus").textContent =
+    "● VIBE user";
+
+
+  $("messageInput").disabled =
+    false;
+
+  $("messageInput").placeholder =
+    "Message " +
+    (
+      user.displayName ||
+      "them"
+    ) +
+    "...";
+
+
+  renderUsersAfterSelection();
+
+  loadConversation();
+
+}
+
+
+/* ==========================================
+   REFRESH SIDEBAR ACTIVE STATE
+========================================== */
+
+function renderUsersAfterSelection(){
+
+  document
+    .querySelectorAll(".friend")
+    .forEach(button => {
+
+      button.classList.remove(
+        "active"
+      );
+
+    });
+
+}
+
+
+/* ==========================================
+   CONVERSATION ID
+========================================== */
+
+function conversationId(){
+
+  if(!currentUser || !selectedUser)
+    return null;
+
+
+  return [
+
+    currentUser.uid,
+    selectedUser.uid
+
+  ].sort().join("_");
+
+}
+
+
+/* ==========================================
+   LOAD CONVERSATION
+========================================== */
+
+function loadConversation(){
+
+  if(unsubscribeMessages){
+
+    unsubscribeMessages();
+
+    unsubscribeMessages =
+      null;
+
+  }
+
 
   const id =
-    hostId(roomCode);
+    conversationId();
 
-  const conn =
-    peer.connect(
+
+  if(!id)
+    return;
+
+
+  $("messages").innerHTML = "";
+
+
+  const messagesRef =
+    collection(
+      db,
+      "conversations",
       id,
-      {
-        reliable:true
-      }
+      "messages"
     );
 
-  acceptConnection(conn);
+
+  const messagesQuery =
+    query(
+      messagesRef,
+      orderBy("createdAt","asc")
+    );
+
+
+  unsubscribeMessages =
+    onSnapshot(
+      messagesQuery,
+
+      snapshot => {
+
+        $("messages").innerHTML =
+          "";
+
+
+        if(snapshot.empty){
+
+          $("messages").innerHTML = `
+
+            <div class="welcome">
+
+              <div class="welcomeIcon">
+                ✦
+              </div>
+
+              <strong>
+                Say hey 👋
+              </strong>
+
+              <p>
+                Start your VIBE conversation.
+              </p>
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        snapshot.forEach(
+          item => {
+
+            const data =
+              item.data();
+
+
+            addMessage(
+              data,
+              data.senderId ===
+                currentUser.uid
+            );
+
+          }
+        );
+
+      },
+
+      error => {
+
+        console.error(error);
+
+        showToast(
+          "Couldn't load messages."
+        );
+
+      }
+
+    );
 
 }
 
 
-// ======================================
-// ACCEPT
-// ======================================
+/* ==========================================
+   SEND MESSAGE
+========================================== */
 
-function acceptConnection(conn){
+async function sendMessage(){
 
-  connection = conn;
-
-  conn.on("open",()=>{
-
-    $("personStatus").textContent =
-      "● Online";
-
-    $("friendAvatar")
-      .querySelector(".dot")
-      .style.background =
-      "#5bf49a";
+  if(
+    !currentUser ||
+    !selectedUser
+  ){
 
     showToast(
-      "Connected ✦"
+      "Choose someone to message first."
     );
 
-  });
+    return;
 
+  }
 
-  conn.on("data",data=>{
-
-    if(!data) return;
-
-    if(data.type === "message"){
-
-      receiveMessage(
-        data
-      );
-
-    }
-
-  });
-
-
-  conn.on("close",()=>{
-
-    $("personStatus").textContent =
-      "● Offline";
-
-    $("friendAvatar")
-      .querySelector(".dot")
-      .style.background =
-      "#555";
-
-  });
-
-}
-
-
-// ======================================
-// SEND
-// ======================================
-
-function sendMessage(){
 
   const input =
     $("messageInput");
@@ -961,73 +1368,99 @@ function sendMessage(){
   const text =
     input.value.trim();
 
-  if(!text) return;
+
+  if(!text)
+    return;
 
 
-  const message = {
-
-    type:"message",
-
-    text:text,
-
-    sender:myName,
-
-    time:Date.now()
-
-  };
+  const id =
+    conversationId();
 
 
-  addMessage(
-    message,
-    true
-  );
+  try{
 
+    await setDoc(
 
-  if(
-    connection &&
-    connection.open
-  ){
+      doc(
+        db,
+        "conversations",
+        id
+      ),
 
-    connection.send(
-      message
+      {
+
+        members:[
+          currentUser.uid,
+          selectedUser.uid
+        ],
+
+        updatedAt:
+          serverTimestamp()
+
+      },
+
+      {
+        merge:true
+      }
+
     );
 
-  }else{
+
+    await addDoc(
+
+      collection(
+        db,
+        "conversations",
+        id,
+        "messages"
+      ),
+
+      {
+
+        text:text,
+
+        senderId:
+          currentUser.uid,
+
+        senderName:
+          currentUser.displayName ||
+          currentUser.email
+            ?.split("@")[0] ||
+          "VIBE User",
+
+        createdAt:
+          serverTimestamp(),
+
+        clientTime:
+          Date.now()
+
+      }
+
+    );
+
+
+    input.value = "";
+
+    input.focus();
+
+  }
+
+  catch(error){
+
+    console.error(error);
 
     showToast(
-      "Friend isn't connected."
+      "Message couldn't send."
     );
 
   }
 
-
-  input.value = "";
-
-  input.focus();
-
 }
 
 
-// ======================================
-// RECEIVE
-// ======================================
-
-function receiveMessage(data){
-
-  addMessage(
-    data,
-    false
-  );
-
-  $("preview").textContent =
-    data.text;
-
-}
-
-
-// ======================================
-// MESSAGE UI
-// ======================================
+/* ==========================================
+   MESSAGE UI
+========================================== */
 
 function addMessage(
   data,
@@ -1057,7 +1490,7 @@ function addMessage(
     document.createElement("div");
 
   text.textContent =
-    data.text;
+    data.text || "";
 
 
   const time =
@@ -1066,8 +1499,41 @@ function addMessage(
   time.className =
     "time";
 
+
+  let timestamp =
+    data.createdAt;
+
+
+  if(
+    timestamp &&
+    typeof timestamp.toDate ===
+      "function"
+  ){
+
+    timestamp =
+      timestamp.toDate();
+
+  }
+
+  else if(data.clientTime){
+
+    timestamp =
+      new Date(
+        data.clientTime
+      );
+
+  }
+
+  else{
+
+    timestamp =
+      new Date();
+
+  }
+
+
   time.textContent =
-    formatTime(data.time);
+    formatTime(timestamp);
 
 
   bubble.appendChild(text);
@@ -1081,16 +1547,12 @@ function addMessage(
   container.scrollTop =
     container.scrollHeight;
 
-
-  $("preview").textContent =
-    data.text;
-
 }
 
 
-// ======================================
-// TIME
-// ======================================
+/* ==========================================
+   TIME
+========================================== */
 
 function formatTime(time){
 
@@ -1106,35 +1568,43 @@ function formatTime(time){
 }
 
 
-// ======================================
-// EMOJI
-// ======================================
+/* ==========================================
+   EMOJI
+========================================== */
 
 function addEmoji(){
 
-  $("messageInput").value +=
+  const input =
+    $("messageInput");
+
+
+  if(input.disabled)
+    return;
+
+
+  input.value +=
     " 😊";
 
-  $("messageInput").focus();
+  input.focus();
 
 }
 
 
-// ======================================
-// ENTER TO SEND
-// ======================================
+/* ==========================================
+   ENTER TO SEND
+========================================== */
 
 $("messageInput")
   .addEventListener(
     "keydown",
-    e => {
+    event => {
 
       if(
-        e.key === "Enter" &&
-        !e.shiftKey
+        event.key === "Enter" &&
+        !event.shiftKey
       ){
 
-        e.preventDefault();
+        event.preventDefault();
 
         sendMessage();
 
@@ -1144,60 +1614,79 @@ $("messageInput")
   );
 
 
-// ======================================
-// INVITE
-// ======================================
-
-function updateInvite(){
-
-  const url =
-    location.origin +
-    location.pathname +
-    "?room=" +
-    roomCode;
-
-  history.replaceState(
-    {},
-    "",
-    "?room=" + roomCode
-  );
-
-}
-
-
-// ======================================
-// CLEAR
-// ======================================
+/* ==========================================
+   CLEAR SCREEN
+========================================== */
 
 function clearMessages(){
 
+  if(!selectedUser){
+
+    showToast(
+      "Choose a conversation first."
+    );
+
+    return;
+
+  }
+
+
   if(
     confirm(
-      "Clear this chat on your screen?"
+      "Clear this chat from your screen?"
     )
   ){
 
-    $("messages").innerHTML = "";
+    $("messages").innerHTML = `
+
+      <div class="welcome">
+
+        <div class="welcomeIcon">
+          ✦
+        </div>
+
+        <strong>
+          Conversation
+        </strong>
+
+        <p>
+          Your saved messages are still in VIBE.
+        </p>
+
+      </div>
+
+    `;
 
   }
 
 }
 
 
-// ======================================
-// VIDEO BUTTON
-// ======================================
+/* ==========================================
+   VIDEO
+========================================== */
 
-function startVideo() {
-  window.location.href = "video.html";
+function startVideo(){
+
+  window.location.href =
+    "video.html";
+
 }
 
 
-// ======================================
-// START
-// ======================================
+/* Make functions available to HTML */
 
-startMessaging();
+window.sendMessage =
+  sendMessage;
+
+window.addEmoji =
+  addEmoji;
+
+window.clearMessages =
+  clearMessages;
+
+window.startVideo =
+  startVideo;
 
 </script>
 
