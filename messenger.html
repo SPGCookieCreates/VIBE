@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>VIBE ✦</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 :root{
   --purple:#8b6cff;
@@ -21,13 +18,9 @@
   --green:#63f5a2;
   --red:#ff5c7a;
   --bg:#05050a;
-  --glass:rgba(255,255,255,.055);
-  --glass2:rgba(255,255,255,.085);
-  --border:rgba(255,255,255,.11);
 }
 
-html,
-body{
+html,body{
   margin:0;
   width:100%;
   height:100%;
@@ -36,28 +29,14 @@ body{
 body{
   min-height:100vh;
   background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(112,74,255,.28),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 90% 15%,
-      rgba(255,79,216,.12),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 85% 90%,
-      rgba(0,220,255,.18),
-      transparent 32%
-    ),
+    radial-gradient(circle at 10% 10%,rgba(112,74,255,.28),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(255,79,216,.12),transparent 25%),
+    radial-gradient(circle at 85% 90%,rgba(0,220,255,.18),transparent 32%),
     #05050a;
   color:#fff;
   font-family:Inter,sans-serif;
   overflow:hidden;
 }
-
-/* NEON ATMOSPHERE */
 
 body:before{
   content:"";
@@ -66,22 +45,10 @@ body:before{
   pointer-events:none;
   opacity:.18;
   background-image:
-    linear-gradient(
-      rgba(255,255,255,.07) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.07) 1px,
-      transparent 1px
-    );
+    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
   background-size:48px 48px;
-  mask-image:
-    linear-gradient(
-      to bottom,
-      #000,
-      transparent 90%
-    );
+  mask-image:linear-gradient(to bottom,#000,transparent 90%);
 }
 
 body:after{
@@ -99,16 +66,11 @@ body:after{
 }
 
 @keyframes ambient{
-  from{
-    transform:translate(0,0) scale(1);
-  }
-  to{
-    transform:translate(100px,-60px) scale(1.2);
-  }
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(100px,-60px) scale(1.2)}
 }
 
-button,
-input{
+button,input{
   font-family:inherit;
 }
 
@@ -149,7 +111,6 @@ nav{
   font-size:23px;
   font-weight:800;
   letter-spacing:-1.2px;
-  text-shadow:0 0 25px rgba(255,255,255,.08);
 }
 
 .logo span{
@@ -171,7 +132,6 @@ nav{
   font-size:10px;
   font-weight:700;
   letter-spacing:.7px;
-  text-shadow:0 0 12px rgba(99,245,162,.5);
 }
 
 .avatar{
@@ -181,30 +141,10 @@ nav{
   display:grid;
   place-items:center;
   font-weight:800;
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
   box-shadow:
     0 0 0 1px rgba(255,255,255,.14),
     0 0 25px rgba(132,102,255,.3);
-  overflow:hidden;
-  transition:.25s;
-}
-
-.avatar:hover{
-  transform:translateY(-2px) scale(1.04);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.2),
-    0 0 35px rgba(132,102,255,.55);
-}
-
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
 }
 
 /* MAIN */
@@ -236,9 +176,6 @@ nav{
 }
 
 .sectionTitle{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   padding:15px 12px 8px;
   color:#666;
   font-size:9px;
@@ -251,28 +188,15 @@ nav{
   height:44px;
   margin-bottom:12px;
   border-radius:14px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(132,102,255,.20),
-      rgba(53,220,255,.10)
-    );
+  background:linear-gradient(
+    135deg,
+    rgba(132,102,255,.20),
+    rgba(53,220,255,.10)
+  );
   border:1px solid rgba(132,102,255,.3);
   color:#c5bcff;
   font-size:12px;
   font-weight:700;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.07),
-    0 5px 25px rgba(80,50,200,.08);
-  transition:.25s;
-}
-
-.groupCreate:hover{
-  transform:translateY(-2px);
-  border-color:rgba(132,102,255,.55);
-  box-shadow:
-    0 0 25px rgba(132,102,255,.18),
-    inset 0 1px rgba(255,255,255,.1);
 }
 
 .search{
@@ -286,24 +210,18 @@ nav{
   background:rgba(255,255,255,.045);
   color:white;
   font-size:12px;
-  backdrop-filter:blur(15px);
-  transition:.2s;
 }
 
 .search:focus{
   border-color:rgba(132,102,255,.55);
-  background:rgba(132,102,255,.07);
-  box-shadow:
-    0 0 0 3px rgba(132,102,255,.08),
-    0 0 25px rgba(132,102,255,.08);
+  box-shadow:0 0 0 3px rgba(132,102,255,.08);
 }
 
 .search::placeholder{
   color:#666;
 }
 
-.userList,
-.groupList{
+.userList,.groupList{
   display:flex;
   flex-direction:column;
   gap:7px;
@@ -319,26 +237,20 @@ nav{
   background:transparent;
   border:1px solid transparent;
   text-align:left;
-  transition:.22s;
 }
 
 .friend:hover{
   background:rgba(255,255,255,.055);
   border-color:rgba(255,255,255,.08);
-  transform:translateX(2px);
 }
 
 .friend.active{
-  background:
-    linear-gradient(
-      100deg,
-      rgba(132,102,255,.16),
-      rgba(53,220,255,.045)
-    );
+  background:linear-gradient(
+    100deg,
+    rgba(132,102,255,.16),
+    rgba(53,220,255,.045)
+  );
   border-color:rgba(132,102,255,.28);
-  box-shadow:
-    inset 0 0 25px rgba(132,102,255,.035),
-    0 0 25px rgba(100,70,255,.06);
 }
 
 .friendAvatar{
@@ -348,24 +260,8 @@ nav{
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:
-    linear-gradient(
-      135deg,
-      #7659ff,
-      #2fdfff
-    );
+  background:linear-gradient(135deg,#7659ff,#2fdfff);
   font-weight:800;
-  position:relative;
-  overflow:hidden;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.1),
-    0 5px 20px rgba(50,100,255,.15);
-}
-
-.friendAvatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
 }
 
 .friendInfo{
@@ -394,42 +290,19 @@ nav{
   font-size:11px;
 }
 
-.groupBadge{
-  margin-left:auto;
-  color:#9d8cff;
-  font-size:10px;
-}
-
-/* GROUP SIDEBAR */
-
 .groupItem{
-  position:relative;
+  display:flex;
+  align-items:center;
+  gap:4px;
 }
 
 .groupDelete{
-  flex-shrink:0;
   width:30px;
   height:30px;
   border-radius:10px;
-  display:grid;
-  place-items:center;
   background:rgba(255,92,122,.07);
   border:1px solid rgba(255,92,122,.1);
   color:#ff7f98;
-  font-size:12px;
-  opacity:.35;
-  transition:.2s;
-}
-
-.groupItem:hover .groupDelete{
-  opacity:1;
-}
-
-.groupDelete:hover{
-  background:rgba(255,92,122,.18);
-  border-color:rgba(255,92,122,.35);
-  transform:scale(1.06);
-  box-shadow:0 0 18px rgba(255,92,122,.15);
 }
 
 /* CHAT */
@@ -439,7 +312,6 @@ nav{
   min-height:0;
   display:flex;
   flex-direction:column;
-  background:rgba(255,255,255,.012);
   overflow:hidden;
 }
 
@@ -453,7 +325,6 @@ nav{
   border-bottom:1px solid rgba(255,255,255,.08);
   background:rgba(255,255,255,.025);
   backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
 }
 
 .person{
@@ -468,23 +339,8 @@ nav{
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
   font-weight:800;
-  overflow:hidden;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.12),
-    0 0 25px rgba(100,80,255,.22);
-}
-
-.personAvatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
 }
 
 .personName{
@@ -496,12 +352,6 @@ nav{
   margin-top:3px;
   color:var(--green);
   font-size:9px;
-  text-shadow:0 0 12px rgba(99,245,162,.4);
-}
-
-.headerButtons{
-  display:flex;
-  gap:8px;
 }
 
 .headerBtn{
@@ -511,17 +361,6 @@ nav{
   background:rgba(255,255,255,.055);
   border:1px solid rgba(255,255,255,.1);
   font-size:17px;
-  transition:.22s;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.04);
-}
-
-.headerBtn:hover{
-  background:rgba(132,102,255,.13);
-  border-color:rgba(132,102,255,.3);
-  transform:translateY(-2px);
-  box-shadow:
-    0 0 25px rgba(132,102,255,.15);
 }
 
 /* MESSAGES */
@@ -531,19 +370,6 @@ nav{
   overflow-y:auto;
   padding:30px 7%;
   scroll-behavior:smooth;
-}
-
-.messages::-webkit-scrollbar,
-.sidebar::-webkit-scrollbar,
-.selectList::-webkit-scrollbar{
-  width:5px;
-}
-
-.messages::-webkit-scrollbar-thumb,
-.sidebar::-webkit-scrollbar-thumb,
-.selectList::-webkit-scrollbar-thumb{
-  background:rgba(255,255,255,.1);
-  border-radius:10px;
 }
 
 .welcome{
@@ -559,15 +385,11 @@ nav{
   display:grid;
   place-items:center;
   border-radius:22px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(132,102,255,.85),
-      rgba(53,220,255,.75)
-    );
-  box-shadow:
-    0 0 25px rgba(132,102,255,.25),
-    0 0 70px rgba(53,220,255,.1);
+  background:linear-gradient(
+    135deg,
+    rgba(132,102,255,.85),
+    rgba(53,220,255,.75)
+  );
   font-size:27px;
 }
 
@@ -587,6 +409,10 @@ nav{
   animation:messageIn .22s ease;
 }
 
+.messageRow.mine{
+  justify-content:flex-end;
+}
+
 @keyframes messageIn{
   from{
     opacity:0;
@@ -598,10 +424,6 @@ nav{
   }
 }
 
-.messageRow.mine{
-  justify-content:flex-end;
-}
-
 .bubble{
   max-width:min(600px,75%);
   padding:12px 15px;
@@ -611,25 +433,16 @@ nav{
   color:#ddd;
   font-size:13px;
   line-height:1.5;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.035),
-    0 5px 25px rgba(0,0,0,.08);
 }
 
 .mine .bubble{
-  background:
-    linear-gradient(
-      135deg,
-      rgba(113,84,236,.82),
-      rgba(56,125,224,.78)
-    );
-  border-color:rgba(255,255,255,.13);
+  background:linear-gradient(
+    135deg,
+    rgba(113,84,236,.82),
+    rgba(56,125,224,.78)
+  );
   color:#fff;
   border-bottom-right-radius:6px;
-  box-shadow:
-    0 5px 25px rgba(90,70,220,.16);
 }
 
 .messageRow:not(.mine) .bubble{
@@ -654,16 +467,13 @@ nav{
 
 .composer{
   flex-shrink:0;
-  position:relative;
-  z-index:20;
   padding:12px 7% 16px;
-  background:
-    linear-gradient(
-      to top,
-      rgba(5,5,10,.96),
-      rgba(5,5,10,.72),
-      transparent
-    );
+  background:linear-gradient(
+    to top,
+    rgba(5,5,10,.96),
+    rgba(5,5,10,.72),
+    transparent
+  );
 }
 
 .composerBox{
@@ -676,12 +486,6 @@ nav{
   border-radius:20px;
   background:rgba(20,20,30,.88);
   border:1px solid rgba(255,255,255,.15);
-  backdrop-filter:blur(30px) saturate(140%);
-  -webkit-backdrop-filter:blur(30px) saturate(140%);
-  box-shadow:
-    0 10px 45px rgba(0,0,0,.45),
-    0 0 30px rgba(100,70,255,.08),
-    inset 0 1px rgba(255,255,255,.08);
 }
 
 .messageInput{
@@ -701,42 +505,24 @@ nav{
 }
 
 .emoji{
-  flex-shrink:0;
   width:42px;
   height:42px;
   border-radius:14px;
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.08);
   font-size:18px;
-  transition:.2s;
-}
-
-.emoji:hover{
-  background:rgba(255,255,255,.12);
-  transform:scale(1.04);
 }
 
 .send{
-  flex-shrink:0;
   width:46px;
   height:46px;
   border-radius:15px;
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
+  background:linear-gradient(
+    135deg,
+    var(--purple),
+    var(--cyan)
+  );
   font-size:17px;
-  box-shadow:
-    0 0 25px rgba(100,100,255,.25);
-  transition:.2s;
-}
-
-.send:hover{
-  transform:translateY(-2px) scale(1.03);
-  box-shadow:
-    0 0 35px rgba(100,100,255,.4);
 }
 
 /* MODAL */
@@ -748,7 +534,6 @@ nav{
   place-items:center;
   background:rgba(0,0,0,.65);
   backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
   z-index:150;
   padding:20px;
 }
@@ -763,17 +548,12 @@ nav{
   overflow:auto;
   padding:26px;
   border-radius:26px;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(25,24,40,.93),
-      rgba(10,10,17,.94)
-    );
+  background:linear-gradient(
+    145deg,
+    rgba(25,24,40,.93),
+    rgba(10,10,17,.94)
+  );
   border:1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 30px 100px rgba(0,0,0,.75),
-    0 0 80px rgba(100,70,255,.12);
-  backdrop-filter:blur(35px);
 }
 
 .modalTitle{
@@ -800,11 +580,6 @@ nav{
   margin-bottom:15px;
 }
 
-.groupNameInput:focus{
-  border-color:rgba(132,102,255,.5);
-  box-shadow:0 0 20px rgba(132,102,255,.1);
-}
-
 .selectList{
   display:flex;
   flex-direction:column;
@@ -820,17 +595,6 @@ nav{
   padding:10px;
   border-radius:14px;
   background:rgba(255,255,255,.035);
-  border:1px solid transparent;
-  transition:.2s;
-}
-
-.selectUser:hover{
-  background:rgba(255,255,255,.07);
-  border-color:rgba(255,255,255,.08);
-}
-
-.selectUser input{
-  accent-color:#8466ff;
 }
 
 .selectAvatar{
@@ -839,21 +603,13 @@ nav{
   border-radius:11px;
   display:grid;
   place-items:center;
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
+  background:linear-gradient(
+    135deg,
+    var(--purple),
+    var(--cyan)
+  );
   font-size:12px;
   font-weight:800;
-  overflow:hidden;
-}
-
-.selectAvatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
 }
 
 .modalButtons{
@@ -868,23 +624,16 @@ nav{
   border-radius:14px;
   background:rgba(255,255,255,.055);
   border:1px solid rgba(255,255,255,.1);
-  transition:.2s;
-}
-
-.modalBtn:hover{
-  background:rgba(255,255,255,.1);
 }
 
 .modalBtn.primary{
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
+  background:linear-gradient(
+    135deg,
+    var(--purple),
+    var(--cyan)
+  );
   font-weight:800;
   border:0;
-  box-shadow:0 0 25px rgba(100,90,255,.2);
 }
 
 /* TOAST */
@@ -898,13 +647,8 @@ nav{
   pointer-events:none;
   padding:12px 19px;
   border-radius:999px;
-  background:rgba(15,15,24,.84);
+  background:rgba(15,15,24,.9);
   border:1px solid rgba(255,255,255,.13);
-  backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
-  box-shadow:
-    0 10px 40px rgba(0,0,0,.35),
-    0 0 25px rgba(100,70,255,.08);
   font-size:11px;
   transition:.25s;
   z-index:200;
@@ -938,13 +682,10 @@ nav{
   border-right-color:var(--cyan);
   border-radius:50%;
   animation:spin .7s linear infinite;
-  box-shadow:0 0 25px rgba(132,102,255,.2);
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+  to{transform:rotate(360deg)}
 }
 
 /* MOBILE */
@@ -985,26 +726,8 @@ nav{
     padding:0 13px;
   }
 
-  .personAvatar{
-    width:39px;
-    height:39px;
-  }
-
-  .headerBtn{
-    width:39px;
-    height:39px;
-  }
-
   .bubble{
     max-width:88%;
-  }
-
-  .composerBox{
-    border-radius:18px;
-  }
-
-  .messageInput{
-    font-size:12px;
   }
 }
 </style>
@@ -1028,15 +751,7 @@ nav{
 
   <div class="navRight">
     <div class="online">● ONLINE</div>
-
     <div class="avatar" id="myAvatar">?</div>
-
-    <input
-      type="file"
-      id="pfpInput"
-      accept="image/png,image/jpeg,image/webp"
-      style="display:none"
-    >
   </div>
 </nav>
 
@@ -1046,10 +761,7 @@ nav{
 
   <div class="sideTitle">CHATS</div>
 
-  <button
-    class="groupCreate"
-    onclick="openGroupModal()"
-  >
+  <button class="groupCreate" id="createGroupBtn">
     ＋ Create Group
   </button>
 
@@ -1060,23 +772,13 @@ nav{
     autocomplete="off"
   >
 
-  <div class="sectionTitle">
-    PEOPLE
-  </div>
+  <div class="sectionTitle">PEOPLE</div>
 
-  <div
-    class="userList"
-    id="userList"
-  ></div>
+  <div class="userList" id="userList"></div>
 
-  <div class="sectionTitle">
-    GROUPS
-  </div>
+  <div class="sectionTitle">GROUPS</div>
 
-  <div
-    class="groupList"
-    id="groupList"
-  ></div>
+  <div class="groupList" id="groupList"></div>
 
 </aside>
 
@@ -1086,27 +788,16 @@ nav{
 
   <div class="person">
 
-    <div
-      class="personAvatar"
-      id="headerAvatar"
-    >✦</div>
+    <div class="personAvatar" id="headerAvatar">✦</div>
 
     <div>
-
-      <div
-        class="personName"
-        id="headerName"
-      >
+      <div class="personName" id="headerName">
         Select someone
       </div>
 
-      <div
-        class="personStatus"
-        id="personStatus"
-      >
+      <div class="personStatus" id="personStatus">
         ● VIBE
       </div>
-
     </div>
 
   </div>
@@ -1115,7 +806,7 @@ nav{
 
     <button
       class="headerBtn"
-      onclick="startVideo()"
+      id="videoBtn"
       title="Video call"
     >
       📹
@@ -1125,23 +816,12 @@ nav{
 
 </header>
 
-<div
-  class="messages"
-  id="messages"
->
+<div class="messages" id="messages">
 
   <div class="welcome">
-    <div>
-
-      <div class="welcomeIcon">✦</div>
-
-      <strong>Welcome to VIBE</strong>
-
-      <p>
-        Select someone or create a group.
-      </p>
-
-    </div>
+    <div class="welcomeIcon">✦</div>
+    <strong>Welcome to VIBE</strong>
+    <p>Select someone or create a group.</p>
   </div>
 
 </div>
@@ -1150,10 +830,7 @@ nav{
 
   <div class="composerBox">
 
-    <button
-      class="emoji"
-      onclick="addEmoji()"
-    >
+    <button class="emoji" id="emojiBtn">
       😊
     </button>
 
@@ -1165,10 +842,7 @@ nav{
       disabled
     >
 
-    <button
-      class="send"
-      onclick="sendMessage()"
-    >
+    <button class="send" id="sendBtn">
       ➤
     </button>
 
@@ -1182,10 +856,7 @@ nav{
 
 <!-- GROUP MODAL -->
 
-<div
-  class="modal"
-  id="groupModal"
->
+<div class="modal" id="groupModal">
 
   <div class="modalBox">
 
@@ -1204,24 +875,15 @@ nav{
       maxlength="40"
     >
 
-    <div
-      class="selectList"
-      id="groupUserList"
-    ></div>
+    <div class="selectList" id="groupUserList"></div>
 
     <div class="modalButtons">
 
-      <button
-        class="modalBtn"
-        onclick="closeGroupModal()"
-      >
+      <button class="modalBtn" id="cancelGroupBtn">
         Cancel
       </button>
 
-      <button
-        class="modalBtn primary"
-        onclick="createGroup()"
-      >
+      <button class="modalBtn primary" id="confirmGroupBtn">
         Create Group
       </button>
 
@@ -1231,13 +893,14 @@ nav{
 
 </div>
 
-<div
-  class="toast"
-  id="toast"
-></div>
+<div class="toast" id="toast"></div>
 
 
 <script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
   initializeApp
@@ -1268,14 +931,6 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from
-"https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
-
 
 const firebaseConfig = {
 
@@ -1287,9 +942,6 @@ const firebaseConfig = {
 
   projectId:
     "vibe-8ef48",
-
-  storageBucket:
-    "vibe-8ef48.firebasestorage.app",
 
   messagingSenderId:
     "508522238856",
@@ -1309,16 +961,22 @@ const auth =
 const db =
   getFirestore(firebaseApp);
 
-const storage =
-  getStorage(firebaseApp);
 
+/* =========================================================
+   STATE
+========================================================= */
 
 let currentUser = null;
 let selectedChat = null;
 let unsubscribeMessages = null;
+
 let allUsers = [];
 let allGroups = [];
 
+
+/* =========================================================
+   HELPERS
+========================================================= */
 
 const $ = id =>
   document.getElementById(id);
@@ -1326,54 +984,124 @@ const $ = id =>
 
 function showToast(text){
 
-  const el = $("toast");
+  const toast = $("toast");
 
-  el.textContent = text;
+  toast.textContent = text;
 
-  el.classList.add("show");
+  toast.classList.add("show");
 
-  setTimeout(() => {
-    el.classList.remove("show");
-  },2200);
+  clearTimeout(showToast.timer);
+
+  showToast.timer =
+    setTimeout(() => {
+      toast.classList.remove("show");
+    },2500);
 
 }
 
 
-/* AUTH */
-
 function hideLoading(){
+
   const loading = $("loading");
 
   if(loading){
     loading.style.display = "none";
   }
+
 }
 
-function showAppError(message){
-  hideLoading();
-  showToast(message);
-  console.error(message);
+
+function showWelcome(){
+
+  $("messages").innerHTML = `
+
+    <div class="welcome">
+
+      <div class="welcomeIcon">✦</div>
+
+      <strong>Welcome to VIBE</strong>
+
+      <p>
+        Select someone or create a group.
+      </p>
+
+    </div>
+
+  `;
+
 }
+
+
+function resetChat(){
+
+  if(unsubscribeMessages){
+
+    unsubscribeMessages();
+
+    unsubscribeMessages = null;
+
+  }
+
+  selectedChat = null;
+
+  $("messageInput").disabled = true;
+
+  $("messageInput").value = "";
+
+  $("messageInput").placeholder =
+    "Select someone first...";
+
+  $("headerName").textContent =
+    "Select someone";
+
+  $("personStatus").textContent =
+    "● VIBE";
+
+  $("headerAvatar").textContent =
+    "✦";
+
+  showWelcome();
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
 
 onAuthStateChanged(
   auth,
   async user => {
 
-    // Show the actual app immediately.
-    hideLoading();
+    /*
+      IMPORTANT:
+      This is the ONLY auth callback.
+      The old file had a second broken callback
+      sitting outside the function.
+    */
 
     if(!user){
+
+      currentUser = null;
+
+      hideLoading();
 
       showToast("Please sign in to VIBE.");
 
       setTimeout(() => {
-        window.location.href = "index.html";
-      }, 800);
+
+        window.location.href =
+          "index.html";
+
+      },800);
 
       return;
+
     }
 
+
     currentUser = user;
+
 
     const name =
       user.displayName ||
@@ -1381,14 +1109,22 @@ onAuthStateChanged(
       "VIBE User";
 
 
-    /* PROFILE */
+    /*
+      No Firebase Storage.
+      We simply use the user's existing
+      Firebase Auth photoURL if one exists.
+    */
 
     if(user.photoURL){
 
       $("myAvatar").innerHTML =
-        `<img src="${user.photoURL}" alt="Profile">`;
+        `<img
+          src="${escapeHtml(user.photoURL)}"
+          style="width:100%;height:100%;object-fit:cover;border-radius:14px"
+          alt="Profile"
+        >`;
 
-    } else {
+    }else{
 
       $("myAvatar").textContent =
         name.charAt(0).toUpperCase();
@@ -1396,9 +1132,11 @@ onAuthStateChanged(
     }
 
 
-    /* SAVE USER */
-
     try{
+
+      /*
+        Create/update the user's Firestore profile.
+      */
 
       await setDoc(
 
@@ -1421,44 +1159,42 @@ onAuthStateChanged(
 
       );
 
-    } catch(error){
 
-      console.error(
-        "Could not update user:",
-        error
-      );
+      /*
+        Load both lists.
+      */
 
-      showToast(
-        "Profile connected, but user sync failed."
-      );
+      await Promise.all([
+        loadUsers(),
+        loadGroups()
+      ]);
+
+
+      hideLoading();
 
     }
 
-
-    /* LOAD USERS */
-
-    try{
-
-      await loadUsers();
-
-    } catch(error){
+    catch(error){
 
       console.error(
-        "Could not load users:",
+        "VIBE startup error:",
         error
       );
 
+      hideLoading();
+
       showToast(
-        "Couldn't load users."
+        "VIBE opened, but Firebase could not load your data."
       );
 
     }
 
   },
+
   error => {
 
     console.error(
-      "Firebase authentication error:",
+      "Firebase Auth error:",
       error
     );
 
@@ -1472,247 +1208,150 @@ onAuthStateChanged(
 );
 
 
-/* SAFETY NET
-   Never allow the loading screen to trap the app. */
+/*
+  Absolute loading-screen safety net.
+  Even if Firebase hangs, the UI cannot remain
+  stuck forever.
+*/
 
 setTimeout(() => {
 
-  const loading =
-    $("loading");
+  hideLoading();
 
-  if(
-    loading &&
-    loading.style.display !== "none"
-  ){
-
-    hideLoading();
-
-    showToast(
-      "VIBE loaded."
-    );
-
-  }
-
-},5000);
-
-    currentUser = user;
-
-    const name =
-      user.displayName ||
-      user.email?.split("@")[0] ||
-      "VIBE User";
+},7000);
 
 
-    if(user.photoURL){
-
-      $("myAvatar").innerHTML =
-        `<img src="${user.photoURL}" alt="Profile">`;
-
-    }
-
-    else{
-
-      $("myAvatar").textContent =
-        name.charAt(0).toUpperCase();
-
-    }
-
-
-    try{
-
-      await setDoc(
-
-        doc(
-          db,
-          "users",
-          user.uid
-        ),
-
-        {
-          uid:user.uid,
-          displayName:name,
-          email:user.email || "",
-          photoURL:user.photoURL || "",
-          lastSeen:serverTimestamp(),
-          online:true
-        },
-
-        {merge:true}
-
-      );
-
-
-      await loadUsers();
-      await loadGroups();
-
-    }
-
-    catch(error){
-
-      console.error(error);
-
-      showToast(
-        "Couldn't load VIBE."
-      );
-
-    }
-
-
-    $("loading").style.display =
-      "none";
-
-  }
-);
-
-
-/* USERS */
+/* =========================================================
+   USERS
+========================================================= */
 
 async function loadUsers(){
 
-  try{
+  const snapshot =
+    await getDocs(
 
-    const snapshot =
-      await getDocs(
+      query(
+        collection(db,"users"),
+        limit(100)
+      )
 
-        query(
-          collection(db,"users"),
-          limit(100)
-        )
-
-      );
-
-
-    allUsers = [];
-
-
-    snapshot.forEach(item => {
-
-      const user =
-        item.data();
-
-      if(
-        user.uid !==
-        currentUser.uid
-      ){
-
-        allUsers.push(user);
-
-      }
-
-    });
-
-
-    allUsers.sort(
-      (a,b) =>
-        (a.displayName || "")
-          .localeCompare(
-            b.displayName || ""
-          )
     );
 
 
-    renderSidebar();
+  allUsers = [];
 
-  }
 
-  catch(error){
+  snapshot.forEach(item => {
 
-    console.error(error);
+    const user =
+      item.data();
 
-    $("userList").innerHTML =
-      `<div class="noUsers">
-        Couldn't load users.
-      </div>`;
 
-  }
+    if(
+      currentUser &&
+      user.uid !== currentUser.uid
+    ){
+
+      allUsers.push(user);
+
+    }
+
+  });
+
+
+  allUsers.sort(
+    (a,b) =>
+      (a.displayName || "")
+        .localeCompare(
+          b.displayName || ""
+        )
+  );
+
+
+  renderSidebar();
 
 }
 
 
-/* GROUPS */
+/* =========================================================
+   GROUPS
+========================================================= */
 
 async function loadGroups(){
 
-  try{
+  const groupsQuery =
+    query(
 
-    const groupsQuery =
-      query(
-        collection(db,"conversations"),
-        where(
-          "members",
-          "array-contains",
-          currentUser.uid
-        ),
-        where(
-          "type",
-          "==",
-          "group"
-        )
-      );
+      collection(
+        db,
+        "conversations"
+      ),
 
+      where(
+        "members",
+        "array-contains",
+        currentUser.uid
+      ),
 
-    const snapshot =
-      await getDocs(groupsQuery);
+      where(
+        "type",
+        "==",
+        "group"
+      )
 
-
-    allGroups = [];
-
-
-    snapshot.forEach(item => {
-
-      const group =
-        item.data();
-
-
-      allGroups.push({
-
-        id:item.id,
-
-        ...group
-
-      });
-
-    });
-
-
-    allGroups.sort(
-      (a,b) =>
-        (a.name || "")
-          .localeCompare(
-            b.name || ""
-          )
     );
 
 
-    renderSidebar();
+  const snapshot =
+    await getDocs(groupsQuery);
 
-  }
 
-  catch(error){
+  allGroups = [];
 
-    console.error(error);
 
-    $("groupList").innerHTML =
-      `<div class="noUsers">
-        Couldn't load groups.
-      </div>`;
+  snapshot.forEach(item => {
 
-  }
+    const group =
+      item.data();
+
+
+    allGroups.push({
+
+      id:item.id,
+
+      ...group
+
+    });
+
+  });
+
+
+  allGroups.sort(
+    (a,b) =>
+      (a.name || "")
+        .localeCompare(
+          b.name || ""
+        )
+  );
+
+
+  renderSidebar();
 
 }
 
 
-/* SIDEBAR */
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 function renderSidebar(){
 
   renderUsers();
+
   renderGroups();
 
 }
 
-
-/* USERS SIDEBAR */
 
 function renderUsers(){
 
@@ -1724,27 +1363,30 @@ function renderUsers(){
 
   const search =
     $("searchInput")
-      ?.value
+      .value
       .trim()
-      .toLowerCase() || "";
+      .toLowerCase();
 
 
-  const filteredUsers =
-    allUsers.filter(user =>
-      (
+  const users =
+    allUsers.filter(user => {
+
+      const name =
         user.displayName ||
-        "VIBE User"
-      )
+        "VIBE User";
+
+      return name
         .toLowerCase()
-        .includes(search)
-    );
+        .includes(search);
+
+    });
 
 
-  if(!filteredUsers.length){
+  if(!users.length){
 
     list.innerHTML =
       `<div class="noUsers">
-        No matching users.
+        ${search ? "No matching users." : "No other users yet."}
       </div>`;
 
     return;
@@ -1752,7 +1394,7 @@ function renderUsers(){
   }
 
 
-  filteredUsers.forEach(user => {
+  users.forEach(user => {
 
     const button =
       document.createElement("button");
@@ -1779,22 +1421,29 @@ function renderUsers(){
       "friendAvatar";
 
 
+    /*
+      Only use Auth photoURL.
+      No Storage required.
+    */
+
     if(user.photoURL){
 
       avatar.innerHTML =
-        `<img src="${user.photoURL}" alt="">`;
+        `<img
+          src="${escapeHtml(user.photoURL)}"
+          style="width:100%;height:100%;object-fit:cover;border-radius:14px"
+          alt=""
+        >`;
 
-    }
-
-    else{
+    }else{
 
       avatar.textContent =
         (
           user.displayName ||
           "V"
         )
-          .charAt(0)
-          .toUpperCase();
+        .charAt(0)
+        .toUpperCase();
 
     }
 
@@ -1834,8 +1483,10 @@ function renderUsers(){
     button.appendChild(info);
 
 
-    button.onclick =
-      () => selectDM(user);
+    button.addEventListener(
+      "click",
+      () => selectDM(user)
+    );
 
 
     list.appendChild(button);
@@ -1844,8 +1495,6 @@ function renderUsers(){
 
 }
 
-
-/* GROUP SIDEBAR */
 
 function renderGroups(){
 
@@ -1857,23 +1506,26 @@ function renderGroups(){
 
   const search =
     $("searchInput")
-      ?.value
+      .value
       .trim()
-      .toLowerCase() || "";
+      .toLowerCase();
 
 
-  const filteredGroups =
-    allGroups.filter(group =>
-      (
+  const groups =
+    allGroups.filter(group => {
+
+      const name =
         group.name ||
-        "Unnamed Group"
-      )
+        "Unnamed Group";
+
+      return name
         .toLowerCase()
-        .includes(search)
-    );
+        .includes(search);
+
+    });
 
 
-  if(!filteredGroups.length){
+  if(!groups.length){
 
     list.innerHTML =
       `<div class="noUsers">
@@ -1885,7 +1537,7 @@ function renderGroups(){
   }
 
 
-  filteredGroups.forEach(group => {
+  groups.forEach(group => {
 
     const wrapper =
       document.createElement("div");
@@ -1899,6 +1551,8 @@ function renderGroups(){
 
     button.className =
       "friend";
+
+    button.style.flex = "1";
 
 
     if(
@@ -1947,11 +1601,7 @@ function renderGroups(){
       "friendPreview";
 
     preview.textContent =
-      (
-        group.members?.length ||
-        1
-      ) +
-      " members";
+      `${group.members?.length || 1} members`;
 
 
     info.appendChild(name);
@@ -1961,20 +1611,22 @@ function renderGroups(){
     button.appendChild(info);
 
 
-    button.onclick =
-      () => selectGroup(group);
+    button.addEventListener(
+      "click",
+      () => selectGroup(group)
+    );
 
 
     wrapper.appendChild(button);
 
 
     /*
-      Only the creator sees the delete button.
+      Only creator gets delete button.
     */
 
     if(
-      group.createdBy ===
-      currentUser.uid
+      currentUser &&
+      group.createdBy === currentUser.uid
     ){
 
       const deleteButton =
@@ -1983,21 +1635,23 @@ function renderGroups(){
       deleteButton.className =
         "groupDelete";
 
-      deleteButton.innerHTML =
+      deleteButton.textContent =
         "🗑";
 
       deleteButton.title =
         "Delete group";
 
 
-      deleteButton.onclick =
+      deleteButton.addEventListener(
+        "click",
         event => {
 
           event.stopPropagation();
 
           deleteGroup(group);
 
-        };
+        }
+      );
 
 
       wrapper.appendChild(
@@ -2007,25 +1661,6 @@ function renderGroups(){
     }
 
 
-    /*
-      Put the delete button beside
-      the group instead of inside it.
-    */
-
-    wrapper.style.display =
-      "flex";
-
-    wrapper.style.alignItems =
-      "center";
-
-    wrapper.style.gap =
-      "4px";
-
-
-    button.style.flex =
-      "1";
-
-
     list.appendChild(wrapper);
 
   });
@@ -2033,36 +1668,43 @@ function renderGroups(){
 }
 
 
-/* SEARCH */
+/* =========================================================
+   SEARCH
+========================================================= */
 
 $("searchInput")
   .addEventListener(
     "input",
-    () => {
-
-      renderSidebar();
-
-    }
+    renderSidebar
   );
 
 
-/* DM */
+/* =========================================================
+   DIRECT MESSAGES
+========================================================= */
 
 function selectDM(user){
 
   selectedChat = {
 
     type:"dm",
+
     id:user.uid,
+
     user:user
 
   };
 
 
   updateChatHeader(
-    user.displayName || "VIBE User",
+
+    user.displayName ||
+      "VIBE User",
+
     user.photoURL,
+
     "● VIBE user"
+
   );
 
 
@@ -2070,12 +1712,7 @@ function selectDM(user){
     false;
 
   $("messageInput").placeholder =
-    "Message " +
-    (
-      user.displayName ||
-      "them"
-    ) +
-    "...";
+    `Message ${user.displayName || "them"}...`;
 
 
   renderSidebar();
@@ -2088,16 +1725,18 @@ function selectDM(user){
 function dmConversationId(userId){
 
   return [
-
     currentUser.uid,
     userId
-
-  ].sort().join("_");
+  ]
+  .sort()
+  .join("_");
 
 }
 
 
-/* GROUP */
+/* =========================================================
+   GROUP CHAT
+========================================================= */
 
 function selectGroup(group){
 
@@ -2118,14 +1757,14 @@ function selectGroup(group){
 
 
   updateChatHeader(
+
     group.name ||
-    "Unnamed Group",
+      "Unnamed Group",
+
     null,
-    (
-      group.members?.length ||
-      1
-    ) +
-    " members"
+
+    `${group.members?.length || 1} members`
+
   );
 
 
@@ -2133,12 +1772,7 @@ function selectGroup(group){
     false;
 
   $("messageInput").placeholder =
-    "Message " +
-    (
-      group.name ||
-      "group"
-    ) +
-    "...";
+    `Message ${group.name || "group"}...`;
 
 
   renderSidebar();
@@ -2148,31 +1782,48 @@ function selectGroup(group){
 }
 
 
-/* LOAD CONVERSATION */
+/* =========================================================
+   CONVERSATION LOADING
+========================================================= */
 
-function loadDMConversation(){
+function loadConversation(){
+
+  if(!selectedChat)
+    return;
+
 
   if(unsubscribeMessages){
 
     unsubscribeMessages();
 
-    unsubscribeMessages =
-      null;
+    unsubscribeMessages = null;
 
   }
 
 
-  const id =
-    dmConversationId(
-      selectedChat.user.uid
-    );
+  let conversationId;
+
+
+  if(selectedChat.type === "group"){
+
+    conversationId =
+      selectedChat.id;
+
+  }else{
+
+    conversationId =
+      dmConversationId(
+        selectedChat.user.uid
+      );
+
+  }
 
 
   const messagesRef =
     collection(
       db,
       "conversations",
-      id,
+      conversationId,
       "messages"
     );
 
@@ -2184,62 +1835,16 @@ function loadDMConversation(){
     );
 
 
-  subscribeMessages(messagesQuery);
+  subscribeMessages(
+    messagesQuery
+  );
 
 }
 
 
-function loadGroupConversation(){
-
-  if(unsubscribeMessages){
-
-    unsubscribeMessages();
-
-    unsubscribeMessages =
-      null;
-
-  }
-
-
-  const messagesRef =
-    collection(
-      db,
-      "conversations",
-      selectedChat.id,
-      "messages"
-    );
-
-
-  const messagesQuery =
-    query(
-      messagesRef,
-      orderBy("createdAt","asc"
-    );
-
-
-  subscribeMessages(messagesQuery);
-
-}
-
-
-function loadConversation(){
-
-  if(selectedChat.type === "group"){
-
-    loadGroupConversation();
-
-  }
-
-  else{
-
-    loadDMConversation();
-
-  }
-
-}
-
-
-/* MESSAGES */
+/* =========================================================
+   MESSAGE SUBSCRIPTION
+========================================================= */
 
 function subscribeMessages(messagesQuery){
 
@@ -2288,10 +1893,14 @@ function subscribeMessages(messagesQuery){
           const data =
             item.data();
 
+
           addMessage(
+
             data,
+
             data.senderId ===
               currentUser.uid
+
           );
 
         });
@@ -2300,10 +1909,13 @@ function subscribeMessages(messagesQuery){
 
       error => {
 
-        console.error(error);
+        console.error(
+          "Message listener error:",
+          error
+        );
 
         showToast(
-          "Couldn't load messages."
+          "Couldn't load messages. Check Firestore rules."
         );
 
       }
@@ -2313,7 +1925,9 @@ function subscribeMessages(messagesQuery){
 }
 
 
-/* SEND */
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
 
 async function sendMessage(){
 
@@ -2345,10 +1959,13 @@ async function sendMessage(){
   try{
 
     let conversationId;
+
     let members;
 
 
-    if(selectedChat.type === "group"){
+    if(
+      selectedChat.type === "group"
+    ){
 
       conversationId =
         selectedChat.id;
@@ -2373,6 +1990,10 @@ async function sendMessage(){
     }
 
 
+    /*
+      Create/update conversation.
+    */
+
     await setDoc(
 
       doc(
@@ -2383,7 +2004,7 @@ async function sendMessage(){
 
       {
 
-        members:members,
+        members,
 
         type:
           selectedChat.type,
@@ -2398,6 +2019,10 @@ async function sendMessage(){
     );
 
 
+    /*
+      Add message.
+    */
+
     await addDoc(
 
       collection(
@@ -2409,15 +2034,14 @@ async function sendMessage(){
 
       {
 
-        text:text,
+        text,
 
         senderId:
           currentUser.uid,
 
         senderName:
           currentUser.displayName ||
-          currentUser.email
-            ?.split("@")[0] ||
+          currentUser.email?.split("@")[0] ||
           "VIBE User",
 
         createdAt:
@@ -2439,7 +2063,10 @@ async function sendMessage(){
 
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Send message error:",
+      error
+    );
 
     showToast(
       "Message couldn't send."
@@ -2450,7 +2077,9 @@ async function sendMessage(){
 }
 
 
-/* MESSAGE UI */
+/* =========================================================
+   MESSAGE UI
+========================================================= */
 
 function addMessage(data,mine){
 
@@ -2514,8 +2143,7 @@ function addMessage(data,mine){
 
   if(
     timestamp &&
-    typeof timestamp.toDate ===
-    "function"
+    typeof timestamp.toDate === "function"
   ){
 
     timestamp =
@@ -2556,7 +2184,9 @@ function addMessage(data,mine){
 }
 
 
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 
 function updateChatHeader(
   name,
@@ -2574,11 +2204,13 @@ function updateChatHeader(
   if(photoURL){
 
     $("headerAvatar").innerHTML =
-      `<img src="${photoURL}" alt="">`;
+      `<img
+        src="${escapeHtml(photoURL)}"
+        style="width:100%;height:100%;object-fit:cover;border-radius:14px"
+        alt=""
+      >`;
 
-  }
-
-  else{
+  }else{
 
     $("headerAvatar").textContent =
       name
@@ -2590,7 +2222,9 @@ function updateChatHeader(
 }
 
 
-/* GROUP MODAL */
+/* =========================================================
+   GROUP MODAL
+========================================================= */
 
 function openGroupModal(){
 
@@ -2663,19 +2297,21 @@ function renderGroupUsers(){
     if(user.photoURL){
 
       avatar.innerHTML =
-        `<img src="${user.photoURL}" alt="">`;
+        `<img
+          src="${escapeHtml(user.photoURL)}"
+          style="width:100%;height:100%;object-fit:cover;border-radius:11px"
+          alt=""
+        >`;
 
-    }
-
-    else{
+    }else{
 
       avatar.textContent =
         (
           user.displayName ||
           "V"
         )
-          .charAt(0)
-          .toUpperCase();
+        .charAt(0)
+        .toUpperCase();
 
     }
 
@@ -2692,7 +2328,6 @@ function renderGroupUsers(){
     label.appendChild(avatar);
     label.appendChild(name);
 
-
     list.appendChild(label);
 
   });
@@ -2700,9 +2335,22 @@ function renderGroupUsers(){
 }
 
 
-/* CREATE GROUP */
+/* =========================================================
+   CREATE GROUP
+========================================================= */
 
 async function createGroup(){
+
+  if(!currentUser){
+
+    showToast(
+      "You aren't signed in."
+    );
+
+    return;
+
+  }
+
 
   const name =
     $("groupNameInput")
@@ -2723,10 +2371,9 @@ async function createGroup(){
 
   const checked =
     [
-      ...document
-        .querySelectorAll(
-          "#groupUserList input:checked"
-        )
+      ...document.querySelectorAll(
+        "#groupUserList input:checked"
+      )
     ];
 
 
@@ -2748,21 +2395,29 @@ async function createGroup(){
     );
 
 
-  selectedMembers.push(
-    currentUser.uid
-  );
+  if(
+    !selectedMembers.includes(
+      currentUser.uid
+    )
+  ){
 
-
-  const groupRef =
-    doc(
-      collection(
-        db,
-        "conversations"
-      )
+    selectedMembers.push(
+      currentUser.uid
     );
+
+  }
 
 
   try{
+
+    const groupRef =
+      doc(
+        collection(
+          db,
+          "conversations"
+        )
+      );
+
 
     await setDoc(
 
@@ -2772,9 +2427,10 @@ async function createGroup(){
 
         type:"group",
 
-        name:name,
+        name,
 
-        members:selectedMembers,
+        members:
+          selectedMembers,
 
         createdBy:
           currentUser.uid,
@@ -2792,13 +2448,15 @@ async function createGroup(){
 
     const newGroup = {
 
-      id:groupRef.id,
+      id:
+        groupRef.id,
 
       type:"group",
 
-      name:name,
+      name,
 
-      members:selectedMembers,
+      members:
+        selectedMembers,
 
       createdBy:
         currentUser.uid
@@ -2811,33 +2469,29 @@ async function createGroup(){
     );
 
 
-    allGroups.sort(
-      (a,b) =>
-        (a.name || "")
-          .localeCompare(
-            b.name || ""
-          )
-    );
-
-
     selectedChat = {
 
       type:"group",
 
-      id:groupRef.id,
+      id:
+        groupRef.id,
 
-      name:name,
+      name,
 
-      members:selectedMembers
+      members:
+        selectedMembers
 
     };
 
 
     updateChatHeader(
+
       name,
+
       null,
-      selectedMembers.length +
-      " members"
+
+      `${selectedMembers.length} members`
+
     );
 
 
@@ -2845,14 +2499,14 @@ async function createGroup(){
       false;
 
     $("messageInput").placeholder =
-      "Message " + name + "...";
+      `Message ${name}...`;
 
 
     closeGroupModal();
 
     renderSidebar();
 
-    loadGroupConversation();
+    loadConversation();
 
     showToast(
       "Group created ✦"
@@ -2862,7 +2516,10 @@ async function createGroup(){
 
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Create group error:",
+      error
+    );
 
     showToast(
       "Couldn't create group."
@@ -2873,20 +2530,15 @@ async function createGroup(){
 }
 
 
-/* DELETE GROUP */
+/* =========================================================
+   DELETE GROUP
+========================================================= */
 
 async function deleteGroup(group){
 
-  if(!currentUser){
-
+  if(!currentUser)
     return;
 
-  }
-
-
-  /*
-    Only the group creator can delete it.
-  */
 
   if(
     group.createdBy !==
@@ -2902,22 +2554,14 @@ async function deleteGroup(group){
   }
 
 
-  const groupName =
-    group.name ||
-    "this group";
-
-
   const confirmed =
     window.confirm(
-      `Delete "${groupName}"?\n\nThis will remove the group and its messages for everyone.`
+      `Delete "${group.name || "this group"}"?\n\nThis will remove the group and its messages for everyone.`
     );
 
 
-  if(!confirmed){
-
+  if(!confirmed)
     return;
-
-  }
 
 
   try{
@@ -2927,77 +2571,19 @@ async function deleteGroup(group){
     );
 
 
-    /*
-      Stop listening to the group's messages
-      if it is currently open.
-    */
-
     if(
       selectedChat &&
       selectedChat.type === "group" &&
       selectedChat.id === group.id
     ){
 
-      if(unsubscribeMessages){
-
-        unsubscribeMessages();
-
-        unsubscribeMessages =
-          null;
-
-      }
-
-      selectedChat =
-        null;
-
-
-      $("messageInput").disabled =
-        true;
-
-      $("messageInput").value =
-        "";
-
-      $("messageInput").placeholder =
-        "Select someone first...";
-
-
-      $("headerName").textContent =
-        "Select someone";
-
-      $("personStatus").textContent =
-        "● VIBE";
-
-      $("headerAvatar").textContent =
-        "✦";
-
-
-      $("messages").innerHTML = `
-
-        <div class="welcome">
-
-          <div class="welcomeIcon">
-            ✦
-          </div>
-
-          <strong>
-            Welcome to VIBE
-          </strong>
-
-          <p>
-            Select someone or create a group.
-          </p>
-
-        </div>
-
-      `;
+      resetChat();
 
     }
 
 
     /*
-      Delete all messages inside the group first.
-      Firestore subcollections are not automatically
-      removed when their parent document is deleted.
+      Delete messages in batches.
     */
 
     const messagesSnapshot =
@@ -3013,16 +2599,10 @@ async function deleteGroup(group){
       );
 
 
-    /*
-      Firestore batches can contain up to 500 writes.
-      Delete in chunks so larger groups work too.
-    */
-
     let batch =
       writeBatch(db);
 
-    let operationCount =
-      0;
+    let count = 0;
 
 
     for(
@@ -3034,25 +2614,24 @@ async function deleteGroup(group){
         messageDoc.ref
       );
 
-      operationCount++;
+      count++;
 
 
-      if(operationCount >= 450){
+      if(count >= 450){
 
         await batch.commit();
 
         batch =
           writeBatch(db);
 
-        operationCount =
-          0;
+        count = 0;
 
       }
 
     }
 
 
-    if(operationCount > 0){
+    if(count > 0){
 
       await batch.commit();
 
@@ -3060,7 +2639,7 @@ async function deleteGroup(group){
 
 
     /*
-      Finally delete the group itself.
+      Delete group document.
     */
 
     await deleteDoc(
@@ -3074,11 +2653,6 @@ async function deleteGroup(group){
     );
 
 
-    /*
-      Remove it locally so the sidebar
-      updates immediately.
-    */
-
     allGroups =
       allGroups.filter(
         item =>
@@ -3088,7 +2662,6 @@ async function deleteGroup(group){
 
     renderSidebar();
 
-
     showToast(
       "Group deleted ✦"
     );
@@ -3097,7 +2670,10 @@ async function deleteGroup(group){
 
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Delete group error:",
+      error
+    );
 
     showToast(
       "Couldn't delete the group."
@@ -3108,7 +2684,9 @@ async function deleteGroup(group){
 }
 
 
-/* TIME */
+/* =========================================================
+   TIME
+========================================================= */
 
 function formatTime(time){
 
@@ -3124,7 +2702,9 @@ function formatTime(time){
 }
 
 
-/* EMOJI */
+/* =========================================================
+   EMOJI
+========================================================= */
 
 function addEmoji(){
 
@@ -3136,15 +2716,70 @@ function addEmoji(){
     return;
 
 
-  input.value +=
-    " 😊";
+  input.value += " 😊";
 
   input.focus();
 
 }
 
 
-/* ENTER */
+/* =========================================================
+   VIDEO
+========================================================= */
+
+function startVideo(){
+
+  window.location.href =
+    "video.html";
+
+}
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+$("sendBtn")
+  .addEventListener(
+    "click",
+    sendMessage
+  );
+
+
+$("emojiBtn")
+  .addEventListener(
+    "click",
+    addEmoji
+  );
+
+
+$("videoBtn")
+  .addEventListener(
+    "click",
+    startVideo
+  );
+
+
+$("createGroupBtn")
+  .addEventListener(
+    "click",
+    openGroupModal
+  );
+
+
+$("cancelGroupBtn")
+  .addEventListener(
+    "click",
+    closeGroupModal
+  );
+
+
+$("confirmGroupBtn")
+  .addEventListener(
+    "click",
+    createGroup
+  );
+
 
 $("messageInput")
   .addEventListener(
@@ -3166,146 +2801,25 @@ $("messageInput")
   );
 
 
-/* VIDEO */
+/* =========================================================
+   BASIC HTML ESCAPING
+========================================================= */
 
-function startVideo(){
+function escapeHtml(value){
 
-  window.location.href =
-    "video.html";
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-/* PROFILE PICTURE */
-
-$("myAvatar").addEventListener(
-  "click",
-  () => {
-
-    $("pfpInput").click();
-
-  }
-);
-
-
-$("pfpInput").addEventListener(
-  "change",
-  async event => {
-
-    const file =
-      event.target.files[0];
-
-
-    if(
-      !file ||
-      !currentUser
-    )
-      return;
-
-
-    if(
-      file.size >
-      5 * 1024 * 1024
-    ){
-
-      showToast(
-        "PFP must be under 5 MB."
-      );
-
-      return;
-
-    }
-
-
-    if(
-      ![
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ].includes(file.type)
-    ){
-
-      showToast(
-        "Please choose JPG, PNG, or WebP."
-      );
-
-      return;
-
-    }
-
-
-    showToast(
-      "Uploading PFP..."
-    );
-
-
-    try{
-
-      const storageRef =
-        ref(
-          storage,
-          "profilePictures/" +
-          currentUser.uid
-        );
-
-
-      await uploadBytes(
-        storageRef,
-        file
-      );
-
-
-      const photoURL =
-        await getDownloadURL(
-          storageRef
-        );
-
-
-      await setDoc(
-
-        doc(
-          db,
-          "users",
-          currentUser.uid
-        ),
-
-        {
-          photoURL:photoURL
-        },
-
-        {merge:true}
-
-      );
-
-
-      $("myAvatar").innerHTML =
-        `<img src="${photoURL}" alt="Profile">`;
-
-
-      showToast(
-        "Profile picture updated ✦"
-      );
-
-    }
-
-    catch(error){
-
-      console.error(error);
-
-      showToast(
-        "Couldn't upload PFP."
-      );
-
-    }
-
-
-    event.target.value = "";
-
-  }
-);
-
-
-/* EXPOSE */
+/* =========================================================
+   EXPOSE BUTTON FUNCTIONS
+========================================================= */
 
 window.sendMessage =
   sendMessage;
