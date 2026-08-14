@@ -864,6 +864,10 @@ let currentUser = null;
 let selectedUser = null;
 let unsubscribeMessages = null;
 
+// Friends
+let friendIds = new Set();
+let pendingSent = new Set();
+let pendingReceived = [];
 const $ = id =>
   document.getElementById(id);
 
