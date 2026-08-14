@@ -1173,6 +1173,20 @@ function selectUser(user){
     "VIBE User";
 
 
+ if (user.photoURL) {
+  $("headerAvatar").innerHTML = `
+    <img
+      src="${user.photoURL}"
+      alt=""
+      style="
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:13px;
+      "
+    >
+  `;
+} else {
   $("headerAvatar").textContent =
     (
       user.displayName ||
@@ -1180,7 +1194,7 @@ function selectUser(user){
     )
       .charAt(0)
       .toUpperCase();
-
+}
 
   $("personStatus").textContent =
     "● VIBE user";
