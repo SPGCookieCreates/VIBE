@@ -9,9 +9,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 :root{
   --purple:#8466ff;
@@ -44,9 +42,7 @@ body:before{
   mask-image:linear-gradient(to bottom,#000,transparent);
 }
 
-button,input{
-  font-family:inherit;
-}
+button,input{font-family:inherit}
 
 button{
   cursor:pointer;
@@ -105,6 +101,7 @@ nav{
   place-items:center;
   font-weight:800;
   background:linear-gradient(135deg,var(--purple),var(--cyan));
+  overflow:hidden;
 }
 
 /* MAIN */
@@ -133,6 +130,22 @@ nav{
   letter-spacing:2px;
 }
 
+.groupCreate{
+  width:100%;
+  height:42px;
+  margin-bottom:12px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#8466ff30,#35dcff20);
+  border:1px solid #8466ff35;
+  color:#b9adff;
+  font-size:12px;
+  font-weight:700;
+}
+
+.groupCreate:hover{
+  background:linear-gradient(135deg,#8466ff45,#35dcff30);
+}
+
 .search{
   width:100%;
   height:42px;
@@ -148,7 +161,6 @@ nav{
 
 .search:focus{
   border-color:#8466ff80;
-  box-shadow:0 0 0 3px #8466ff12;
 }
 
 .search::placeholder{
@@ -179,28 +191,6 @@ nav{
   border-color:#ffffff10;
 }
 
-.addFriendBtn{
-  margin-left:auto;
-  flex-shrink:0;
-  width:32px;
-  height:32px;
-  border-radius:10px;
-  background:#8466ff22;
-  border:1px solid #8466ff35;
-  color:#a995ff;
-  font-size:17px;
-}
-
-.addFriendBtn:hover{
-  background:#8466ff40;
-  transform:scale(1.05);
-}
-
-.addFriendBtn:disabled{
-  opacity:.6;
-  cursor:default;
-}
-  
 .friend.active{
   background:#8466ff16;
   border-color:#8466ff35;
@@ -216,17 +206,13 @@ nav{
   background:linear-gradient(135deg,#7659ff,#2fdfff);
   font-weight:800;
   position:relative;
+  overflow:hidden;
 }
 
-.dot{
-  position:absolute;
-  width:10px;
-  height:10px;
-  right:-2px;
-  bottom:-2px;
-  border-radius:50%;
-  background:#555;
-  border:2px solid #111;
+.friendAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .friendInfo{
@@ -252,6 +238,14 @@ nav{
   text-align:center;
   color:#666;
   font-size:11px;
+}
+
+/* GROUP BADGE */
+
+.groupBadge{
+  margin-left:auto;
+  color:#9d8cff;
+  font-size:10px;
 }
 
 /* CHAT */
@@ -289,6 +283,13 @@ nav{
   place-items:center;
   background:linear-gradient(135deg,var(--purple),var(--cyan));
   font-weight:800;
+  overflow:hidden;
+}
+
+.personAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .personName{
@@ -314,7 +315,6 @@ nav{
   background:#ffffff0b;
   border:1px solid #ffffff12;
   font-size:17px;
-  transition:.2s;
 }
 
 .headerBtn:hover{
@@ -362,18 +362,6 @@ nav{
 .messageRow{
   display:flex;
   margin:8px 0;
-  animation:messageIn .25s ease;
-}
-
-@keyframes messageIn{
-  from{
-    opacity:0;
-    transform:translateY(8px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
 }
 
 .messageRow.mine{
@@ -393,13 +381,19 @@ nav{
 
 .mine .bubble{
   background:linear-gradient(135deg,#7154eccc,#387de0cc);
-  border-color:#ffffff12;
   color:#fff;
   border-bottom-right-radius:5px;
 }
 
 .messageRow:not(.mine) .bubble{
   border-bottom-left-radius:5px;
+}
+
+.senderName{
+  color:#a99cff;
+  font-size:10px;
+  font-weight:700;
+  margin-bottom:4px;
 }
 
 .time{
@@ -424,7 +418,6 @@ nav{
   background:#ffffff08;
   border:1px solid #ffffff12;
   backdrop-filter:blur(25px);
-  box-shadow:0 15px 50px #0008;
 }
 
 .messageInput{
@@ -457,31 +450,121 @@ nav{
   border-radius:14px;
   background:linear-gradient(135deg,var(--purple),var(--cyan));
   font-size:17px;
-  box-shadow:0 5px 25px #765aff35;
-  transition:.2s;
 }
 
-.send:hover{
-  transform:translateY(-2px);
-}
+/* MODAL */
 
-.emptyChat{
-  height:100%;
-  display:grid;
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
   place-items:center;
-  text-align:center;
-  color:#666;
+  background:#0009;
+  backdrop-filter:blur(12px);
+  z-index:150;
+  padding:20px;
 }
 
-.emptyChatIcon{
-  font-size:45px;
+.modal.show{
+  display:grid;
+}
+
+.modalBox{
+  width:min(480px,100%);
+  max-height:85vh;
+  overflow:auto;
+  padding:25px;
+  border-radius:25px;
+  background:#111119f5;
+  border:1px solid #ffffff15;
+  box-shadow:0 30px 100px #000;
+}
+
+.modalTitle{
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.modalSub{
+  color:#777;
+  font-size:11px;
+  margin-bottom:20px;
+}
+
+.groupNameInput{
+  width:100%;
+  height:48px;
+  padding:0 14px;
+  border-radius:13px;
+  border:1px solid #ffffff12;
+  background:#ffffff08;
+  color:white;
+  outline:none;
   margin-bottom:15px;
 }
 
-.emptyChat strong{
-  color:#ddd;
-  display:block;
-  margin-bottom:7px;
+.selectList{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  max-height:300px;
+  overflow:auto;
+}
+
+.selectUser{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-radius:13px;
+  background:#ffffff05;
+  border:1px solid transparent;
+}
+
+.selectUser:hover{
+  background:#ffffff0b;
+}
+
+.selectUser input{
+  accent-color:#8466ff;
+}
+
+.selectAvatar{
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  font-size:12px;
+  font-weight:800;
+  overflow:hidden;
+}
+
+.selectAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.modalButtons{
+  display:flex;
+  gap:8px;
+  margin-top:20px;
+}
+
+.modalBtn{
+  flex:1;
+  height:45px;
+  border-radius:13px;
+  background:#ffffff0b;
+  border:1px solid #ffffff12;
+}
+
+.modalBtn.primary{
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  font-weight:800;
 }
 
 /* TOAST */
@@ -500,7 +583,7 @@ nav{
   backdrop-filter:blur(20px);
   font-size:11px;
   transition:.25s;
-  z-index:100;
+  z-index:200;
 }
 
 .toast.show{
@@ -516,7 +599,7 @@ nav{
   display:grid;
   place-items:center;
   background:#07070cf5;
-  z-index:200;
+  z-index:300;
   font-size:14px;
   font-weight:700;
 }
@@ -535,42 +618,21 @@ nav{
   to{transform:rotate(360deg)}
 }
 
-/* MOBILE */
-
 @media(max-width:700px){
 
-  nav{
-    padding:0 15px;
-  }
+  nav{padding:0 15px}
 
-  .main{
-    grid-template-columns:1fr;
-  }
+  .main{grid-template-columns:1fr}
 
-  .sidebar{
-    display:none;
-  }
+  .sidebar{display:none}
 
-  .messages{
-    padding:25px 15px;
-  }
+  .messages{padding:25px 15px}
 
-  .composer{
-    padding:10px 10px 15px;
-  }
+  .composer{padding:10px 10px 15px}
 
-  .chatHeader{
-    padding:0 15px;
-  }
+  .chatHeader{padding:0 15px}
 
-  .headerBtn{
-    width:38px;
-    height:38px;
-  }
-
-  .bubble{
-    max-width:85%;
-  }
+  .bubble{max-width:85%}
 }
 </style>
 </head>
@@ -584,198 +646,210 @@ nav{
   </div>
 </div>
 
-
 <div class="app">
 
 <nav>
-
   <div class="logo">
     VIBE<span>✦</span>
   </div>
 
   <div class="navRight">
+    <div class="online">● ONLINE</div>
 
-    <div class="online">
-      ● ONLINE
-    </div>
+    <div class="avatar" id="myAvatar">?</div>
 
-    <div
-  class="avatar"
-  id="myAvatar"
-  title="Change profile picture"
->
-  ?
-</div>
-
-<input
-  type="file"
-  id="pfpInput"
-  accept="image/png,image/jpeg,image/webp"
-  style="display:none"
->
-
+    <input
+      type="file"
+      id="pfpInput"
+      accept="image/png,image/jpeg,image/webp"
+      style="display:none"
+    >
   </div>
-
 </nav>
 
 
 <div class="main">
 
-  <!-- SIDEBAR -->
+<aside class="sidebar">
 
-  <aside class="sidebar">
+  <div class="sideTitle">CHATS</div>
 
-<div class="sideTitle">
-  FRIENDS
-</div>
+  <button
+    class="groupCreate"
+    onclick="openGroupModal()"
+  >
+    ＋ Create Group
+  </button>
 
-<div id="requestsBox" style="display:none;margin-bottom:15px;">
-  <div class="sideTitle" style="padding:0 12px 8px;">
-    🔔 REQUESTS
+  <input
+    class="search"
+    id="searchInput"
+    placeholder="Search VIBE..."
+    autocomplete="off"
+  >
+
+  <div
+    class="userList"
+    id="userList"
+  ></div>
+
+</aside>
+
+
+<main class="chat">
+
+<header class="chatHeader">
+
+  <div class="person">
+
+    <div
+      class="personAvatar"
+      id="headerAvatar"
+    >✦</div>
+
+    <div>
+
+      <div
+        class="personName"
+        id="headerName"
+      >
+        Select someone
+      </div>
+
+      <div
+        class="personStatus"
+        id="personStatus"
+      >
+        ● VIBE
+      </div>
+
+    </div>
+
   </div>
 
-  <div id="requestList"></div>
+
+  <div class="headerButtons">
+
+    <button
+      class="headerBtn"
+      onclick="startVideo()"
+      title="Video call"
+    >
+      📹
+    </button>
+
+  </div>
+
+</header>
+
+
+<div
+  class="messages"
+  id="messages"
+>
+
+  <div class="emptyChat">
+
+    <div>
+
+      <div class="emptyChatIcon">✦</div>
+
+      <strong>Welcome to VIBE</strong>
+
+      <span>
+        Select someone or create a group.
+      </span>
+
+    </div>
+
+  </div>
+
 </div>
 
-<div class="sideTitle">
-  PEOPLE
-</div>
+
+<div class="composer">
+
+  <div class="composerBox">
+
+    <button
+      class="emoji"
+      onclick="addEmoji()"
+    >
+      😊
+    </button>
 
     <input
-      class="search"
-      id="searchInput"
-      placeholder="Search VIBE..."
+      class="messageInput"
+      id="messageInput"
+      placeholder="Select someone first..."
       autocomplete="off"
+      disabled
     >
 
-    <div
-      class="userList"
-      id="userList"
-    ></div>
-
-  </aside>
-
-
-  <!-- CHAT -->
-
-  <main class="chat">
-
-    <header class="chatHeader">
-
-      <div class="person">
-
-        <div
-          class="personAvatar"
-          id="headerAvatar"
-        >
-          ✦
-        </div>
-
-        <div>
-
-          <div
-            class="personName"
-            id="headerName"
-          >
-            Select someone
-          </div>
-
-          <div
-            class="personStatus"
-            id="personStatus"
-          >
-            ● VIBE
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="headerButtons">
-
-        <button
-          class="headerBtn"
-          onclick="startVideo()"
-          title="Video call"
-        >
-          📹
-        </button>
-
-        <button
-          class="headerBtn"
-          onclick="clearMessages()"
-          title="Clear chat"
-        >
-          ⋯
-        </button>
-
-      </div>
-
-    </header>
-
-
-    <div
-      class="messages"
-      id="messages"
+    <button
+      class="send"
+      onclick="sendMessage()"
     >
+      ➤
+    </button>
 
-      <div class="emptyChat">
-
-        <div>
-
-          <div class="emptyChatIcon">
-            ✦
-          </div>
-
-          <strong>
-            Welcome to VIBE
-          </strong>
-
-          <span>
-            Search for someone to start a DM.
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="composer">
-
-      <div class="composerBox">
-
-        <button
-          class="emoji"
-          onclick="addEmoji()"
-        >
-          😊
-        </button>
-
-        <input
-          class="messageInput"
-          id="messageInput"
-          placeholder="Select someone first..."
-          autocomplete="off"
-          disabled
-        >
-
-        <button
-          class="send"
-          onclick="sendMessage()"
-        >
-          ➤
-        </button>
-
-      </div>
-
-    </div>
-
-  </main>
+  </div>
 
 </div>
+
+</main>
+</div>
+</div>
+
+
+<!-- GROUP MODAL -->
+
+<div
+  class="modal"
+  id="groupModal"
+>
+
+  <div class="modalBox">
+
+    <div class="modalTitle">
+      Create a group ✦
+    </div>
+
+    <div class="modalSub">
+      Give your group a name and choose who gets invited.
+    </div>
+
+    <input
+      class="groupNameInput"
+      id="groupNameInput"
+      placeholder="Group name..."
+      maxlength="40"
+    >
+
+    <div
+      class="selectList"
+      id="groupUserList"
+    ></div>
+
+    <div class="modalButtons">
+
+      <button
+        class="modalBtn"
+        onclick="closeGroupModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="modalBtn primary"
+        onclick="createGroup()"
+      >
+        Create Group
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -813,14 +887,19 @@ import {
   orderBy,
   onSnapshot,
   getDocs,
-  getDoc,
-  deleteDoc,
   serverTimestamp,
   limit
 } from
 "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-  
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
+
 
 const firebaseConfig = {
 
@@ -854,6 +933,8 @@ const auth =
 const db =
   getFirestore(firebaseApp);
 
+const storage =
+  getStorage(firebaseApp);
 
 
 /* ==========================================
@@ -861,21 +942,18 @@ const db =
 ========================================== */
 
 let currentUser = null;
-let selectedUser = null;
+let selectedChat = null;
 let unsubscribeMessages = null;
+let allUsers = [];
 
-// Friends
-let friendIds = new Set();
-let pendingSent = new Set();
-let pendingReceived = [];
+
+/* ==========================================
+   HELPERS
+========================================== */
 
 const $ = id =>
   document.getElementById(id);
 
-
-/* ==========================================
-   TOAST
-========================================== */
 
 function showToast(text){
 
@@ -886,59 +964,11 @@ function showToast(text){
   el.classList.add("show");
 
   setTimeout(() => {
-
     el.classList.remove("show");
-
   },2200);
 
 }
-async function sendFriendRequest(user){
 
-  if(!currentUser || !user){
-    return;
-  }
-
-  if(friendIds.has(user.uid)){
-    showToast("Already friends ✦");
-    return;
-  }
-
-  if(pendingSent.has(user.uid)){
-    showToast("Request already sent.");
-    return;
-  }
-
-  try{
-
-    await setDoc(
-      doc(
-        db,
-        "friendRequests",
-        currentUser.uid + "_" + user.uid
-      ),
-      {
-        from: currentUser.uid,
-        to: user.uid,
-        status: "pending",
-        createdAt: serverTimestamp()
-      }
-    );
-
-    pendingSent.add(user.uid);
-
-    showToast("Friend request sent ✦");
-
-    loadUsers();
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast("Couldn't send friend request.");
-
-  }
-
-}
 
 /* ==========================================
    AUTH
@@ -964,6 +994,7 @@ onAuthStateChanged(
       user.email?.split("@")[0] ||
       "VIBE User";
 
+
     $("myAvatar").textContent =
       name.charAt(0).toUpperCase();
 
@@ -979,28 +1010,21 @@ onAuthStateChanged(
         ),
 
         {
-
           uid:user.uid,
-
           displayName:name,
-
           email:user.email || "",
-
           photoURL:user.photoURL || "",
-
           lastSeen:serverTimestamp(),
-
           online:true
-
         },
 
-        {
-          merge:true
-        }
+        {merge:true}
 
       );
 
-     await loadUsers();
+
+      await loadUsers();
+
     }
 
     catch(error){
@@ -1008,7 +1032,7 @@ onAuthStateChanged(
       console.error(error);
 
       showToast(
-        "Couldn't load VIBE users."
+        "Couldn't load VIBE."
       );
 
     }
@@ -1027,13 +1051,6 @@ onAuthStateChanged(
 
 async function loadUsers(){
 
-  const userList =
-    $("userList");
-
-  userList.innerHTML =
-    `<div class="noUsers">Loading people...</div>`;
-
-
   try{
 
     const snapshot =
@@ -1041,36 +1058,33 @@ async function loadUsers(){
 
         query(
           collection(db,"users"),
-          limit(50)
+          limit(100)
         )
 
       );
 
 
-    const users = [];
+    allUsers = [];
 
 
-    snapshot.forEach(
-      item => {
+    snapshot.forEach(item => {
 
-        const user =
-          item.data();
+      const user =
+        item.data();
 
+      if(
+        user.uid !==
+        currentUser.uid
+      ){
 
-        if(
-          user.uid !==
-          currentUser.uid
-        ){
-
-          users.push(user);
-
-        }
+        allUsers.push(user);
 
       }
-    );
+
+    });
 
 
-    users.sort(
+    allUsers.sort(
       (a,b) =>
         (a.displayName || "")
           .localeCompare(
@@ -1079,34 +1093,7 @@ async function loadUsers(){
     );
 
 
-    renderUsers(users);
-
-
-    $("searchInput")
-      .addEventListener(
-        "input",
-        () => {
-
-          const term =
-            $("searchInput")
-              .value
-              .trim()
-              .toLowerCase();
-
-
-          const filtered =
-            users.filter(
-              user =>
-                (user.displayName || "")
-                  .toLowerCase()
-                  .includes(term)
-            );
-
-
-          renderUsers(filtered);
-
-        }
-      );
+    renderSidebar();
 
   }
 
@@ -1114,7 +1101,7 @@ async function loadUsers(){
 
     console.error(error);
 
-    userList.innerHTML =
+    $("userList").innerHTML =
       `<div class="noUsers">
         Couldn't load users.
       </div>`;
@@ -1125,10 +1112,10 @@ async function loadUsers(){
 
 
 /* ==========================================
-   RENDER USERS
+   SIDEBAR
 ========================================== */
 
-function renderUsers(users){
+function renderSidebar(){
 
   const list =
     $("userList");
@@ -1136,11 +1123,11 @@ function renderUsers(users){
   list.innerHTML = "";
 
 
-  if(!users.length){
+  if(!allUsers.length){
 
     list.innerHTML =
       `<div class="noUsers">
-        No VIBE users found.
+        No other VIBE users yet.
       </div>`;
 
     return;
@@ -1148,212 +1135,121 @@ function renderUsers(users){
   }
 
 
-  users.forEach(
-    user => {
+  allUsers.forEach(user => {
 
-      const button =
-        document.createElement("button");
+    const button =
+      document.createElement("button");
 
-      button.className =
-        "friend";
-
-
-      if(
-        selectedUser &&
-        selectedUser.uid === user.uid
-      ){
-
-        button.classList.add(
-          "active"
-        );
-
-      }
+    button.className =
+      "friend";
 
 
-      const avatar =
-        document.createElement("div");
+    if(
+      selectedChat &&
+      selectedChat.id ===
+      user.uid
+    ){
 
-      avatar.className =
-        "friendAvatar";
-
-
-     if (user.photoURL) {
-  avatar.innerHTML = `
-    <img
-      src="${user.photoURL}"
-      alt=""
-      style="
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        border-radius:14px;
-      "
-    >
-  `;
-} else {
-  avatar.textContent =
-    (
-      user.displayName ||
-      "V"
-    )
-      .charAt(0)
-      .toUpperCase();
-}
-
-
-      const dot =
-        document.createElement("div");
-
-      dot.className =
-        "dot";
-
-      avatar.appendChild(dot);
-
-
-      const info =
-        document.createElement("div");
-
-      info.className =
-        "friendInfo";
-
-
-      const name =
-        document.createElement("div");
-
-      name.className =
-        "friendName";
-
-      name.textContent =
-        user.displayName ||
-        "VIBE User";
-
-
-      const preview =
-        document.createElement("div");
-
-      preview.className =
-        "friendPreview";
-
-      preview.textContent =
-        "Start a conversation...";
-
-
-      info.appendChild(name);
-      info.appendChild(preview);
-
- button.appendChild(avatar);
-button.appendChild(info);
-
-
-/* Friend button */
-
-const addButton =
-  document.createElement("button");
-
-addButton.className =
-  "addFriendBtn";
-
-if(friendIds.has(user.uid)){
-
-  addButton.textContent =
-    "✓";
-
-  addButton.title =
-    "Friends";
-
-  addButton.disabled =
-    true;
-
-}
-
-else if(pendingSent.has(user.uid)){
-
-  addButton.textContent =
-    "✓";
-
-  addButton.title =
-    "Request sent";
-
-  addButton.disabled =
-    true;
-
-}
-
-else{
-
-  addButton.textContent =
-    "+";
-
-  addButton.title =
-    "Add friend";
-
-  addButton.onclick =
-    event => {
-
-      event.stopPropagation();
-
-      sendFriendRequest(user);
-
-    };
-
-}
-
-
-button.appendChild(addButton);
-
-
-button.onclick =
-  () => selectUser(user);
-
-
-      list.appendChild(button);
+      button.classList.add("active");
 
     }
-  );
+
+
+    const avatar =
+      document.createElement("div");
+
+    avatar.className =
+      "friendAvatar";
+
+
+    if(user.photoURL){
+
+      avatar.innerHTML =
+        `<img src="${user.photoURL}" alt="">`;
+
+    }
+
+    else{
+
+      avatar.textContent =
+        (
+          user.displayName ||
+          "V"
+        )
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "friendInfo";
+
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "friendName";
+
+    name.textContent =
+      user.displayName ||
+      "VIBE User";
+
+
+    const preview =
+      document.createElement("div");
+
+    preview.className =
+      "friendPreview";
+
+    preview.textContent =
+      "Direct message";
+
+
+    info.appendChild(name);
+    info.appendChild(preview);
+
+    button.appendChild(avatar);
+    button.appendChild(info);
+
+
+    button.onclick =
+      () => selectDM(user);
+
+
+    list.appendChild(button);
+
+  });
 
 }
 
 
 /* ==========================================
-   SELECT USER
+   SELECT DM
 ========================================== */
 
-function selectUser(user){
+function selectDM(user){
 
-  selectedUser =
-    user;
+  selectedChat = {
+
+    type:"dm",
+
+    id:user.uid,
+
+    user:user
+
+  };
 
 
-  $("headerName").textContent =
-    user.displayName ||
-    "VIBE User";
-
-
- if (user.photoURL) {
-  $("headerAvatar").innerHTML = `
-    <img
-      src="${user.photoURL}"
-      alt=""
-      style="
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        border-radius:13px;
-      "
-    >
-  `;
-} else {
-  $("headerAvatar").textContent =
-    (
-      user.displayName ||
-      "V"
-    )
-      .charAt(0)
-      .toUpperCase();
-}
-
-  $("personStatus").textContent =
-    "● VIBE user";
+  updateChatHeader(
+    user.displayName || "VIBE User",
+    user.photoURL,
+    "● VIBE user"
+  );
 
 
   $("messageInput").disabled =
@@ -1368,28 +1264,9 @@ function selectUser(user){
     "...";
 
 
-  renderUsersAfterSelection();
+  renderSidebar();
 
   loadConversation();
-
-}
-
-
-/* ==========================================
-   REFRESH SIDEBAR ACTIVE STATE
-========================================== */
-
-function renderUsersAfterSelection(){
-
-  document
-    .querySelectorAll(".friend")
-    .forEach(button => {
-
-      button.classList.remove(
-        "active"
-      );
-
-    });
 
 }
 
@@ -1398,16 +1275,12 @@ function renderUsersAfterSelection(){
    CONVERSATION ID
 ========================================== */
 
-function conversationId(){
-
-  if(!currentUser || !selectedUser)
-    return null;
-
+function dmConversationId(userId){
 
   return [
 
     currentUser.uid,
-    selectedUser.uid
+    userId
 
   ].sort().join("_");
 
@@ -1415,10 +1288,10 @@ function conversationId(){
 
 
 /* ==========================================
-   LOAD CONVERSATION
+   LOAD DM
 ========================================== */
 
-function loadConversation(){
+function loadDMConversation(){
 
   if(unsubscribeMessages){
 
@@ -1431,14 +1304,9 @@ function loadConversation(){
 
 
   const id =
-    conversationId();
-
-
-  if(!id)
-    return;
-
-
-  $("messages").innerHTML = "";
+    dmConversationId(
+      selectedChat.user.uid
+    );
 
 
   const messagesRef =
@@ -1457,14 +1325,65 @@ function loadConversation(){
     );
 
 
+  subscribeMessages(messagesQuery);
+
+}
+
+
+/* ==========================================
+   LOAD GROUP
+========================================== */
+
+function loadGroupConversation(){
+
+  if(unsubscribeMessages){
+
+    unsubscribeMessages();
+
+    unsubscribeMessages =
+      null;
+
+  }
+
+
+  const messagesRef =
+    collection(
+      db,
+      "conversations",
+      selectedChat.id,
+      "messages"
+    );
+
+
+  const messagesQuery =
+    query(
+      messagesRef,
+      orderBy("createdAt","asc")
+    );
+
+
+  subscribeMessages(messagesQuery);
+
+}
+
+
+/* ==========================================
+   MESSAGE SUBSCRIPTION
+========================================== */
+
+function subscribeMessages(messagesQuery){
+
+  $("messages").innerHTML = "";
+
+
   unsubscribeMessages =
     onSnapshot(
+
       messagesQuery,
 
       snapshot => {
 
-        $("messages").innerHTML =
-          "";
+        $("messages").innerHTML = "";
 
 
         if(snapshot.empty){
@@ -1494,21 +1413,15 @@ function loadConversation(){
         }
 
 
-        snapshot.forEach(
-          item => {
+        snapshot.forEach(item => {
 
-            const data =
-              item.data();
+          addMessage(
+            item.data(),
+            item.data().senderId ===
+              currentUser.uid
+          );
 
-
-            addMessage(
-              data,
-              data.senderId ===
-                currentUser.uid
-            );
-
-          }
-        );
+        });
 
       },
 
@@ -1528,6 +1441,27 @@ function loadConversation(){
 
 
 /* ==========================================
+   LOAD CONVERSATION
+========================================== */
+
+function loadConversation(){
+
+  if(selectedChat.type === "group"){
+
+    loadGroupConversation();
+
+  }
+
+  else{
+
+    loadDMConversation();
+
+  }
+
+}
+
+
+/* ==========================================
    SEND MESSAGE
 ========================================== */
 
@@ -1535,11 +1469,11 @@ async function sendMessage(){
 
   if(
     !currentUser ||
-    !selectedUser
+    !selectedChat
   ){
 
     showToast(
-      "Choose someone to message first."
+      "Select a chat first."
     );
 
     return;
@@ -1558,35 +1492,60 @@ async function sendMessage(){
     return;
 
 
-  const id =
-    conversationId();
-
-
   try{
+
+    let conversationId;
+    let members;
+
+
+    if(selectedChat.type === "group"){
+
+      conversationId =
+        selectedChat.id;
+
+      members =
+        selectedChat.members;
+
+    }
+
+    else{
+
+      conversationId =
+        dmConversationId(
+          selectedChat.user.uid
+        );
+
+      members = [
+
+        currentUser.uid,
+        selectedChat.user.uid
+
+      ];
+
+    }
+
 
     await setDoc(
 
       doc(
         db,
         "conversations",
-        id
+        conversationId
       ),
 
       {
 
-        members:[
-          currentUser.uid,
-          selectedUser.uid
-        ],
+        members:members,
+
+        type:
+          selectedChat.type,
 
         updatedAt:
           serverTimestamp()
 
       },
 
-      {
-        merge:true
-      }
+      {merge:true}
 
     );
 
@@ -1596,7 +1555,7 @@ async function sendMessage(){
       collection(
         db,
         "conversations",
-        id,
+        conversationId,
         "messages"
       ),
 
@@ -1647,10 +1606,7 @@ async function sendMessage(){
    MESSAGE UI
 ========================================== */
 
-function addMessage(
-  data,
-  mine
-){
+function addMessage(data,mine){
 
   const container =
     $("messages");
@@ -1669,6 +1625,27 @@ function addMessage(
 
   bubble.className =
     "bubble";
+
+
+  if(
+    selectedChat &&
+    selectedChat.type === "group" &&
+    !mine
+  ){
+
+    const sender =
+      document.createElement("div");
+
+    sender.className =
+      "senderName";
+
+    sender.textContent =
+      data.senderName ||
+      "VIBE User";
+
+    bubble.appendChild(sender);
+
+  }
 
 
   const text =
@@ -1692,7 +1669,7 @@ function addMessage(
   if(
     timestamp &&
     typeof timestamp.toDate ===
-      "function"
+    "function"
   ){
 
     timestamp =
@@ -1703,9 +1680,7 @@ function addMessage(
   else if(data.clientTime){
 
     timestamp =
-      new Date(
-        data.clientTime
-      );
+      new Date(data.clientTime);
 
   }
 
@@ -1736,7 +1711,305 @@ function addMessage(
 
 
 /* ==========================================
-   TIME
+   HEADER
+========================================== */
+
+function updateChatHeader(
+  name,
+  photoURL,
+  status
+){
+
+  $("headerName").textContent =
+    name;
+
+
+  $("personStatus").textContent =
+    status;
+
+
+  if(photoURL){
+
+    $("headerAvatar").innerHTML =
+      `<img src="${photoURL}" alt="">`;
+
+  }
+
+  else{
+
+    $("headerAvatar").textContent =
+      name
+        .charAt(0)
+        .toUpperCase();
+
+  }
+
+}
+
+
+/* ==========================================
+   GROUP MODAL
+========================================== */
+
+function openGroupModal(){
+
+  $("groupNameInput").value = "";
+
+  renderGroupUsers();
+
+  $("groupModal")
+    .classList
+    .add("show");
+
+}
+
+
+function closeGroupModal(){
+
+  $("groupModal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* ==========================================
+   GROUP USERS
+========================================== */
+
+function renderGroupUsers(){
+
+  const list =
+    $("groupUserList");
+
+  list.innerHTML = "";
+
+
+  if(!allUsers.length){
+
+    list.innerHTML =
+      `<div class="noUsers">
+        There aren't any other VIBE users yet.
+      </div>`;
+
+    return;
+
+  }
+
+
+  allUsers.forEach(user => {
+
+    const label =
+      document.createElement("label");
+
+    label.className =
+      "selectUser";
+
+
+    const checkbox =
+      document.createElement("input");
+
+    checkbox.type =
+      "checkbox";
+
+    checkbox.value =
+      user.uid;
+
+
+    const avatar =
+      document.createElement("div");
+
+    avatar.className =
+      "selectAvatar";
+
+
+    if(user.photoURL){
+
+      avatar.innerHTML =
+        `<img src="${user.photoURL}" alt="">`;
+
+    }
+
+    else{
+
+      avatar.textContent =
+        (
+          user.displayName ||
+          "V"
+        )
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+
+    const name =
+      document.createElement("span");
+
+    name.textContent =
+      user.displayName ||
+      "VIBE User";
+
+
+    label.appendChild(checkbox);
+    label.appendChild(avatar);
+    label.appendChild(name);
+
+
+    list.appendChild(label);
+
+  });
+
+}
+
+
+/* ==========================================
+   CREATE GROUP
+========================================== */
+
+async function createGroup(){
+
+  const name =
+    $("groupNameInput")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    showToast(
+      "Give the group a name."
+    );
+
+    return;
+
+  }
+
+
+  const checked =
+    [
+      ...document
+        .querySelectorAll(
+          "#groupUserList input:checked"
+        )
+    ];
+
+
+  if(!checked.length){
+
+    showToast(
+      "Choose at least one person."
+    );
+
+    return;
+
+  }
+
+
+  const selectedMembers =
+    checked.map(
+      checkbox =>
+        checkbox.value
+    );
+
+
+  selectedMembers.push(
+    currentUser.uid
+  );
+
+
+  const groupRef =
+    doc(
+      collection(
+        db,
+        "conversations"
+      )
+    );
+
+
+  try{
+
+    await setDoc(
+
+      groupRef,
+
+      {
+
+        type:"group",
+
+        name:name,
+
+        members:selectedMembers,
+
+        createdBy:
+          currentUser.uid,
+
+        createdAt:
+          serverTimestamp(),
+
+        updatedAt:
+          serverTimestamp()
+
+      }
+
+    );
+
+
+    selectedChat = {
+
+      type:"group",
+
+      id:groupRef.id,
+
+      name:name,
+
+      members:selectedMembers
+
+    };
+
+
+    updateChatHeader(
+      name,
+      null,
+      selectedMembers.length +
+      " members"
+    );
+
+
+    $("messageInput").disabled =
+      false;
+
+    $("messageInput").placeholder =
+      "Message " + name + "...";
+
+
+    closeGroupModal();
+
+    renderSidebar();
+
+    loadGroupConversation();
+
+    showToast(
+      "Group created ✦"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Couldn't create group."
+    );
+
+  }
+
+}
+
+
+/* ==========================================
+   FORMAT TIME
 ========================================== */
 
 function formatTime(time){
@@ -1776,7 +2049,7 @@ function addEmoji(){
 
 
 /* ==========================================
-   ENTER TO SEND
+   ENTER
 ========================================== */
 
 $("messageInput")
@@ -1800,68 +2073,42 @@ $("messageInput")
 
 
 /* ==========================================
-   CLEAR SCREEN
+   VIDEO
 ========================================== */
 
-function clearMessages(){
+function startVideo(){
 
-  if(!selectedUser){
+  if(
+    selectedChat &&
+    selectedChat.type === "group"
+  ){
 
-    showToast(
-      "Choose a conversation first."
-    );
+    window.location.href =
+      "video.html";
 
     return;
 
   }
 
 
-  if(
-    confirm(
-      "Clear this chat from your screen?"
-    )
-  ){
-
-    $("messages").innerHTML = `
-
-      <div class="welcome">
-
-        <div class="welcomeIcon">
-          ✦
-        </div>
-
-        <strong>
-          Conversation
-        </strong>
-
-        <p>
-          Your saved messages are still in VIBE.
-        </p>
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* ==========================================
-   VIDEO
-========================================== */
-
-function startVideo(){
-
   window.location.href =
     "video.html";
 
 }
 
+
 /* ==========================================
    PROFILE PICTURE
 ========================================== */
 
+$("myAvatar").addEventListener(
+  "click",
+  () => {
+
+    $("pfpInput").click();
+
+  }
+);
 
 
 $("pfpInput").addEventListener(
@@ -1871,12 +2118,18 @@ $("pfpInput").addEventListener(
     const file =
       event.target.files[0];
 
-    if(!file || !currentUser)
+
+    if(
+      !file ||
+      !currentUser
+    )
       return;
 
 
-    // Basic safety/size limit
-    if(file.size > 5 * 1024 * 1024){
+    if(
+      file.size >
+      5 * 1024 * 1024
+    ){
 
       showToast(
         "PFP must be under 5 MB."
@@ -1896,7 +2149,7 @@ $("pfpInput").addEventListener(
     ){
 
       showToast(
-        "Please choose a JPG, PNG, or WebP."
+        "Please choose JPG, PNG, or WebP."
       );
 
       return;
@@ -1943,26 +2196,13 @@ $("pfpInput").addEventListener(
           photoURL:photoURL
         },
 
-        {
-          merge:true
-        }
+        {merge:true}
 
       );
 
 
-      // Update your avatar immediately
-      $("myAvatar").innerHTML = `
-        <img
-          src="${photoURL}"
-          alt="Profile"
-          style="
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            border-radius:13px;
-          "
-        >
-      `;
+      $("myAvatar").innerHTML =
+        `<img src="${photoURL}" alt="Profile">`;
 
 
       showToast(
@@ -1986,8 +2226,11 @@ $("pfpInput").addEventListener(
 
   }
 );
-  
-/* Make functions available to HTML */
+
+
+/* ==========================================
+   EXPOSE BUTTON FUNCTIONS
+========================================== */
 
 window.sendMessage =
   sendMessage;
@@ -1995,11 +2238,17 @@ window.sendMessage =
 window.addEmoji =
   addEmoji;
 
-window.clearMessages =
-  clearMessages;
-
 window.startVideo =
   startVideo;
+
+window.openGroupModal =
+  openGroupModal;
+
+window.closeGroupModal =
+  closeGroupModal;
+
+window.createGroup =
+  createGroup;
 
 </script>
 
