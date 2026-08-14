@@ -1191,12 +1191,69 @@ function renderUsers(users){
       info.appendChild(name);
       info.appendChild(preview);
 
-      button.appendChild(avatar);
-      button.appendChild(info);
+ button.appendChild(avatar);
+button.appendChild(info);
 
 
-      button.onclick =
-        () => selectUser(user);
+/* Friend button */
+
+const addButton =
+  document.createElement("button");
+
+addButton.className =
+  "addFriendBtn";
+
+if(friendIds.has(user.uid)){
+
+  addButton.textContent =
+    "✓";
+
+  addButton.title =
+    "Friends";
+
+  addButton.disabled =
+    true;
+
+}
+
+else if(pendingSent.has(user.uid)){
+
+  addButton.textContent =
+    "✓";
+
+  addButton.title =
+    "Request sent";
+
+  addButton.disabled =
+    true;
+
+}
+
+else{
+
+  addButton.textContent =
+    "+";
+
+  addButton.title =
+    "Add friend";
+
+  addButton.onclick =
+    event => {
+
+      event.stopPropagation();
+
+      sendFriendRequest(user);
+
+    };
+
+}
+
+
+button.appendChild(addButton);
+
+
+button.onclick =
+  () => selectUser(user);
 
 
       list.appendChild(button);
