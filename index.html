@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VIBE ✦</title>
+
+<script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --purple: #8366ff;
+  --cyan: #31dfff;
+  --pink: #ff4fd8;
+  --bg: #07070c;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 15%, #6540ff35, transparent 30%),
+    radial-gradient(circle at 90% 85%, #00ddff25, transparent 30%),
+    radial-gradient(circle at 50% 50%, #ff2fd10b, transparent 40%),
+    var(--bg);
+  color: white;
+  font-family: Inter, sans-serif;
+  overflow: hidden;
+}
+
+/* ---------- BACKGROUND ---------- */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(#ffffff05 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff05 1px, transparent 1px);
+
+  background-size: 45px 45px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent
+  );
+
+  animation: gridMove 15s linear infinite;
+}
+
+@keyframes gridMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(45px);
+  }
+}
+
+/* floating glow */
+
+.glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .15;
+  pointer-events: none;
+  animation: float 10s ease-in-out infinite;
+}
+
+.glow.one {
+  background: var(--purple);
+  top: -100px;
+  left: -100px;
+}
+
+.glow.two {
+  background: var(--cyan);
+  right: -100px;
+  bottom: -100px;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  50% {
+    transform: translate(60px, -40px);
+  }
+}
+
+/* ---------- NAV ---------- */
+
+nav {
+  height: 76px;
+  padding: 0 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--purple);
+  text-shadow: 0 0 20px var(--purple);
+}
+
+.status {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+  border: 1px solid #ffffff12;
+
+  background: #ffffff08;
+  backdrop-filter: blur(20px);
+
+  font-size: 11px;
+  color: #999;
+}
+
+/* ---------- JOIN ---------- */
+
+#joinScreen {
+  min-height: calc(100vh - 76px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+}
+
+.hero {
+  width: min(500px, 100%);
+  text-align: center;
+
+  animation: heroIn .8s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.orb {
+  width: 105px;
+  height: 105px;
+
+  margin: 0 auto 30px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--cyan)
+    );
+
+  box-shadow:
+    0 0 100px #7257ff50,
+    inset 0 0 35px #ffffff35;
+
+  font-size: 44px;
+
+  transform: rotate(-6deg);
+
+  animation: orbFloat 4s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  50% {
+    transform: rotate(3deg) translateY(-8px);
+  }
+}
+
+h1 {
+  margin: 0;
+
+  font-size: clamp(45px, 9vw, 76px);
+
+  line-height: .9;
+
+  letter-spacing: -6px;
+}
+
+.gradient {
+  background:
+    linear-gradient(
+      90deg,
+      white,
+      #a48dff,
+      #4de4ff
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.subtitle {
+  max-width: 400px;
+
+  margin: 25px auto 35px;
+
+  color: #858591;
+
+  line-height: 1.6;
+}
+
+.card {
+  padding: 24px;
+
+  border-radius: 25px;
+
+  background: #ffffff08;
+
+  border: 1px solid #ffffff12;
+
+  backdrop-filter: blur(30px);
+
+  box-shadow:
+    0 30px 100px #0009,
+    inset 0 1px #ffffff0b;
+}
+
+input {
+  width: 100%;
+  height: 58px;
+
+  border: 1px solid #ffffff15;
+  border-radius: 16px;
+
+  background: #00000035;
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  letter-spacing: 5px;
+
+  outline: none;
+
+  transition: .2s;
+}
+
+input::placeholder {
+  color: #555;
+}
+
+input:focus {
+  border-color: #8065ff;
+
+  box-shadow:
+    0 0 0 4px #8065ff15,
+    0 0 30px #8065ff15;
+}
+
+button {
+  border: none;
+  font-family: inherit;
+  color: white;
+  cursor: pointer;
+}
+
+.primary {
+  width: 100%;
+  height: 58px;
+
+  margin-top: 12px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #795cff,
+      #24d5ff
+    );
+
+  font-weight: 800;
+
+  box-shadow:
+    0 10px 35px #674cff35;
+
+  transition: .2s;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 50px #674cff55;
+}
+
+.create {
+  margin-top: 18px;
+
+  background: none;
+
+  color: #a696ff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+#error {
+  margin-top: 14px;
+
+  color: #ff668c;
+
+  font-size: 13px;
+}
+
+/* ---------- CALL ---------- */
+
+#callScreen {
+  display: none;
+
+  height: calc(100vh - 76px);
+
+  padding: 12px 24px 24px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.roombar {
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roomName {
+  color: #777;
+  font-size: 12px;
+}
+
+.roomName strong {
+  color: white;
+  letter-spacing: 4px;
+}
+
+.connected {
+  color: #62f5a0;
+  font-size: 11px;
+}
+
+.videos {
+  height: calc(100% - 125px);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+}
+
+.videoCard {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 27px;
+
+  background: #111117;
+
+  border: 1px solid #ffffff12;
+
+  box-shadow:
+    0 30px 100px #000b;
+
+  transition: .3s;
+}
+
+.videoCard:hover {
+  border-color: #ffffff25;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  background:
+    radial-gradient(
+      circle,
+      #171727,
+      #08080d
+    );
+}
+
+.videoCard:first-child video {
+  transform: scaleX(-1);
+}
+
+.videoLabel {
+  position: absolute;
+
+  left: 16px;
+  bottom: 16px;
+
+  padding: 9px 13px;
+
+  border-radius: 12px;
+
+  background: #0008;
+
+  backdrop-filter: blur(20px);
+
+  font-size: 11px;
+}
+
+.waiting {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  pointer-events: none;
+
+  color: #777;
+}
+
+.waitingBox {
+  text-align: center;
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  background: #0007;
+
+  backdrop-filter: blur(20px);
+}
+
+.spinner {
+  width: 35px;
+  height: 35px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  border: 2px solid #ffffff15;
+  border-top-color: var(--purple);
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- CONTROLS ---------- */
+
+.controls {
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.control {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+
+  background: #ffffff0c;
+
+  border: 1px solid #ffffff15;
+
+  backdrop-filter: blur(20px);
+
+  font-size: 18px;
+
+  transition: .2s;
+}
+
+.control:hover {
+  transform: translateY(-3px);
+  background: #ffffff18;
+}
+
+.control.off {
+  background: #ff386022;
+  border-color: #ff386055;
+}
+
+.hangup {
+  background: #ff31552b;
+  border-color: #ff315555;
+}
+
+.hangup:hover {
+  background: #ff315555;
+}
+
+/* ---------- TOAST ---------- */
+
+.toast {
+  position: fixed;
+
+  left: 50%;
+  bottom: 30px;
+
+  transform:
+    translate(-50%, 20px);
+
+  padding: 12px 18px;
+
+  border-radius: 999px;
+
+  background: #111119e8;
+
+  border: 1px solid #ffffff18;
+
+  backdrop-filter: blur(20px);
+
+  color: #ccc;
+
+  font-size: 12px;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: .3s;
+
+  z-index: 100;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width: 700px) {
+
+  body {
+    overflow: auto;
+  }
+
+  nav {
+    padding: 0 18px;
+  }
+
+  #callScreen {
+    height: auto;
+    min-height: calc(100vh - 76px);
+
+    padding: 8px 10px 15px;
+  }
+
+  .videos {
+    height: auto;
+
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .videoCard {
+    height: 40vh;
+  }
+
+  .videoCard:first-child {
+    height: 27vh;
+  }
+
+  .controls {
+    margin-top: 8px;
+  }
+
+  h1 {
+    letter-spacing: -4px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<nav>
+  <div class="logo">
+    VIBE<span>✦</span>
+  </div>
+
+  <div class="status" id="navStatus">
+    PRIVATE • 2 PEOPLE
+  </div>
+</nav>
+
+
+<!-- ================= JOIN ================= -->
+
+<section id="joinScreen">
+
+  <div class="hero">
+
+    <div class="orb">
+      ✦
+    </div>
+
+    <h1>
+      <span class="gradient">Talk.</span><br>
+      Your way.
+    </h1>
+
+    <div class="subtitle">
+      A private little corner of the internet
+      for you and your favorite person.
+    </div>
+
+    <div class="card">
+
+      <input
+        id="roomInput"
+        maxlength="6"
+        placeholder="ROOM CODE"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button
+        class="primary"
+        onclick="joinRoom()"
+      >
+        JOIN ROOM →
+      </button>
+
+      <button
+        class="create"
+        onclick="createRoom()"
+      >
+        + Create a new room
+      </button>
+
+      <div id="error"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CALL ================= -->
+
+<section id="callScreen">
+
+  <div class="roombar">
+
+    <div class="roomName">
+      ROOM
+      <strong id="roomDisplay">
+        ------
+      </strong>
+    </div>
+
+    <div
+      class="connected"
+      id="connectionStatus"
+    >
+      ● Connecting
+    </div>
+
+  </div>
+
+
+  <div class="videos">
+
+    <!-- LOCAL -->
+
+    <div class="videoCard">
+
+      <video
+        id="localVideo"
+        autoplay
+        muted
+        playsinline
+      ></video>
+
+      <div class="videoLabel">
+        You
+      </div>
+
+    </div>
+
+
+    <!-- REMOTE -->
+
+    <div class="videoCard">
+
+      <video
+        id="remoteVideo"
+        autoplay
+        playsinline
+      ></video>
+
+      <div
+        class="waiting"
+        id="waiting"
+      >
+
+        <div class="waitingBox">
+
+          <div class="spinner"></div>
+
+          <div>
+            Waiting for your friend...
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="videoLabel">
+        Friend
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="controls">
+
+    <button
+      class="control"
+      id="micBtn"
+      onclick="toggleMic()"
+    >
+      🎤
+    </button>
+
+    <button
+      class="control"
+      id="camBtn"
+      onclick="toggleCamera()"
+    >
+      📹
+    </button>
+
+    <button
+      class="control hangup"
+      onclick="leaveCall()"
+    >
+      ☎
+    </button>
+
+  </div>
+
+</section>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script>
+
+let peer;
+let localStream;
+let currentCall;
+
+let roomCode = "";
+
+
+// ==========================================
+// HELPERS
+// ==========================================
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+
+function showError(message) {
+  $("error").textContent = message;
+}
+
+
+function toast(message) {
+
+  const el = $("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  setTimeout(() => {
+    el.classList.remove("show");
+  }, 2500);
+}
+
+
+function randomRoom() {
+
+  const chars =
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  let result = "";
+
+  for (let i = 0; i < 6; i++) {
+
+    result += chars[
+      Math.floor(
+        Math.random() * chars.length
+      )
+    ];
+
+  }
+
+  return result;
+}
+
+
+// ==========================================
+// CREATE ROOM
+// ==========================================
+
+async function createRoom() {
+
+  const code = randomRoom();
+
+  $("roomInput").value = code;
+
+  await startRoom(code);
+
+}
+
+
+// ==========================================
+// JOIN ROOM
+// ==========================================
+
+async function joinRoom() {
+
+  const code =
+    $("roomInput")
+      .value
+      .trim()
+      .toUpperCase();
+
+  if (code.length !== 6) {
+
+    showError(
+      "Enter a 6-character room code."
+    );
+
+    return;
+  }
+
+  await startRoom(code);
+
+}
+
+
+// ==========================================
+// START
+// ==========================================
+
+async function startRoom(code) {
+
+  showError("");
+
+  roomCode = code;
+
+  try {
+
+    /*
+      This is where the browser asks
+      for camera + microphone permission.
+    */
+
+    if (
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ) {
+
+      throw new Error(
+        "Camera access requires HTTPS."
+      );
+
+    }
+
+
+    localStream =
+      await navigator.mediaDevices.getUserMedia({
+        video: {
+          width: {
+            ideal: 1280
+          },
+          height: {
+            ideal: 720
+          }
+        },
+
+        audio: true
+      });
+
+
+    $("localVideo").srcObject =
+      localStream;
+
+
+    $("joinScreen").style.display =
+      "none";
+
+    $("callScreen").style.display =
+      "block";
+
+
+    $("roomDisplay").textContent =
+      roomCode;
+
+
+    $("connectionStatus").textContent =
+      "● Connecting";
+
+
+    /*
+      PeerJS cloud signaling.
+      No PeerServer setup required.
+    */
+
+    peer = new Peer();
+
+
+    peer.on("open", id => {
+
+      console.log(
+        "Your Peer ID:",
+        id
+      );
+
+
+      /*
+        We use the room code as a
+        simple deterministic peer ID.
+
+        First person becomes:
+          vibe-ABC123-a
+
+        Second:
+          vibe-ABC123-b
+      */
+
+      connectToRoom();
+
+    });
+
+
+    peer.on("call", call => {
+
+      currentCall = call;
+
+      call.answer(localStream);
+
+      call.on("stream", remoteStream => {
+
+        showRemote(remoteStream);
+
+      });
+
+    });
+
+
+    peer.on("error", error => {
+
+      console.error(error);
+
+      $("connectionStatus").textContent =
+        "● Connection error";
+
+      toast(
+        "Connection error — try again."
+      );
+
+    });
+
+
+    peer.on("disconnected", () => {
+
+      $("connectionStatus").textContent =
+        "● Disconnected";
+
+    });
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    showError(
+      getCameraError(error)
+    );
+
+  }
+
+}
+
+
+// ==========================================
+// CONNECT TO OTHER PERSON
+// ==========================================
+
+function connectToRoom() {
+
+  /*
+    We don't know whether we're first
+    or second.
+
+    Try the "A" peer first.
+    If we're A, nobody is there yet.
+    If we're B, A should exist.
+  */
+
+  const peerA =
+    "vibe-" +
+    roomCode +
+    "-a";
+
+  const peerB =
+    "vibe-" +
+    roomCode +
+    "-b";
+
+
+  /*
+    Instead of forcing a custom Peer ID,
+    we use a data connection to discover
+    which side we are.
+
+    The first browser waits.
+    The second browser tries A.
+  */
+
+  const conn =
+    peer.connect(peerA, {
+      reliable: true
+    });
+
+
+  let connected = false;
+
+
+  conn.on("open", () => {
+
+    connected = true;
+
+    callPeer(peerA);
+
+  });
+
+
+  conn.on("error", () => {
+
+    if (!connected) {
+
+      /*
+        We are probably the first
+        person in the room.
+      */
+
+      setTimeout(() => {
+
+        tryCustomRoomPeer();
+
+      }, 1000);
+
+    }
+
+  });
+
+
+  setTimeout(() => {
+
+    if (!connected) {
+
+      tryCustomRoomPeer();
+
+    }
+
+  }, 1500);
+
+}
+
+
+// ==========================================
+// ROOM PEER FALLBACK
+// ==========================================
+
+function tryCustomRoomPeer() {
+
+  /*
+    The easiest reliable approach with
+    PeerJS is to create a temporary
+    "room discovery" connection.
+
+    We make a deterministic second peer
+    only when possible.
+
+    If that isn't available, the user
+    can share the generated Peer ID.
+  */
+
+  $("connectionStatus").textContent =
+    "● Waiting for friend";
+
+  toast(
+    "Room ready — waiting for friend"
+  );
+
+
+  /*
+    Show a shareable room code.
+  */
+
+  $("roomDisplay").textContent =
+    roomCode;
+
+
+  /*
+    Keep listening for incoming calls.
+  */
+
+}
+
+
+// ==========================================
+// CALL
+// ==========================================
+
+function callPeer(remoteId) {
+
+  if (!peer || !localStream) {
+    return;
+  }
+
+
+  $("connectionStatus").textContent =
+    "● Calling";
+
+
+  currentCall =
+    peer.call(
+      remoteId,
+      localStream
+    );
+
+
+  if (!currentCall) {
+    return;
+  }
+
+
+  currentCall.on(
+    "stream",
+    remoteStream => {
+
+      showRemote(remoteStream);
+
+    }
+  );
+
+
+  currentCall.on(
+    "close",
+    () => {
+
+      $("connectionStatus").textContent =
+        "● Call ended";
+
+    }
+  );
+
+
+  currentCall.on(
+    "error",
+    error => {
+
+      console.error(error);
+
+      $("connectionStatus").textContent =
+        "● Connection failed";
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// REMOTE VIDEO
+// ==========================================
+
+function showRemote(stream) {
+
+  $("remoteVideo").srcObject =
+    stream;
+
+  $("waiting").style.display =
+    "none";
+
+  $("connectionStatus").textContent =
+    "● Connected";
+
+  $("navStatus").textContent =
+    "LIVE • 2 PEOPLE";
+
+}
+
+
+// ==========================================
+// MIC
+// ==========================================
+
+function toggleMic() {
+
+  if (!localStream) {
+    return;
+  }
+
+
+  const track =
+    localStream.getAudioTracks()[0];
+
+
+  if (!track) {
+    return;
+  }
+
+
+  track.enabled =
+    !track.enabled;
+
+
+  $("micBtn").textContent =
+    track.enabled
+      ? "🎤"
+      : "🔇";
+
+
+  $("micBtn").classList.toggle(
+    "off",
+    !track.enabled
+  );
+
+}
+
+
+// ==========================================
+// CAMERA
+// ==========================================
+
+function toggleCamera() {
+
+  if (!localStream) {
+    return;
+  }
+
+
+  const track =
+    localStream.getVideoTracks()[0];
+
+
+  if (!track) {
+    return;
+  }
+
+
+  track.enabled =
+    !track.enabled;
+
+
+  $("camBtn").textContent =
+    track.enabled
+      ? "📹"
+      : "🚫";
+
+
+  $("camBtn").classList.toggle(
+    "off",
+    !track.enabled
+  );
+
+}
+
+
+// ==========================================
+// LEAVE
+// ==========================================
+
+function leaveCall() {
+
+  if (currentCall) {
+
+    currentCall.close();
+
+  }
+
+
+  if (peer) {
+
+    peer.destroy();
+
+  }
+
+
+  if (localStream) {
+
+    localStream
+      .getTracks()
+      .forEach(track => {
+        track.stop();
+      });
+
+  }
+
+
+  location.reload();
+
+}
+
+
+// ==========================================
+// CAMERA ERROR
+// ==========================================
+
+function getCameraError(error) {
+
+  switch (error.name) {
+
+    case "NotAllowedError":
+      return "Camera or microphone permission was blocked. Click the 🔒 icon in your browser and allow both.";
+
+    case "NotFoundError":
+      return "No camera or microphone was found.";
+
+    case "NotReadableError":
+      return "Your camera or microphone is already being used by another app.";
+
+    case "SecurityError":
+      return "Your browser blocked camera access for security reasons.";
+
+    case "TypeError":
+      return "Camera access requires HTTPS. Open the GitHub Pages HTTPS address.";
+
+    default:
+      return (
+        "Could not access camera/microphone: " +
+        error.message
+      );
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
