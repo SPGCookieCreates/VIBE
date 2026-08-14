@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>VIBE ✦</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
+
+  background:
+    radial-gradient(circle at 15% 20%, #704cff35, transparent 30%),
+    radial-gradient(circle at 85% 80%, #00d9ff25, transparent 30%),
+    #07070c;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(#ffffff08 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+
+  background-size: 45px 45px;
+  mask-image: linear-gradient(#000, transparent);
+}
+
+.card {
+  width: min(430px, 92vw);
+  padding: 38px;
+  border: 1px solid #ffffff14;
+  border-radius: 28px;
+
+  background: #ffffff08;
+  backdrop-filter: blur(30px);
+
+  box-shadow: 0 30px 100px #0009;
+  text-align: center;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.logo span {
+  color: #8668ff;
+  text-shadow: 0 0 30px #8668ff;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 30px;
+}
+
+.google {
+  width: 100%;
+  height: 52px;
+
+  border: 1px solid #ffffff16;
+  border-radius: 15px;
+
+  background: white;
+  color: #111;
+
+  font-weight: 700;
+  font-size: 13px;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.google:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px #0005;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 22px 0;
+
+  color: #555;
+  font-size: 10px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #ffffff12;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+
+  margin-bottom: 10px;
+  padding: 0 15px;
+
+  outline: none;
+
+  border: 1px solid #ffffff12;
+  border-radius: 14px;
+
+  background: #ffffff08;
+  color: white;
+
+  font-size: 13px;
+}
+
+input:focus {
+  border-color: #8065ff;
+  box-shadow: 0 0 0 3px #8065ff15;
+}
+
+input::placeholder {
+  color: #666;
+}
+
+.emailBtn,
+.enter {
+  width: 100%;
+  height: 50px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #8061ff,
+    #32dfff
+  );
+
+  color: white;
+
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.switch {
+  margin-top: 18px;
+  color: #777;
+  font-size: 11px;
+}
+
+.switch button {
+  border: 0;
+  background: none;
+  color: #9b87ff;
+  cursor: pointer;
+}
+
+.error {
+  min-height: 18px;
+  margin-top: 15px;
+  color: #ff6d8e;
+  font-size: 11px;
+}
+
+#app {
+  display: none;
+  text-align: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+
+  margin: 0 auto 18px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 25px;
+
+  background: linear-gradient(
+    135deg,
+    #8061ff,
+    #32dfff
+  );
+
+  font-size: 30px;
+  font-weight: 900;
+}
+
+#app h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+#app p {
+  color: #777;
+  font-size: 12px;
+}
+
+.logout {
+  margin-top: 12px;
+
+  border: 0;
+  background: none;
+
+  color: #666;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- LOGIN SCREEN -->
+
+  <section id="login">
+
+    <div class="logo">
+      VIBE<span>✦</span>
+    </div>
+
+    <div class="subtitle">
+      Your people. Your space.
+    </div>
+
+    <button
+      class="google"
+      id="googleBtn"
+    >
+      Continue with Google
+    </button>
+
+    <div class="divider">
+      OR
+    </div>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+      autocomplete="email"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
+
+    <button
+      class="emailBtn"
+      id="emailBtn"
+    >
+      Create account
+    </button>
+
+    <div class="switch">
+
+      <span id="switchText">
+        Already have an account?
+      </span>
+
+      <button id="modeBtn">
+        Log in
+      </button>
+
+    </div>
+
+    <div
+      class="error"
+      id="error"
+    ></div>
+
+  </section>
+
+
+  <!-- LOGGED-IN SCREEN -->
+
+  <section id="app">
+
+    <div
+      class="avatar"
+      id="avatar"
+    >
+      V
+    </div>
+
+    <h1 id="welcome">
+      Welcome to VIBE.
+    </h1>
+
+    <p id="account"></p>
+
+    <button
+      class="enter"
+      id="enterBtn"
+    >
+      Enter VIBE ✦
+    </button>
+
+    <br>
+
+    <button
+      class="logout"
+      id="logoutBtn"
+    >
+      Sign out
+    </button>
+
+  </section>
+
+</div>
+
+
+<script type="module">
+
+/*
+====================================================
+FIREBASE IMPORTS
+====================================================
+*/
+
+import {
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from
+"https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+
+/*
+====================================================
+VIBE FIREBASE CONFIG
+====================================================
+*/
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyC0oSoz5Xn2-vqCz7tZL-tXITcClTmE1Mk",
+
+  authDomain:
+    "vibe-8ef48.firebaseapp.com",
+
+  projectId:
+    "vibe-8ef48",
+
+  storageBucket:
+    "vibe-8ef48.firebasestorage.app",
+
+  messagingSenderId:
+    "508522238856",
+
+  appId:
+    "1:508522238856:web:d79330d3e1d6078d83a03d"
+
+};
+
+
+/*
+====================================================
+INITIALIZE FIREBASE
+====================================================
+*/
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+const googleProvider =
+  new GoogleAuthProvider();
+
+
+/*
+====================================================
+ELEMENTS
+====================================================
+*/
+
+const loginScreen =
+  document.getElementById("login");
+
+const appScreen =
+  document.getElementById("app");
+
+const googleBtn =
+  document.getElementById("googleBtn");
+
+const emailBtn =
+  document.getElementById("emailBtn");
+
+const modeBtn =
+  document.getElementById("modeBtn");
+
+const emailInput =
+  document.getElementById("email");
+
+const passwordInput =
+  document.getElementById("password");
+
+const errorBox =
+  document.getElementById("error");
+
+const welcome =
+  document.getElementById("welcome");
+
+const account =
+  document.getElementById("account");
+
+const avatar =
+  document.getElementById("avatar");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const enterBtn =
+  document.getElementById("enterBtn");
+
+
+/*
+====================================================
+LOGIN MODE
+====================================================
+*/
+
+let loginMode = false;
+
+
+/*
+====================================================
+GOOGLE LOGIN
+====================================================
+*/
+
+googleBtn.addEventListener(
+  "click",
+  async () => {
+
+    errorBox.textContent = "";
+
+    try {
+
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      errorBox.textContent =
+        friendlyError(error);
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+EMAIL LOGIN / SIGNUP
+====================================================
+*/
+
+emailBtn.addEventListener(
+  "click",
+  async () => {
+
+    errorBox.textContent = "";
+
+    const email =
+      emailInput.value.trim();
+
+    const password =
+      passwordInput.value;
+
+
+    if (!email || !password) {
+
+      errorBox.textContent =
+        "Enter your email and password.";
+
+      return;
+
+    }
+
+
+    if (password.length < 6) {
+
+      errorBox.textContent =
+        "Password must be at least 6 characters.";
+
+      return;
+
+    }
+
+
+    try {
+
+      let result;
+
+
+      if (loginMode) {
+
+        result =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+      }
+
+      else {
+
+        result =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        await createProfile(
+          result.user
+        );
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      errorBox.textContent =
+        friendlyError(error);
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+SWITCH LOGIN / CREATE ACCOUNT
+====================================================
+*/
+
+modeBtn.addEventListener(
+  "click",
+  () => {
+
+    loginMode =
+      !loginMode;
+
+
+    if (loginMode) {
+
+      emailBtn.textContent =
+        "Log in";
+
+      modeBtn.textContent =
+        "Create one";
+
+      document.getElementById(
+        "switchText"
+      ).textContent =
+        "Don't have an account?";
+
+    }
+
+    else {
+
+      emailBtn.textContent =
+        "Create account";
+
+      modeBtn.textContent =
+        "Log in";
+
+      document.getElementById(
+        "switchText"
+      ).textContent =
+        "Already have an account?";
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+CREATE USER PROFILE
+====================================================
+*/
+
+async function createProfile(user) {
+
+  const displayName =
+    user.displayName ||
+    (
+      user.email
+        ? user.email.split("@")[0]
+        : "VIBE User"
+    );
+
+
+  await setDoc(
+    doc(
+      db,
+      "users",
+      user.uid
+    ),
+
+    {
+
+      uid:
+        user.uid,
+
+      displayName:
+        displayName,
+
+      email:
+        user.email || "",
+
+      photoURL:
+        user.photoURL || "",
+
+      createdAt:
+        serverTimestamp(),
+
+      online:
+        true
+
+    },
+
+    {
+      merge: true
+    }
+
+  );
+
+}
+
+
+/*
+====================================================
+AUTH STATE
+====================================================
+*/
+
+onAuthStateChanged(
+  auth,
+  async (user) => {
+
+    if (user) {
+
+      try {
+
+        await createProfile(
+          user
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Profile error:",
+          error
+        );
+
+      }
+
+
+      loginScreen.style.display =
+        "none";
+
+      appScreen.style.display =
+        "block";
+
+
+      const name =
+        user.displayName ||
+        (
+          user.email
+            ? user.email.split("@")[0]
+            : "VIBE User"
+        );
+
+
+      welcome.textContent =
+        "Welcome, " +
+        name +
+        ".";
+
+
+      account.textContent =
+        user.email || "";
+
+
+      avatar.textContent =
+        name
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+    else {
+
+      loginScreen.style.display =
+        "block";
+
+      appScreen.style.display =
+        "none";
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+ENTER VIBE
+====================================================
+*/
+
+enterBtn.addEventListener(
+  "click",
+  () => {
+
+    window.location.href =
+      "messenger.html";
+
+  }
+);
+
+
+/*
+====================================================
+LOG OUT
+====================================================
+*/
+
+logoutBtn.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      await signOut(
+        auth
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+FRIENDLY ERROR MESSAGES
+====================================================
+*/
+
+function friendlyError(error) {
+
+  const code =
+    error.code || "";
+
+
+  if (
+    code.includes(
+      "auth/email-already-in-use"
+    )
+  ) {
+
+    return (
+      "That email already has an account."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/invalid-credential"
+    )
+  ) {
+
+    return (
+      "Email or password is incorrect."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/invalid-email"
+    )
+  ) {
+
+    return (
+      "Please enter a valid email."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/popup-closed-by-user"
+    )
+  ) {
+
+    return (
+      "Google sign-in was cancelled."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/unauthorized-domain"
+    )
+  ) {
+
+    return (
+      "This website isn't authorized in Firebase yet."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/operation-not-allowed"
+    )
+  ) {
+
+    return (
+      "That sign-in method isn't enabled in Firebase."
+    );
+
+  }
+
+
+  if (
+    code.includes(
+      "auth/weak-password"
+    )
+  ) {
+
+    return (
+      "Choose a stronger password."
+    );
+
+  }
+
+
+  return (
+    error.message ||
+    "Something went wrong."
+  );
+
+}
+
+</script>
+
+</body>
+</html>
