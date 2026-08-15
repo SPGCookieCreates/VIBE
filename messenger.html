@@ -103,7 +103,7 @@ nav{
   background:rgba(5,5,10,.62);
   backdrop-filter:blur(28px) saturate(150%);
   -webkit-backdrop-filter:blur(28px) saturate(150%);
-  z-index:5;
+  z-index:20;
   box-shadow:0 8px 40px rgba(0,0,0,.2);
 }
 
@@ -145,6 +145,20 @@ nav{
   box-shadow:
     0 0 0 1px rgba(255,255,255,.14),
     0 0 25px rgba(132,102,255,.3);
+  overflow:hidden;
+}
+
+/* MOBILE MENU BUTTON */
+
+.mobileMenuBtn{
+  display:none;
+  width:42px;
+  height:42px;
+  margin-right:10px;
+  border-radius:14px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.1);
+  font-size:18px;
 }
 
 /* MAIN */
@@ -165,6 +179,8 @@ nav{
   backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
   overflow:auto;
+  position:relative;
+  z-index:10;
 }
 
 .sideTitle{
@@ -197,6 +213,16 @@ nav{
   color:#c5bcff;
   font-size:12px;
   font-weight:700;
+  transition:.2s;
+}
+
+.groupCreate:hover{
+  transform:translateY(-1px);
+  background:linear-gradient(
+    135deg,
+    rgba(132,102,255,.28),
+    rgba(53,220,255,.15)
+  );
 }
 
 .search{
@@ -221,7 +247,9 @@ nav{
   color:#666;
 }
 
-.userList,.groupList{
+.userList,
+.groupList,
+.hiddenList{
   display:flex;
   flex-direction:column;
   gap:7px;
@@ -237,6 +265,7 @@ nav{
   background:transparent;
   border:1px solid transparent;
   text-align:left;
+  transition:.18s;
 }
 
 .friend:hover{
@@ -262,6 +291,7 @@ nav{
   place-items:center;
   background:linear-gradient(135deg,#7659ff,#2fdfff);
   font-weight:800;
+  overflow:hidden;
 }
 
 .friendInfo{
@@ -272,6 +302,9 @@ nav{
 .friendName{
   font-size:13px;
   font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .friendPreview{
@@ -290,19 +323,108 @@ nav{
   font-size:11px;
 }
 
+/* CHAT ACTIONS */
+
+.chatActions{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-left:auto;
+}
+
+.chatAction{
+  width:30px;
+  height:30px;
+  flex-shrink:0;
+  border-radius:10px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07);
+  color:#888;
+  font-size:12px;
+  opacity:0;
+  transition:.18s;
+}
+
+.friend:hover .chatAction,
+.groupItem:hover .chatAction,
+.chatAction:focus{
+  opacity:1;
+}
+
+.chatAction:hover{
+  color:#fff;
+  background:rgba(255,255,255,.09);
+}
+
+.chatAction.hide:hover{
+  color:#ffb0bd;
+  border-color:rgba(255,92,122,.25);
+  background:rgba(255,92,122,.08);
+}
+
+.chatAction.delete:hover{
+  color:#ff7f98;
+  border-color:rgba(255,92,122,.3);
+  background:rgba(255,92,122,.1);
+}
+
+/* GROUP */
+
 .groupItem{
   display:flex;
   align-items:center;
   gap:4px;
+  width:100%;
 }
 
-.groupDelete{
-  width:30px;
-  height:30px;
+.groupItem > .friend{
+  flex:1;
+  min-width:0;
+}
+
+.hiddenItem{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:8px;
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.hiddenItemInfo{
+  min-width:0;
+  flex:1;
+}
+
+.hiddenItemName{
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.hiddenItemType{
+  margin-top:3px;
+  color:#666;
+  font-size:9px;
+}
+
+.restoreBtn{
+  width:32px;
+  height:32px;
+  flex-shrink:0;
   border-radius:10px;
-  background:rgba(255,92,122,.07);
-  border:1px solid rgba(255,92,122,.1);
-  color:#ff7f98;
+  background:rgba(99,245,162,.06);
+  border:1px solid rgba(99,245,162,.12);
+  color:#75e9a8;
+}
+
+.hiddenEmpty{
+  padding:10px 12px;
+  color:#555;
+  font-size:10px;
 }
 
 /* CHAT */
@@ -331,27 +453,38 @@ nav{
   display:flex;
   align-items:center;
   gap:12px;
+  min-width:0;
 }
 
 .personAvatar{
   width:42px;
   height:42px;
+  flex-shrink:0;
   border-radius:14px;
   display:grid;
   place-items:center;
   background:linear-gradient(135deg,var(--purple),var(--cyan));
   font-weight:800;
+  overflow:hidden;
 }
 
 .personName{
   font-size:14px;
   font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .personStatus{
   margin-top:3px;
   color:var(--green);
   font-size:9px;
+}
+
+.headerButtons{
+  display:flex;
+  gap:7px;
 }
 
 .headerBtn{
@@ -361,6 +494,12 @@ nav{
   background:rgba(255,255,255,.055);
   border:1px solid rgba(255,255,255,.1);
   font-size:17px;
+  transition:.18s;
+}
+
+.headerBtn:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.16);
 }
 
 /* MESSAGES */
@@ -554,6 +693,7 @@ nav{
     rgba(10,10,17,.94)
   );
   border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 30px 100px rgba(0,0,0,.5);
 }
 
 .modalTitle{
@@ -578,6 +718,10 @@ nav{
   color:white;
   outline:none;
   margin-bottom:15px;
+}
+
+.groupNameInput:focus{
+  border-color:rgba(132,102,255,.5);
 }
 
 .selectList{
@@ -610,6 +754,7 @@ nav{
   );
   font-size:12px;
   font-weight:800;
+  overflow:hidden;
 }
 
 .modalButtons{
@@ -652,6 +797,10 @@ nav{
   font-size:11px;
   transition:.25s;
   z-index:200;
+  white-space:nowrap;
+  max-width:90vw;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .toast.show{
@@ -688,6 +837,17 @@ nav{
   to{transform:rotate(360deg)}
 }
 
+/* MOBILE OVERLAY */
+
+.sidebarOverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  backdrop-filter:blur(5px);
+  z-index:8;
+}
+
 /* MOBILE */
 
 @media(max-width:700px){
@@ -705,12 +865,38 @@ nav{
     display:none;
   }
 
+  .mobileMenuBtn{
+    display:block;
+  }
+
+  .navLeft{
+    display:flex;
+    align-items:center;
+  }
+
   .main{
     grid-template-columns:1fr;
   }
 
   .sidebar{
-    display:none;
+    display:block;
+    position:fixed;
+    left:0;
+    top:64px;
+    bottom:0;
+    width:min(320px,88vw);
+    transform:translateX(-105%);
+    transition:transform .25s ease;
+    box-shadow:20px 0 60px rgba(0,0,0,.45);
+    z-index:10;
+  }
+
+  .sidebar.mobileOpen{
+    transform:translateX(0);
+  }
+
+  .sidebarOverlay.show{
+    display:block;
   }
 
   .messages{
@@ -729,6 +915,15 @@ nav{
   .bubble{
     max-width:88%;
   }
+
+  .chatAction{
+    opacity:1;
+  }
+
+  .headerBtn{
+    width:39px;
+    height:39px;
+  }
 }
 </style>
 </head>
@@ -745,19 +940,38 @@ nav{
 <div class="app">
 
 <nav>
-  <div class="logo">
-    VIBE<span>✦</span>
+
+  <div class="navLeft">
+
+    <button
+      class="mobileMenuBtn"
+      id="mobileMenuBtn"
+      title="Open chats"
+    >
+      ☰
+    </button>
+
+    <div class="logo">
+      VIBE<span>✦</span>
+    </div>
+
   </div>
 
   <div class="navRight">
     <div class="online">● ONLINE</div>
     <div class="avatar" id="myAvatar">?</div>
   </div>
+
 </nav>
 
 <div class="main">
 
-<aside class="sidebar">
+<div
+  class="sidebarOverlay"
+  id="sidebarOverlay"
+></div>
+
+<aside class="sidebar" id="sidebar">
 
   <div class="sideTitle">CHATS</div>
 
@@ -779,6 +993,10 @@ nav{
   <div class="sectionTitle">GROUPS</div>
 
   <div class="groupList" id="groupList"></div>
+
+  <div class="sectionTitle">HIDDEN</div>
+
+  <div class="hiddenList" id="hiddenList"></div>
 
 </aside>
 
@@ -895,7 +1113,6 @@ nav{
 
 <div class="toast" id="toast"></div>
 
-
 <script type="module">
 
 /* =========================================================
@@ -972,6 +1189,18 @@ let unsubscribeMessages = null;
 
 let allUsers = [];
 let allGroups = [];
+
+/*
+  Hidden chat IDs are stored in the user's profile.
+
+  DM format:
+    dm_USER_UID
+
+  Group format:
+    group_GROUP_DOCUMENT_ID
+*/
+
+let hiddenChats = [];
 
 
 /* =========================================================
@@ -1062,6 +1291,180 @@ function resetChat(){
 
   showWelcome();
 
+  closeMobileSidebar();
+
+}
+
+
+/* =========================================================
+   HIDDEN CHAT HELPERS
+========================================================= */
+
+function dmHiddenId(userId){
+
+  return `dm_${userId}`;
+
+}
+
+
+function groupHiddenId(groupId){
+
+  return `group_${groupId}`;
+
+}
+
+
+function isChatHidden(type,id){
+
+  const hiddenId =
+    type === "dm"
+      ? dmHiddenId(id)
+      : groupHiddenId(id);
+
+  return hiddenChats.includes(hiddenId);
+
+}
+
+
+/*
+  Save the hidden-chat list to the user's profile.
+*/
+
+async function saveHiddenChats(){
+
+  if(!currentUser)
+    return;
+
+  await setDoc(
+
+    doc(
+      db,
+      "users",
+      currentUser.uid
+    ),
+
+    {
+      hiddenChats
+    },
+
+    {merge:true}
+
+  );
+
+}
+
+
+/*
+  Hide a DM or group only for the current user.
+*/
+
+async function hideChat(type,id){
+
+  if(!currentUser)
+    return;
+
+  const hiddenId =
+    type === "dm"
+      ? dmHiddenId(id)
+      : groupHiddenId(id);
+
+  if(!hiddenChats.includes(hiddenId)){
+
+    hiddenChats.push(hiddenId);
+
+  }
+
+
+  try{
+
+    await saveHiddenChats();
+
+    /*
+      If this is the chat currently open,
+      close it too.
+    */
+
+    if(
+      selectedChat &&
+      selectedChat.type === type &&
+      selectedChat.id === id
+    ){
+
+      resetChat();
+
+    }
+
+    renderSidebar();
+
+    showToast(
+      "Chat removed from your sidebar."
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Hide chat error:",
+      error
+    );
+
+    showToast(
+      "Couldn't remove this chat."
+    );
+
+  }
+
+}
+
+
+/*
+  Restore a previously hidden chat.
+*/
+
+async function restoreChat(type,id){
+
+  if(!currentUser)
+    return;
+
+  const hiddenId =
+    type === "dm"
+      ? dmHiddenId(id)
+      : groupHiddenId(id);
+
+
+  hiddenChats =
+    hiddenChats.filter(
+      item =>
+        item !== hiddenId
+    );
+
+
+  try{
+
+    await saveHiddenChats();
+
+    renderSidebar();
+
+    showToast(
+      "Chat restored ✦"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Restore chat error:",
+      error
+    );
+
+    showToast(
+      "Couldn't restore this chat."
+    );
+
+  }
+
 }
 
 
@@ -1073,20 +1476,15 @@ onAuthStateChanged(
   auth,
   async user => {
 
-    /*
-      IMPORTANT:
-      This is the ONLY auth callback.
-      The old file had a second broken callback
-      sitting outside the function.
-    */
-
     if(!user){
 
       currentUser = null;
 
       hideLoading();
 
-      showToast("Please sign in to VIBE.");
+      showToast(
+        "Please sign in to VIBE."
+      );
 
       setTimeout(() => {
 
@@ -1109,12 +1507,6 @@ onAuthStateChanged(
       "VIBE User";
 
 
-    /*
-      No Firebase Storage.
-      We simply use the user's existing
-      Firebase Auth photoURL if one exists.
-    */
-
     if(user.photoURL){
 
       $("myAvatar").innerHTML =
@@ -1135,16 +1527,54 @@ onAuthStateChanged(
     try{
 
       /*
-        Create/update the user's Firestore profile.
+        Create/update the user's profile.
+
+        hiddenChats is intentionally NOT overwritten here.
       */
 
-      await setDoc(
-
+      const userRef =
         doc(
           db,
           "users",
           user.uid
-        ),
+        );
+
+
+      const existingUser =
+        await getDocs(
+          query(
+            collection(db,"users"),
+            where("uid","==",user.uid),
+            limit(1)
+          )
+        );
+
+
+      let existingHiddenChats = [];
+
+
+      existingUser.forEach(item => {
+
+        const data =
+          item.data();
+
+        if(Array.isArray(data.hiddenChats)){
+
+          existingHiddenChats =
+            data.hiddenChats;
+
+        }
+
+      });
+
+
+      hiddenChats =
+        existingHiddenChats;
+
+
+      await setDoc(
+
+        userRef,
 
         {
           uid:user.uid,
@@ -1152,17 +1582,14 @@ onAuthStateChanged(
           email:user.email || "",
           photoURL:user.photoURL || "",
           lastSeen:serverTimestamp(),
-          online:true
+          online:true,
+          hiddenChats
         },
 
         {merge:true}
 
       );
 
-
-      /*
-        Load both lists.
-      */
 
       await Promise.all([
         loadUsers(),
@@ -1209,9 +1636,7 @@ onAuthStateChanged(
 
 
 /*
-  Absolute loading-screen safety net.
-  Even if Firebase hangs, the UI cannot remain
-  stuck forever.
+  Loading safety net.
 */
 
 setTimeout(() => {
@@ -1350,8 +1775,14 @@ function renderSidebar(){
 
   renderGroups();
 
+  renderHiddenChats();
+
 }
 
+
+/* =========================================================
+   USERS SIDEBAR
+========================================================= */
 
 function renderUsers(){
 
@@ -1375,9 +1806,22 @@ function renderUsers(){
         user.displayName ||
         "VIBE User";
 
-      return name
-        .toLowerCase()
-        .includes(search);
+
+      const matchesSearch =
+        name
+          .toLowerCase()
+          .includes(search);
+
+
+      const visible =
+        !isChatHidden(
+          "dm",
+          user.uid
+        );
+
+
+      return matchesSearch &&
+        visible;
 
     });
 
@@ -1386,7 +1830,11 @@ function renderUsers(){
 
     list.innerHTML =
       `<div class="noUsers">
-        ${search ? "No matching users." : "No other users yet."}
+        ${
+          search
+            ? "No matching users."
+            : "No visible people."
+        }
       </div>`;
 
     return;
@@ -1420,11 +1868,6 @@ function renderUsers(){
     avatar.className =
       "friendAvatar";
 
-
-    /*
-      Only use Auth photoURL.
-      No Storage required.
-    */
 
     if(user.photoURL){
 
@@ -1479,13 +1922,67 @@ function renderUsers(){
     info.appendChild(name);
     info.appendChild(preview);
 
+
     button.appendChild(avatar);
     button.appendChild(info);
 
 
+    /*
+      Hide button.
+    */
+
+    const actions =
+      document.createElement("div");
+
+    actions.className =
+      "chatActions";
+
+
+    const hideButton =
+      document.createElement("button");
+
+    hideButton.className =
+      "chatAction hide";
+
+    hideButton.textContent =
+      "✕";
+
+    hideButton.title =
+      "Remove from sidebar";
+
+
+    hideButton.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+        hideChat(
+          "dm",
+          user.uid
+        );
+
+      }
+    );
+
+
+    actions.appendChild(
+      hideButton
+    );
+
+
+    button.appendChild(actions);
+
+
     button.addEventListener(
       "click",
-      () => selectDM(user)
+      () => {
+
+        selectDM(user);
+
+        closeMobileSidebar();
+
+      }
     );
 
 
@@ -1495,6 +1992,10 @@ function renderUsers(){
 
 }
 
+
+/* =========================================================
+   GROUP SIDEBAR
+========================================================= */
 
 function renderGroups(){
 
@@ -1518,9 +2019,22 @@ function renderGroups(){
         group.name ||
         "Unnamed Group";
 
-      return name
-        .toLowerCase()
-        .includes(search);
+
+      const matchesSearch =
+        name
+          .toLowerCase()
+          .includes(search);
+
+
+      const visible =
+        !isChatHidden(
+          "group",
+          group.id
+        );
+
+
+      return matchesSearch &&
+        visible;
 
     });
 
@@ -1529,7 +2043,11 @@ function renderGroups(){
 
     list.innerHTML =
       `<div class="noUsers">
-        ${search ? "No matching groups." : "No groups yet."}
+        ${
+          search
+            ? "No matching groups."
+            : "No visible groups."
+        }
       </div>`;
 
     return;
@@ -1551,8 +2069,6 @@ function renderGroups(){
 
     button.className =
       "friend";
-
-    button.style.flex = "1";
 
 
     if(
@@ -1611,17 +2127,56 @@ function renderGroups(){
     button.appendChild(info);
 
 
-    button.addEventListener(
-      "click",
-      () => selectGroup(group)
-    );
+    /*
+      Group actions.
+    */
 
+    const actions =
+      document.createElement("div");
 
-    wrapper.appendChild(button);
+    actions.className =
+      "chatActions";
 
 
     /*
-      Only creator gets delete button.
+      Hide group for yourself.
+    */
+
+    const hideButton =
+      document.createElement("button");
+
+    hideButton.className =
+      "chatAction hide";
+
+    hideButton.textContent =
+      "✕";
+
+    hideButton.title =
+      "Remove from sidebar";
+
+
+    hideButton.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+        hideChat(
+          "group",
+          group.id
+        );
+
+      }
+    );
+
+
+    actions.appendChild(
+      hideButton
+    );
+
+
+    /*
+      Creator can permanently delete.
     */
 
     if(
@@ -1633,13 +2188,13 @@ function renderGroups(){
         document.createElement("button");
 
       deleteButton.className =
-        "groupDelete";
+        "chatAction delete";
 
       deleteButton.textContent =
         "🗑";
 
       deleteButton.title =
-        "Delete group";
+        "Delete group permanently";
 
 
       deleteButton.addEventListener(
@@ -1654,14 +2209,287 @@ function renderGroups(){
       );
 
 
-      wrapper.appendChild(
+      actions.appendChild(
         deleteButton
       );
 
     }
 
 
+    button.appendChild(actions);
+
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        selectGroup(group);
+
+        closeMobileSidebar();
+
+      }
+    );
+
+
+    wrapper.appendChild(button);
+
     list.appendChild(wrapper);
+
+  });
+
+}
+
+
+/* =========================================================
+   HIDDEN CHATS
+========================================================= */
+
+function renderHiddenChats(){
+
+  const list =
+    $("hiddenList");
+
+  list.innerHTML = "";
+
+
+  const search =
+    $("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const hiddenDMs =
+    allUsers.filter(user => {
+
+      return isChatHidden(
+        "dm",
+        user.uid
+      );
+
+    });
+
+
+  const hiddenGroups =
+    allGroups.filter(group => {
+
+      return isChatHidden(
+        "group",
+        group.id
+      );
+
+    });
+
+
+  const totalHidden =
+    hiddenDMs.length +
+    hiddenGroups.length;
+
+
+  if(!totalHidden){
+
+    list.innerHTML =
+      `<div class="hiddenEmpty">
+        No hidden chats.
+      </div>`;
+
+    return;
+
+  }
+
+
+  /*
+    Hidden people.
+  */
+
+  hiddenDMs.forEach(user => {
+
+    const name =
+      user.displayName ||
+      "VIBE User";
+
+
+    if(
+      search &&
+      !name.toLowerCase().includes(search)
+    ){
+
+      return;
+
+    }
+
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "hiddenItem";
+
+
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "hiddenItemInfo";
+
+
+    const nameElement =
+      document.createElement("div");
+
+    nameElement.className =
+      "hiddenItemName";
+
+    nameElement.textContent =
+      name;
+
+
+    const type =
+      document.createElement("div");
+
+    type.className =
+      "hiddenItemType";
+
+    type.textContent =
+      "Direct message";
+
+
+    info.appendChild(
+      nameElement
+    );
+
+    info.appendChild(
+      type
+    );
+
+
+    const restore =
+      document.createElement("button");
+
+    restore.className =
+      "restoreBtn";
+
+    restore.textContent =
+      "↩";
+
+    restore.title =
+      "Restore chat";
+
+
+    restore.addEventListener(
+      "click",
+      () => {
+
+        restoreChat(
+          "dm",
+          user.uid
+        );
+
+      }
+    );
+
+
+    item.appendChild(info);
+    item.appendChild(restore);
+
+    list.appendChild(item);
+
+  });
+
+
+  /*
+    Hidden groups.
+  */
+
+  hiddenGroups.forEach(group => {
+
+    const name =
+      group.name ||
+      "Unnamed Group";
+
+
+    if(
+      search &&
+      !name.toLowerCase().includes(search)
+    ){
+
+      return;
+
+    }
+
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      "hiddenItem";
+
+
+    const info =
+      document.createElement("div");
+
+    info.className =
+      "hiddenItemInfo";
+
+
+    const nameElement =
+      document.createElement("div");
+
+    nameElement.className =
+      "hiddenItemName";
+
+    nameElement.textContent =
+      name;
+
+
+    const type =
+      document.createElement("div");
+
+    type.className =
+      "hiddenItemType";
+
+    type.textContent =
+      "Group";
+
+
+    info.appendChild(
+      nameElement
+    );
+
+    info.appendChild(
+      type
+    );
+
+
+    const restore =
+      document.createElement("button");
+
+    restore.className =
+      "restoreBtn";
+
+    restore.textContent =
+      "↩";
+
+    restore.title =
+      "Restore group";
+
+
+    restore.addEventListener(
+      "click",
+      () => {
+
+        restoreChat(
+          "group",
+          group.id
+        );
+
+      }
+    );
+
+
+    item.appendChild(info);
+    item.appendChild(restore);
+
+    list.appendChild(item);
 
   });
 
@@ -1991,8 +2819,31 @@ async function sendMessage(){
 
 
     /*
-      Create/update conversation.
+      Sending a message automatically
+      brings the chat back to the sidebar.
+
+      This is intentional: if you start talking
+      to a hidden chat again, it becomes visible.
     */
+
+    const hiddenId =
+      selectedChat.type === "group"
+        ? groupHiddenId(selectedChat.id)
+        : dmHiddenId(selectedChat.user.uid);
+
+
+    if(hiddenChats.includes(hiddenId)){
+
+      hiddenChats =
+        hiddenChats.filter(
+          item =>
+            item !== hiddenId
+        );
+
+      await saveHiddenChats();
+
+    }
+
 
     await setDoc(
 
@@ -2018,10 +2869,6 @@ async function sendMessage(){
 
     );
 
-
-    /*
-      Add message.
-    */
 
     await addDoc(
 
@@ -2058,6 +2905,8 @@ async function sendMessage(){
     input.value = "";
 
     input.focus();
+
+    renderSidebar();
 
   }
 
@@ -2446,6 +3295,26 @@ async function createGroup(){
     );
 
 
+    /*
+      Creating a group automatically makes it visible.
+    */
+
+    const hiddenId =
+      groupHiddenId(
+        groupRef.id
+      );
+
+
+    hiddenChats =
+      hiddenChats.filter(
+        item =>
+          item !== hiddenId
+      );
+
+
+    await saveHiddenChats();
+
+
     const newGroup = {
 
       id:
@@ -2556,7 +3425,7 @@ async function deleteGroup(group){
 
   const confirmed =
     window.confirm(
-      `Delete "${group.name || "this group"}"?\n\nThis will remove the group and its messages for everyone.`
+      `Permanently delete "${group.name || "this group"}"?\n\nThis removes the group and its messages for everyone.\n\nIf you only want it gone from YOUR sidebar, use ✕ instead.`
     );
 
 
@@ -2638,10 +3507,6 @@ async function deleteGroup(group){
     }
 
 
-    /*
-      Delete group document.
-    */
-
     await deleteDoc(
 
       doc(
@@ -2660,10 +3525,24 @@ async function deleteGroup(group){
       );
 
 
+    /*
+      Remove it from hidden list too,
+      if it happened to be hidden.
+    */
+
+    hiddenChats =
+      hiddenChats.filter(
+        item =>
+          item !== groupHiddenId(group.id)
+      );
+
+
+    await saveHiddenChats();
+
     renderSidebar();
 
     showToast(
-      "Group deleted ✦"
+      "Group permanently deleted ✦"
     );
 
   }
@@ -2736,6 +3615,36 @@ function startVideo(){
 
 
 /* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+function openMobileSidebar(){
+
+  $("sidebar")
+    .classList
+    .add("mobileOpen");
+
+  $("sidebarOverlay")
+    .classList
+    .add("show");
+
+}
+
+
+function closeMobileSidebar(){
+
+  $("sidebar")
+    .classList
+    .remove("mobileOpen");
+
+  $("sidebarOverlay")
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
    EVENTS
 ========================================================= */
 
@@ -2781,6 +3690,20 @@ $("confirmGroupBtn")
   );
 
 
+$("mobileMenuBtn")
+  .addEventListener(
+    "click",
+    openMobileSidebar
+  );
+
+
+$("sidebarOverlay")
+  .addEventListener(
+    "click",
+    closeMobileSidebar
+  );
+
+
 $("messageInput")
   .addEventListener(
     "keydown",
@@ -2794,6 +3717,28 @@ $("messageInput")
         event.preventDefault();
 
         sendMessage();
+
+      }
+
+    }
+  );
+
+
+/*
+  Click outside the group modal closes it.
+*/
+
+$("groupModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target ===
+        $("groupModal")
+      ){
+
+        closeGroupModal();
 
       }
 
@@ -2818,7 +3763,7 @@ function escapeHtml(value){
 
 
 /* =========================================================
-   EXPOSE BUTTON FUNCTIONS
+   EXPOSE FUNCTIONS
 ========================================================= */
 
 window.sendMessage =
@@ -2841,6 +3786,12 @@ window.createGroup =
 
 window.deleteGroup =
   deleteGroup;
+
+window.hideChat =
+  hideChat;
+
+window.restoreChat =
+  restoreChat;
 
 </script>
 
