@@ -2678,6 +2678,7 @@ function subscribeMessages(messagesQuery){
 
   $("messages").innerHTML = "";
 
+  let initialLoad = true;
 
   unsubscribeMessages =
     onSnapshot(
@@ -2686,49 +2687,49 @@ function subscribeMessages(messagesQuery){
 
       snapshot => {
 
-        $("messages").innerHTML = "";
+        if(initialLoad){
 
+          $("messages").innerHTML = "";
 
-        if(snapshot.empty){
+          if(snapshot.empty){
 
-          $("messages").innerHTML = `
-
-            <div class="welcome">
-
-              <div class="welcomeIcon">
-                ✦
+            $("messages").innerHTML = `
+              <div class="welcome">
+                <div class="welcomeIcon">✦</div>
+                <strong>Say hey 👋</strong>
+                <p>Start your VIBE conversation.</p>
               </div>
+            `;
 
-              <strong>
-                Say hey 👋
-              </strong>
+            initialLoad = false;
+            return;
+          }
 
-              <p>
-                Start your VIBE conversation.
-              </p>
+          snapshot.forEach(item => {
 
-            </div>
+            const data = item.data();
 
-          `;
+            addMessage(
+              data,
+              data.senderId === currentUser.uid
+            );
 
+          });
+
+          initialLoad = false;
           return;
-
         }
 
+        snapshot.docChanges().forEach(change => {
 
-        snapshot.forEach(item => {
+          if(change.type !== "added")
+            return;
 
-          const data =
-            item.data();
-
+          const data = change.doc.data();
 
           addMessage(
-
             data,
-
-            data.senderId ===
-              currentUser.uid
-
+            data.senderId === currentUser.uid
           );
 
         });
