@@ -3025,11 +3025,23 @@ function addMessage(data,mine){
 
   row.appendChild(bubble);
 
-  container.appendChild(row);
+ const shouldScroll =
+  container.scrollHeight -
+  container.scrollTop -
+  container.clientHeight < 100;
 
+container.appendChild(row);
 
-  container.scrollTop =
-    container.scrollHeight;
+if(shouldScroll){
+
+  requestAnimationFrame(() => {
+
+    container.scrollTop =
+      container.scrollHeight;
+
+  });
+
+}
 
 }
 
